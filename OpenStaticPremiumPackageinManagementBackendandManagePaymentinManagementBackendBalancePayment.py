@@ -170,13 +170,7 @@ class AdminPanelOpenStaticPremiumPackageWithBalancePaymentTest:
             time.sleep(2)
             
         except Exception as e:
-            print(f"Error selecting 静态独享 from dropdown: {e}")
-            print("Attempting to take screenshot for debugging...")
-            try:
-                self.driver.save_screenshot("static_package_selection_error.png")
-                print("Screenshot saved as static_package_selection_error.png")
-            except:
-                print("Could not save screenshot")
+            print(f"Error selecting package type: {e}")
             raise
     
     def enter_vpn_account_name(self):
@@ -351,13 +345,6 @@ class AdminPanelOpenStaticPremiumPackageWithBalancePaymentTest:
         
         print("Could not find explicit success message, but payment flow completed")
         print("Test may have succeeded - checking final state...")
-        
-        # Take a screenshot for manual verification
-        try:
-            self.driver.save_screenshot("final_state.png")
-            print("Final state screenshot saved as final_state.png")
-        except:
-            pass
         
         # Since the main flow completed successfully, we'll consider this a success
         return True

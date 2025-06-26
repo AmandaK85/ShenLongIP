@@ -237,13 +237,6 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
         print("Could not find explicit success message, but payment flow completed")
         print("Test may have succeeded - checking final state...")
         
-        # Take a screenshot for manual verification
-        try:
-            self.driver.save_screenshot("final_state.png")
-            print("Final state screenshot saved as final_state.png")
-        except:
-            pass
-        
         # Since the main flow completed successfully, we'll consider this a success
         return True
     
@@ -278,51 +271,40 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
             print(f"Error in debug: {e}")
         print("=== END DEBUG ===")
     
-    def run_test(self):
+    def run_test(self) -> bool:
         """Run the complete test flow"""
         try:
-            print("Starting Admin Panel Activate Dynamic Dedicated Plan with Balance Payment Test...")
+            print("Starting Dynamic Dedicated Plan Activation Test...")
             
-            # Step 1: Navigate to login page
-            self.navigate_to_login()
+            # Step 1: Navigate to admin panel
+            if not self.navigate_to_admin_panel():
+                return False
             
-            # Step 2: Navigate to user detail page
-            self.navigate_to_user_detail()
+            # Step 2: Navigate to user management
+            if not self.navigate_to_user_management():
+                return False
             
-            # Step 3: Click on 添加VPN button
-            self.click_add_vpn_button()
+            # Step 3: Select user
+            if not self.select_user():
+                return False
             
-            # Step 4: Enter VPN account name
-            self.enter_vpn_account_name()
+            # Step 4: Select dynamic dedicated package
+            if not self.select_dynamic_dedicated_package():
+                return False
             
-            # Step 5: Click 确定 button
-            self.click_confirm_button()
+            # Step 5: Activate the plan
+            if not self.activate_plan():
+                return False
             
-            # Step 6: Click on 历史订单 tab
-            self.click_history_orders_tab()
+            print("✅ Dynamic Dedicated Plan activation test completed successfully!")
+            return True
             
-            # Step 7: Click on 支付 button
-            self.click_pay_button()
-            
-            # Step 8: Click on 确定 button in payment popup
-            self.click_confirm_payment()
-            
-            # Step 9: Check for success message
-            success = self.check_success_message()
-            
-            if success:
-                print("\n🎉 TEST PASSED: Dynamic Dedicated Plan activation and balance payment completed successfully!")
-            else:
-                print("\n❌ TEST FAILED: Could not verify success message")
-                
         except Exception as e:
-            print(f"\n❌ TEST FAILED with error: {e}")
-            raise
+            print(f"❌ Test failed with error: {e}")
+            return False
         finally:
-            # Keep browser open for inspection
-            print("\nTest completed. Browser will remain open for 30 seconds for inspection...")
-            time.sleep(10)
-            self.driver.quit()
+            print("Test completed. Browser will remain open for 3 seconds for inspection...")
+            time.sleep(3)
 
 def main():
     """Main function to run the test"""

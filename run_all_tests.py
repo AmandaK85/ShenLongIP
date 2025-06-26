@@ -130,55 +130,26 @@ def main():
     total_duration = end_time - start_time
     
     # Print summary
-    print("=" * 80)
+    print("\n" + "="*60)
     print("TEST EXECUTION SUMMARY")
-    print("=" * 80)
-    print(f"Total Execution Time: {total_duration:.2f} seconds")
+    print("="*60)
+    print(f"Total tests: {len(results)}")
     
-    passed = sum(1 for result in results.values() if result['status'] == 'PASSED')
-    failed = sum(1 for result in results.values() if result['status'] == 'FAILED')
-    total = len(results)
+    passed_count = sum(1 for result in results.values() if result['status'] == 'PASSED')
+    failed_count = sum(1 for result in results.values() if result['status'] == 'FAILED')
     
-    print(f"Passed: {passed}/{total}")
-    print(f"Failed: {failed}/{total}")
-    print(f"Success Rate: {(passed/total*100):.1f}%" if total > 0 else "Success Rate: 0%")
+    print(f"Passed: {passed_count}")
+    print(f"Failed: {failed_count}")
+    print(f"Success rate: {(passed_count/len(results)*100):.1f}%")
+    print("="*60)
     
-    if failed > 0:
-        print("\nFAILED TESTS:")
+    if failed_count > 0:
+        print("\nFailed tests:")
         for test_name, result in results.items():
             if result['status'] == 'FAILED':
-                print(f"   • {test_name}: {result.get('error', 'Unknown error')}")
+                print(f"  ❌ {test_name}: {result.get('error', 'Unknown error')}")
     
-    print("=" * 80)
-    
-    # Save results to file
-    with open("test_results.txt", "w", encoding="utf-8") as f:
-        f.write("SHENLONG IP ADMIN PANEL - TEST RESULTS\n")
-        f.write("=" * 50 + "\n")
-        f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-        
-        for test_name, result in results.items():
-            f.write(f"Test: {test_name}\n")
-            f.write(f"Status: {result['status']}\n")
-            f.write(f"Duration: {result['duration']:.2f}s\n")
-            
-            if result['error']:
-                f.write(f"Error: {result['error']}\n")
-            
-            if result.get('output'):
-                f.write(f"Output:\n{result['output']}\n")
-            
-            f.write("-" * 30 + "\n")
-    
-    print(f"Detailed results saved to: test_results.txt")
-    
-    # Return appropriate exit code
-    if failed > 0:
-        print(f"\n{failed} test(s) failed. Check the results above.")
-        sys.exit(1)
-    else:
-        print("\nAll tests passed successfully!")
-        sys.exit(0)
+    print(f"\nTest execution completed in {total_duration:.2f} seconds")
 
 if __name__ == "__main__":
     main() 

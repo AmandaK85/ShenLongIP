@@ -451,13 +451,6 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
         print("Could not find explicit success message, but payment flow completed")
         print("Test may have succeeded - checking final state...")
         
-        # Take a screenshot for manual verification
-        try:
-            self.driver.save_screenshot("final_state.png")
-            print("Final state screenshot saved as final_state.png")
-        except:
-            pass
-        
         # Since the main flow completed successfully, we'll consider this a success
         return True
     
@@ -492,84 +485,40 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
             print(f"Error in debug: {e}")
         print("=== END DEBUG ===")
     
-    def run_test(self):
-        """Run the complete test flow with improved error handling"""
+    def run_test(self) -> bool:
+        """Run the complete test flow"""
         try:
-            print("Starting Admin Panel Purchase Fixed Long-Term Plan Activate Fixed Long-Term Plan in Admin Panel with Pending Payment Order Test...")
+            print("Starting Fixed Long-Term Plan Purchase and Activation Test...")
             
-            # Step 1: Navigate to login page
-            self.navigate_to_login()
+            # Step 1: Navigate to admin panel
+            if not self.navigate_to_admin_panel():
+                return False
             
-            # Step 2: Navigate to user detail page
-            self.navigate_to_user_detail()
+            # Step 2: Navigate to user management
+            if not self.navigate_to_user_management():
+                return False
             
-            # Step 3: Click on 添加固定长效套餐 button
-            self.click_add_fixed_long_term_plan_button()
+            # Step 3: Select user
+            if not self.select_user():
+                return False
             
-            # Step 4: Select package name (测试007)
-            try:
-                self.select_package_name()
-            except Exception as e:
-                print(f"Package name selection failed: {e}")
-                print("Running debug to understand page structure...")
-                self.debug_page_structure()
-                raise
+            # Step 4: Purchase fixed long-term plan
+            if not self.purchase_fixed_long_term_plan():
+                return False
             
-            # Step 5: Click add region button
-            self.click_add_region_button()
+            # Step 5: Activate the plan
+            if not self.activate_fixed_long_term_plan():
+                return False
             
-            # Step 6: Select region (陕西-西安)
-            self.select_region()
+            print("✅ Fixed Long-Term Plan purchase and activation test completed successfully!")
+            return True
             
-            # Step 7: Select generate pending order
-            self.select_generate_pending_order()
-            
-            # Step 8: Enter number 7
-            self.enter_number()
-            
-            # Step 9: Click 确 定 button
-            self.click_confirm_button()
-            
-            # Step 10: Check for success message
-            print("Checking for success message after confirmation...")
-            success = self.check_success_message()
-            
-            if success:
-                print("Success message found, proceeding with payment...")
-                
-                # Step 11: Click 历史订单 tab
-                self.click_history_orders_tab()
-                
-                # Step 12: Click 支付 button
-                self.click_pay_button()
-                
-                # Step 13: Click 确 定 button in payment popup
-                self.click_confirm_payment()
-                
-                # Step 14: Click 固定长效历史套餐 tab
-                self.click_fixed_long_term_history_tab()
-                
-                # Step 15: Turn off the switch
-                self.turn_off_switch()
-                
-                print("\n🎉 TEST PASSED: Fixed Long-Term Plan activation with pending payment order completed successfully!")
-            else:
-                print("\n❌ TEST FAILED: Could not verify success message")
-                
         except Exception as e:
-            print(f"\n❌ TEST FAILED with error: {e}")
-            # Take screenshot on failure
-            try:
-                self.driver.save_screenshot("error_state.png")
-                print("Error screenshot saved as error_state.png")
-            except:
-                pass
-            raise
+            print(f"❌ Test failed with error: {e}")
+            return False
         finally:
-            # Keep browser open for inspection
-            print("\nTest completed. Browser will remain open for 5 seconds for inspection...")  # Reduced wait time
-            time.sleep(5)
-            self.driver.quit()
+            print("Test completed. Browser will remain open for 3 seconds for inspection...")
+            time.sleep(3)
 
 def main():
     """Main function to run the test"""

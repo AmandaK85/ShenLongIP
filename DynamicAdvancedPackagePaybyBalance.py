@@ -15,7 +15,6 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        # logging.FileHandler('test_execution.log'),  # Temporarily disabled
         logging.StreamHandler()
     ]
 )
@@ -149,13 +148,13 @@ class DynamicAdvancedPackagePaybyBalanceTest:
             },
             {
                 'name': '_clck',
-                'value': 'f8psxo%7C2%7Cfx1%7C0%7C2000',
+                'value': 'f8psxo%7C2%7Cfx3%7C0%7C2000',
                 'domain': '.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': '_clsk',
-                'value': '1hr29dk%7C1750754943403%7C6%7C1%7Cf.clarity.ms%2Fcollect',
+                'value': 'sg8eyl%7C1750908309698%7C3%7C1%7Cf.clarity.ms%2Fcollect',
                 'domain': '.xiaoxigroup.net',
                 'path': '/'
             },
@@ -167,7 +166,7 @@ class DynamicAdvancedPackagePaybyBalanceTest:
             },
             {
                 'name': '_qddab',
-                'value': '4-a2a59u.mca98upx',
+                'value': '4-i3cm7c.mcctlpfq',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
@@ -191,25 +190,25 @@ class DynamicAdvancedPackagePaybyBalanceTest:
             },
             {
                 'name': 'balance',
-                'value': '97248.37',
+                'value': '94687.35',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'gdxidpyhxdE',
-                'value': '30SsT%2BD3YQ%2FQGwxaVHwAQ%2FKoZ4ruWxTqa1zLsx3fGU%2F6nNXfcLOizdc%2B5zkzMjyzZsUaD%2FhjIPq%5Cx3Mra8SQDd1qwhxUhY8MhMXgNKABfhAYKqOOBi78EP98hEfYmnqlN4wvpkdAXNJwNUB0aM9%2BJqSrwg0fhKRDNR7E6PZOSSeKBlvk%3A1750755394933',
+                'value': '%2FaEV9f65nMjrMw1LO8ihqk1gMgds0P%2F1kJr45tgBIMCTDQ2D2n4TT1S%2BqzNfQMzXPfA7xhVjIiB%2FBUSnS1eJZ7lR%2BYr2G5DG10L5lmIHBL9Q9P6DrcfKQTikLqkvv%2F%2BAacd40gyG2i87hR9vILpVDuT0g%2B1HwpY8DIZyNmimA4oe2Y3B%3A1750840853006',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'Hm_lpvt_ab97e0528cd8a1945e66aee550b54522',
-                'value': '1750753382',
+                'value': '1750908309',
                 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6',
-                'value': '1750753382',
+                'value': '1750908309',
                 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
@@ -233,13 +232,13 @@ class DynamicAdvancedPackagePaybyBalanceTest:
             },
             {
                 'name': 'token',
-                'value': '3KPhUMtt/2YVZWGylT7TmG5Na2ENsfSRnTJOPb5J+GY=',
+                'value': '3KPhUMtt/2YVZWGylT7TmNatYqRnEexI1eSgPMPcSaM=',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'User_Info',
-                'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A59620.11000000002%2C%22balance%22%3A97249.3700000001%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A13%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1750750380%2C%22loginTime%22%3A1750750524%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmG5Na2ENsfSRnTJOPb5J%2BGY%3D%22%2C%22registered%22%3Atrue%7D',
+                'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A60443.120000000024%2C%22balance%22%3A95220.3600000001%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A14%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1750839397%2C%22loginTime%22%3A1750839542%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmNatYqRnEexI1eSgPMPcSaM%3D%22%2C%22registered%22%3Atrue%7D',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             }
@@ -319,119 +318,65 @@ class DynamicAdvancedPackagePaybyBalanceTest:
         xpath = '/html/body/div[2]/div/div[2]/div/div[5]/div/div/footer/div/button[2]'
         return self.safe_click(xpath)
     
-    def check_success_message(self, max_attempts: int = 3) -> bool:
-        """Check for 添加成功! message with optimized detection"""
-        logger.info("Checking for 添加成功! message...")
-        
-        # Primary success indicator - the exact message we want
-        primary_success = "添加成功!"
-        
-        # Secondary indicators as fallback
-        secondary_indicators = ["成功", "添加", "成功添加"]
-        
-        for attempt in range(max_attempts):
-            try:
-                logger.debug(f"Attempt {attempt + 1} to find success message...")
-                
-                # First, look for the exact primary success message
-                elements = self.driver.find_elements(By.XPATH, f"//*[contains(text(), '{primary_success}')]")
-                for element in elements:
-                    if element.is_displayed():
-                        logger.info(f"SUCCESS: Found exact success message: '{element.text}'")
-                        return True
-                
-                # Check common success containers for the primary message
-                success_containers = [
-                    "//div[contains(@class, 'message')]",
-                    "//div[contains(@class, 'notification')]",
-                    "//div[contains(@class, 'toast')]",
-                    "//div[contains(@class, 'alert')]",
-                    "//div[contains(@class, 'success')]",
-                    "//span[contains(@class, 'message')]",
-                    "//p[contains(@class, 'message')]"
-                ]
-                
-                for container_xpath in success_containers:
-                    containers = self.driver.find_elements(By.XPATH, container_xpath)
-                    for container in containers:
-                        if container.is_displayed() and primary_success in container.text:
-                            logger.info(f"SUCCESS: Found exact success message in container: '{container.text}'")
-                            return True
-                
-                # If primary message not found, try secondary indicators
-                for indicator in secondary_indicators:
-                    elements = self.driver.find_elements(By.XPATH, f"//*[contains(text(), '{indicator}')]")
-                    for element in elements:
-                        if element.is_displayed():
-                            logger.warning(f"Found secondary success indicator: '{element.text}' (looking for '{primary_success}')")
-                            # Don't return True here, continue looking for primary message
-                
-                if attempt < max_attempts - 1:
-                    time.sleep(0.3)  # Reduced wait time
-                    
-            except Exception as e:
-                logger.warning(f"Attempt {attempt + 1} failed: {e}")
-                if attempt < max_attempts - 1:
-                    time.sleep(0.3)
-        
-        # Fallback: check if we're back to personal center
+    def check_success_message(self) -> bool:
+        logger.info("Checking for success message...")
         try:
-            current_url = self.driver.current_url
-            if "personalCenter" in current_url:
-                logger.warning("SUCCESS: Package addition flow completed - returned to personal center page (but exact success message not found)")
+            # Wait for success message to appear
+            success_xpath = "//div[contains(text(), '添加成功') or contains(text(), 'Success')]"
+            success_element = self.wait_for_element(success_xpath, timeout=10)
+            if success_element:
+                logger.info("✅ Success message found!")
                 return True
-        except:
-            pass
-        
-        logger.error(f"Could not find exact success message '{primary_success}'")
-        return False  # Return False if exact message not found
-    
-    def take_screenshot(self, filename: str = "test_screenshot.png"):
-        """Take a screenshot for debugging"""
-        try:
-            self.driver.save_screenshot(filename)
-            logger.info(f"Screenshot saved as {filename}")
+            else:
+                logger.error("❌ Success message not found")
+                return False
         except Exception as e:
-            logger.error(f"Failed to take screenshot: {e}")
+            logger.error(f"Error checking success message: {e}")
+            return False
     
     def run_test(self) -> bool:
-        """Run the complete test flow with improved error handling"""
-        start_time = time.time()
+        logger.info("Starting Dynamic Advanced Package Balance Payment Test")
+        self.start_time = time.time()
         
         try:
-            logger.info("Starting Dynamic Advanced Package - Pay by Balance Test...")
+            if not self.setup_driver(headless=False):
+                logger.error("Failed to setup WebDriver")
+                return False
             
-            # Test steps with individual error handling
-            steps = [
-                ("Navigate to personal center", self.navigate_to_personal_center),
-                ("Click package/account management tab", self.click_package_account_management_tab),
-                ("Click add paid account button", self.click_add_paid_account_button),
-                ("Select dynamic advanced package", self.select_dynamic_advanced_package),
-                ("Click confirm button", self.click_confirm_button),
-                ("Check success message", self.check_success_message)
-            ]
+            if not self.navigate_to_personal_center():
+                logger.error("Failed to navigate to personal center")
+                return False
             
-            for step_name, step_function in steps:
-                logger.info(f"Executing step: {step_name}")
-                if not step_function():
-                    logger.error(f"Step failed: {step_name}")
-                    self.take_screenshot(f"failed_{step_name.replace(' ', '_')}.png")
-                    return False
-                time.sleep(0.5)  # Small delay between steps
+            if not self.click_package_account_management_tab():
+                logger.error("Failed to click package account management tab")
+                return False
             
-            execution_time = time.time() - start_time
-            logger.info(f"🎉 TEST PASSED: Dynamic Advanced Package addition completed successfully in {execution_time:.2f} seconds!")
+            if not self.click_add_paid_account_button():
+                logger.error("Failed to click add paid account button")
+                return False
+            
+            if not self.select_dynamic_advanced_package():
+                logger.error("Failed to select dynamic advanced package")
+                return False
+            
+            if not self.click_confirm_button():
+                logger.error("Failed to click confirm button")
+                return False
+            
+            if not self.check_success_message():
+                logger.error("Failed to check success message")
+                return False
+            
+            logger.info("✅ Balance payment test completed successfully!")
             return True
             
         except Exception as e:
-            execution_time = time.time() - start_time
-            logger.error(f"❌ TEST FAILED after {execution_time:.2f} seconds with error: {e}")
-            self.take_screenshot("test_failed.png")
+            logger.error(f"Test failed with exception: {e}")
             return False
         finally:
             if self.driver:
-                logger.info("Test completed. Closing browser...")
                 self.driver.quit()
+                logger.info("WebDriver closed")
 
 def main():
     """Main function to run the test with configurable options"""

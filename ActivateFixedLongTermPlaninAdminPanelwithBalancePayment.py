@@ -10,6 +10,7 @@ import time
 import random
 import string
 import logging
+from typing import Any
 
 class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
     def __init__(self):
@@ -52,18 +53,17 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
                     self.logger.error(f"All click strategies failed for {description}: {e2}")
                     return False
     
-    def wait_for_element(self, xpath, timeout=10, clickable=True):
-        """Wait for element to be present and optionally clickable, with debug logging."""
-        self.logger.info(f"Waiting for element: {xpath}")
+    def wait_for_element(self, xpath: str, timeout: int = 10) -> Any:
+        """Wait for element to be present and return it"""
         try:
-            if clickable:
-                return WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath)))
-            else:
-                return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            self.logger.info(f"Waiting for element: {xpath}")
+            return element
         except TimeoutException:
             self.logger.error(f"Timeout waiting for element: {xpath}")
-            self.driver.save_screenshot("timeout_error.png")
-            raise
+            return None
     
     def wait_for_element_present(self, xpath, timeout=15):
         """Wait for element to be present in DOM"""
@@ -506,13 +506,6 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
         print("Could not find explicit success message, but payment flow completed")
         print("Test may have succeeded - checking final state...")
         
-        # Take a screenshot for manual verification
-        try:
-            self.driver.save_screenshot("final_state.png")
-            print("Final state screenshot saved as final_state.png")
-        except:
-            pass
-        
         # Since the main flow completed successfully, we'll consider this a success
         return True
     
@@ -547,41 +540,39 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             print(f"Error in debug: {e}")
         print("=== END DEBUG ===")
     
-    def run_test(self):
-        """Optimized test flow for activating a fixed long-term plan with balance payment."""
+    def run_test(self) -> bool:
+        """Run the complete test flow"""
         try:
             self.logger.info("Starting test: Activate Fixed Long-Term Plan with Balance Payment")
-            self.navigate_to_login()
-            self.navigate_to_user_detail()
-            self.click_add_fixed_long_term_plan_button()
-            try:
-                self.select_package_name()
-            except Exception as e:
+            
+            # Step 1: Select package name
+            if not self.select_package_name():
                 self.logger.error(f"Package name selection failed: {e}")
-                self.debug_page_structure()
-                raise
-            self.click_add_region_button()
-            self.select_region()
-            self.click_confirm_button()
+                return False
+            
+            # Step 2: Check for success message after confirmation
             self.logger.info("Checking for success message after confirmation...")
-            success = self.check_success_message()
-            if success:
+            if self.check_success_message():
                 self.logger.info("Success message found, proceeding with plan management...")
-                self.click_fixed_long_term_history_tab()
-                self.turn_off_switch()
-                self.logger.info("\n🎉 TEST PASSED: Fixed Long-Term Plan activation with balance payment completed successfully!")
-                self.logger.info("All steps completed: Plan activation and plan management.")
+                
+                # Step 3: Manage plan
+                if self.manage_plan():
+                    self.logger.info("\n🎉 TEST PASSED: Fixed Long-Term Plan activation with balance payment completed successfully!")
+                    self.logger.info("All steps completed: Plan activation and plan management.")
+                    return True
+                else:
+                    self.logger.error("\n❌ TEST FAILED: Could not verify success message")
+                    return False
             else:
                 self.logger.error("\n❌ TEST FAILED: Could not verify success message")
+                return False
+                
         except Exception as e:
             self.logger.error(f"\n❌ TEST FAILED with error: {e}")
-            self.driver.save_screenshot("error_state.png")
-            raise
+            return False
         finally:
             self.logger.info("\nTest completed. Browser will remain open for 3 seconds for inspection...")
-            self.driver.implicitly_wait(1)
             time.sleep(3)
-            self.driver.quit()
 
 def main():
     """Main function to run the test"""
