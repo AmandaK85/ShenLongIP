@@ -148,20 +148,14 @@ class DynamicAdvancedPackagePaybyBalanceTest:
             },
             {
                 'name': '_clck',
-                'value': 'f8psxo%7C2%7Cfx3%7C0%7C2000',
+                'value': 'f8psxo%7C2%7Cfx7%7C0%7C2000',
                 'domain': '.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': '_clsk',
-                'value': 'sg8eyl%7C1750908309698%7C3%7C1%7Cf.clarity.ms%2Fcollect',
+                'value': '102bc0c%7C1751251133069%7C5%7C1%7Cf.clarity.ms%2Fcollect',
                 'domain': '.xiaoxigroup.net',
-                'path': '/'
-            },
-            {
-                'name': '_qdda',
-                'value': '4-1.1',
-                'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
@@ -178,7 +172,7 @@ class DynamicAdvancedPackagePaybyBalanceTest:
             },
             {
                 'name': '_uetsid',
-                'value': '3e20203050cd11f0a97b35acc8424bd5',
+                'value': 'ed8b3e10555a11f0825ea526153911de',
                 'domain': '.xiaoxigroup.net',
                 'path': '/'
             },
@@ -190,25 +184,25 @@ class DynamicAdvancedPackagePaybyBalanceTest:
             },
             {
                 'name': 'balance',
-                'value': '94687.35',
+                'value': '93871.35',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'gdxidpyhxdE',
-                'value': '%2FaEV9f65nMjrMw1LO8ihqk1gMgds0P%2F1kJr45tgBIMCTDQ2D2n4TT1S%2BqzNfQMzXPfA7xhVjIiB%2FBUSnS1eJZ7lR%2BYr2G5DG10L5lmIHBL9Q9P6DrcfKQTikLqkvv%2F%2BAacd40gyG2i87hR9vILpVDuT0g%2B1HwpY8DIZyNmimA4oe2Y3B%3A1750840853006',
+                'value': '3Y3dXk99MP%2FQPnKhVLwlL5KkTUnubQ7LaWYCuxzkKU96WNlbj%2BVNLNc7Zxb1HZQGdCVBr5rAHmc%5CMQdZabtXjaXPBKn40awNOTcvJSANkvMYaiRhB4MbfqwtrnkY5a99NfcK4%2Fihf5JwJ5TOh8NclhhS%2F5ofDmnuaDfn4DLbhiuyxASy%3A1751251866412',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'Hm_lpvt_ab97e0528cd8a1945e66aee550b54522',
-                'value': '1750908309',
+                'value': '1751250947',
                 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6',
-                'value': '1750908309',
+                'value': '1751250947',
                 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
@@ -232,13 +226,13 @@ class DynamicAdvancedPackagePaybyBalanceTest:
             },
             {
                 'name': 'token',
-                'value': '3KPhUMtt/2YVZWGylT7TmNatYqRnEexI1eSgPMPcSaM=',
+                'value': '3KPhUMtt/2YVZWGylT7TmBE3yDGhpokIAtKoq6hEK6M=',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'User_Info',
-                'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A60443.120000000024%2C%22balance%22%3A95220.3600000001%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A14%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1750839397%2C%22loginTime%22%3A1750839542%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmNatYqRnEexI1eSgPMPcSaM%3D%22%2C%22registered%22%3Atrue%7D',
+                'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A61208.13000000003%2C%22balance%22%3A93871.35000000011%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A15%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1750929487%2C%22loginTime%22%3A1750929664%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmBE3yDGhpokIAtKoq6hEK6M%3D%22%2C%22registered%22%3Atrue%7D',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             }
@@ -321,15 +315,47 @@ class DynamicAdvancedPackagePaybyBalanceTest:
     def check_success_message(self) -> bool:
         logger.info("Checking for success message...")
         try:
-            # Wait for success message to appear
-            success_xpath = "//div[contains(text(), '添加成功') or contains(text(), 'Success')]"
-            success_element = self.wait_for_element(success_xpath, timeout=10)
-            if success_element:
-                logger.info("✅ Success message found!")
+            # Take a screenshot for debugging
+            screenshot_path = f"debug_balance_success_exception.png"
+            self.driver.save_screenshot(screenshot_path)
+            logger.info(f"Screenshot saved to {screenshot_path}")
+
+            # Try to find the message in all elements
+            elements = self.driver.find_elements(By.XPATH, "//*[contains(text(), '添加成功')]")
+            logger.info(f"Found {len(elements)} elements containing '添加成功' in main document")
+            for idx, el in enumerate(elements):
+                logger.info(f"Element {idx}: tag={el.tag_name}, text={el.text}")
+            if elements:
+                logger.info("✅ Success message found in main document!")
                 return True
-            else:
-                logger.error("❌ Success message not found")
-                return False
+
+            # Check iframes for the message
+            iframes = self.driver.find_elements(By.TAG_NAME, "iframe")
+            logger.info(f"Found {len(iframes)} iframes on the page")
+            for i, iframe in enumerate(iframes):
+                try:
+                    self.driver.switch_to.frame(iframe)
+                    elements = self.driver.find_elements(By.XPATH, "//*[contains(text(), '添加成功')]")
+                    logger.info(f"Found {len(elements)} elements containing '添加成功' in iframe {i}")
+                    for idx, el in enumerate(elements):
+                        logger.info(f"Iframe {i} Element {idx}: tag={el.tag_name}, text={el.text}")
+                    if elements:
+                        logger.info(f"✅ Success message found in iframe {i}!")
+                        self.driver.switch_to.default_content()
+                        return True
+                    self.driver.switch_to.default_content()
+                except Exception as e:
+                    logger.warning(f"Error searching iframe {i}: {e}")
+                    self.driver.switch_to.default_content()
+
+            # Fallback: search page source
+            time.sleep(2)
+            if "添加成功" in self.driver.page_source:
+                logger.info("✅ Success message found in page source!")
+                return True
+
+            logger.error("❌ Success message not found anywhere")
+            return False
         except Exception as e:
             logger.error(f"Error checking success message: {e}")
             return False
@@ -339,30 +365,32 @@ class DynamicAdvancedPackagePaybyBalanceTest:
         self.start_time = time.time()
         
         try:
-            if not self.setup_driver(headless=False):
-                logger.error("Failed to setup WebDriver")
-                return False
-            
             if not self.navigate_to_personal_center():
                 logger.error("Failed to navigate to personal center")
                 return False
+            time.sleep(2)
             
             if not self.click_package_account_management_tab():
                 logger.error("Failed to click package account management tab")
                 return False
+            time.sleep(2)
             
             if not self.click_add_paid_account_button():
                 logger.error("Failed to click add paid account button")
                 return False
+            time.sleep(2)
             
             if not self.select_dynamic_advanced_package():
                 logger.error("Failed to select dynamic advanced package")
                 return False
+            time.sleep(2)
             
             if not self.click_confirm_button():
                 logger.error("Failed to click confirm button")
                 return False
+            time.sleep(2)
             
+            # Always check page source for '添加成功' as a fallback
             if not self.check_success_message():
                 logger.error("Failed to check success message")
                 return False

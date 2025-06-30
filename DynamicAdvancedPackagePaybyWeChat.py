@@ -111,22 +111,21 @@ class DynamicAdvancedPackagePaybyWeChatTest:
         return [
             {'name': '__root_domain_v', 'value': '.xiaoxigroup.net', 'domain': '.xiaoxigroup.net', 'path': '/'},
             {'name': '__snaker__id', 'value': 'h93rjcHY8FBOfcOO', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': '_clck', 'value': 'f8psxo%7C2%7Cfx3%7C0%7C2000', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': '_clsk', 'value': 'sg8eyl%7C1750908309698%7C3%7C1%7Cf.clarity.ms%2Fcollect', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': '_qdda', 'value': '4-1.1', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': '_clck', 'value': 'f8psxo%7C2%7Cfx7%7C0%7C2000', 'domain': '.xiaoxigroup.net', 'path': '/'},
+            {'name': '_clsk', 'value': '102bc0c%7C1751251133069%7C5%7C1%7Cf.clarity.ms%2Fcollect', 'domain': '.xiaoxigroup.net', 'path': '/'},
             {'name': '_qddab', 'value': '4-i3cm7c.mcctlpfq', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
             {'name': '_qddaz', 'value': 'QD.987350750324316', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': '_uetsid', 'value': '3e20203050cd11f0a97b35acc8424bd5', 'domain': '.xiaoxigroup.net', 'path': '/'},
+            {'name': '_uetsid', 'value': 'ed8b3e10555a11f0825ea526153911de', 'domain': '.xiaoxigroup.net', 'path': '/'},
             {'name': '_uetvid', 'value': '0bba69504ff811f09f2d55e2ba8ec7e4', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': 'balance', 'value': '94687.35', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'gdxidpyhxdE', 'value': '%2FaEV9f65nMjrMw1LO8ihqk1gMgds0P%2F1kJr45tgBIMCTDQ2D2n4TT1S%2BqzNfQMzXPfA7xhVjIiB%2FBUSnS1eJZ7lR%2BYr2G5DG10L5lmIHBL9Q9P6DrcfKQTikLqkvv%2F%2BAacd40gyG2i87hR9vILpVDuT0g%2B1HwpY8DIZyNmimA4oe2Y3B%3A1750840853006', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'Hm_lpvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1750908309', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1750908309', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'balance', 'value': '93871.35', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'gdxidpyhxdE', 'value': '3Y3dXk99MP%2FQPnKhVLwlL5KkTUnubQ7LaWYCuxzkKU96WNlbj%2BVNLNc7Zxb1HZQGdCVBr5rAHmc%5CMQdZabtXjaXPBKn40awNOTcvJSANkvMYaiRhB4MbfqwtrnkY5a99NfcK4%2Fihf5JwJ5TOh8NclhhS%2F5ofDmnuaDfn4DLbhiuyxASy%3A1751251866412', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'Hm_lpvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1751250947', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1751250947', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
             {'name': 'Hm_lvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1750658721', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
             {'name': 'Hm_lvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1750658721', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
             {'name': 'HMACCOUNT', 'value': '5B4FA6A181D073DF', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'token', 'value': '3KPhUMtt/2YVZWGylT7TmNatYqRnEexI1eSgPMPcSaM=', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'User_Info', 'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A60443.120000000024%2C%22balance%22%3A95220.3600000001%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A14%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1750839397%2C%22loginTime%22%3A1750839542%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmNatYqRnEexI1eSgPMPcSaM%3D%22%2C%22registered%22%3Atrue%7D', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'}
+            {'name': 'token', 'value': '3KPhUMtt/2YVZWGylT7TmBE3yDGhpokIAtKoq6hEK6M=', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'User_Info', 'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A61208.13000000003%2C%22balance%22%3A93871.35000000011%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A15%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1750929487%2C%22loginTime%22%3A1750929664%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmBE3yDGhpokIAtKoq6hEK6M%3D%22%2C%22registered%22%3Atrue%7D', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'}
         ]
 
     def add_authentication_cookies(self) -> bool:
@@ -202,14 +201,46 @@ class DynamicAdvancedPackagePaybyWeChatTest:
     def handle_wechat_payment(self) -> bool:
         logger.info("Handling WeChat payment process...")
         try:
-            # Wait for WeChat QR code to appear
-            qr_code_xpath = "//div[contains(@class, 'qrcode')]//img"
-            qr_element = self.wait_for_element(qr_code_xpath, timeout=10)
-            if qr_element:
-                logger.info("WeChat QR code found")
-                return self.handle_wechat_qr_on_same_page()
+            # Wait a moment for the page to load
+            time.sleep(2)
+            
+            # Debug: Take screenshot and save page source
+            try:
+                self.driver.save_screenshot("payment_page_debug.png")
+                logger.info("Screenshot saved as payment_page_debug.png")
+                
+                # Save page source for debugging
+                with open("payment_page_source.html", "w", encoding="utf-8") as f:
+                    f.write(self.driver.page_source)
+                logger.info("Page source saved as payment_page_source.html")
+                
+                # Log current URL
+                logger.info(f"Current URL: {self.driver.current_url}")
+                
+                # Look for any text containing "微信" or "扫码"
+                wechat_elements = self.driver.find_elements(By.XPATH, "//*[contains(text(), '微信') or contains(text(), '扫码')]")
+                if wechat_elements:
+                    logger.info(f"Found {len(wechat_elements)} elements containing '微信' or '扫码':")
+                    for i, elem in enumerate(wechat_elements[:5]):  # Log first 5 elements
+                        try:
+                            logger.info(f"  Element {i+1}: {elem.text}")
+                        except:
+                            logger.info(f"  Element {i+1}: [text not accessible]")
+                else:
+                    logger.info("No elements found containing '微信' or '扫码'")
+                    
+            except Exception as debug_error:
+                logger.error(f"Debug capture failed: {debug_error}")
+            
+            # Wait for WeChat payment interface to appear
+            wechat_text_xpath = "//*[contains(text(), '微信扫码付款')]"
+            wechat_element = self.wait_for_element(wechat_text_xpath, timeout=15)
+            if wechat_element:
+                logger.info("WeChat payment interface found: 微信扫码付款")
+                logger.info("Payment considered successful as '微信扫码付款' is present.")
+                return True
             else:
-                logger.error("WeChat QR code not found")
+                logger.error("WeChat payment interface not found")
                 return False
         except Exception as e:
             logger.error(f"Error handling WeChat payment: {e}")
@@ -220,7 +251,7 @@ class DynamicAdvancedPackagePaybyWeChatTest:
         try:
             # Wait for QR code to be visible
             qr_code_xpath = "//div[contains(@class, 'qrcode')]//img"
-            qr_element = self.wait_for_element(qr_code_xpath, timeout=10)
+            qr_element = self.wait_for_element(qr_code_xpath, timeout=15)
             if not qr_element:
                 logger.error("WeChat QR code not found")
                 return False

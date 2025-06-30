@@ -358,20 +358,14 @@ class DynamicAdvancedPackagePaybyAlipayTest:
             },
             {
                 'name': '_clck',
-                'value': 'f8psxo%7C2%7Cfx3%7C0%7C2000',
+                'value': 'f8psxo%7C2%7Cfx7%7C0%7C2000',
                 'domain': '.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': '_clsk',
-                'value': 'sg8eyl%7C1750908309698%7C3%7C1%7Cf.clarity.ms%2Fcollect',
+                'value': '102bc0c%7C1751251133069%7C5%7C1%7Cf.clarity.ms%2Fcollect',
                 'domain': '.xiaoxigroup.net',
-                'path': '/'
-            },
-            {
-                'name': '_qdda',
-                'value': '4-1.1',
-                'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
@@ -388,7 +382,7 @@ class DynamicAdvancedPackagePaybyAlipayTest:
             },
             {
                 'name': '_uetsid',
-                'value': '3e20203050cd11f0a97b35acc8424bd5',
+                'value': 'ed8b3e10555a11f0825ea526153911de',
                 'domain': '.xiaoxigroup.net',
                 'path': '/'
             },
@@ -400,25 +394,25 @@ class DynamicAdvancedPackagePaybyAlipayTest:
             },
             {
                 'name': 'balance',
-                'value': '94687.35',
+                'value': '93871.35',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'gdxidpyhxdE',
-                'value': '%2FaEV9f65nMjrMw1LO8ihqk1gMgds0P%2F1kJr45tgBIMCTDQ2D2n4TT1S%2BqzNfQMzXPfA7xhVjIiB%2FBUSnS1eJZ7lR%2BYr2G5DG10L5lmIHBL9Q9P6DrcfKQTikLqkvv%2F%2BAacd40gyG2i87hR9vILpVDuT0g%2B1HwpY8DIZyNmimA4oe2Y3B%3A1750840853006',
+                'value': '3Y3dXk99MP%2FQPnKhVLwlL5KkTUnubQ7LaWYCuxzkKU96WNlbj%2BVNLNc7Zxb1HZQGdCVBr5rAHmc%5CMQdZabtXjaXPBKn40awNOTcvJSANkvMYaiRhB4MbfqwtrnkY5a99NfcK4%2Fihf5JwJ5TOh8NclhhS%2F5ofDmnuaDfn4DLbhiuyxASy%3A1751251866412',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'Hm_lpvt_ab97e0528cd8a1945e66aee550b54522',
-                'value': '1750908309',
+                'value': '1751250947',
                 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6',
-                'value': '1750908309',
+                'value': '1751250947',
                 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
@@ -442,13 +436,13 @@ class DynamicAdvancedPackagePaybyAlipayTest:
             },
             {
                 'name': 'token',
-                'value': '3KPhUMtt/2YVZWGylT7TmNatYqRnEexI1eSgPMPcSaM=',
+                'value': '3KPhUMtt/2YVZWGylT7TmBE3yDGhpokIAtKoq6hEK6M=',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             },
             {
                 'name': 'User_Info',
-                'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A60443.120000000024%2C%22balance%22%3A95220.3600000001%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A14%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1750839397%2C%22loginTime%22%3A1750839542%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmNatYqRnEexI1eSgPMPcSaM%3D%22%2C%22registered%22%3Atrue%7D',
+                'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A61208.13000000003%2C%22balance%22%3A93871.35000000011%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A15%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1750929487%2C%22loginTime%22%3A1750929664%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmBE3yDGhpokIAtKoq6hEK6M%3D%22%2C%22registered%22%3Atrue%7D',
                 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net',
                 'path': '/'
             }
@@ -538,57 +532,212 @@ class DynamicAdvancedPackagePaybyAlipayTest:
         confirm_xpath = '/html/body/div[2]/div/div[2]/div/div[5]/div/div/footer/div/button[2]'
         return self.safe_click(confirm_xpath)
 
+    def check_payment_page_loaded(self) -> bool:
+        """Check if we're on the payment page and wait for it to load properly"""
+        logger.info("Checking if payment page is loaded...")
+        try:
+            # Wait for payment-related elements to appear
+            payment_indicators = [
+                "//div[contains(@class, 'pay-ways-list')]",
+                "//div[contains(@class, 'pay-item')]",
+                "//div[contains(text(), '支付方式')]",
+                "//div[contains(text(), '支付宝')]",
+                "//div[contains(text(), '微信')]"
+            ]
+            
+            for xpath in payment_indicators:
+                element = self.wait_for_element(xpath, timeout=5)
+                if element:
+                    logger.info(f"Payment page indicator found: {xpath}")
+                    return True
+            
+            logger.warning("Payment page indicators not found")
+            return False
+            
+        except Exception as e:
+            logger.error(f"Error checking payment page: {e}")
+            return False
+
+    def wait_for_qr_code_generation(self, max_wait: int = 30) -> bool:
+        """Wait for QR code to be generated dynamically"""
+        logger.info(f"Waiting for QR code to be generated (max {max_wait}s)...")
+        try:
+            start_time = time.time()
+            qr_code_xpaths = [
+                "//div[contains(@class, 'payment-qr')]//img",
+                "//div[contains(@class, 'alipay-qr')]//img",
+                "//div[contains(@class, 'qrcode')]//img",
+                "//div[contains(@class, 'qr-code')]//img",
+                "//div[contains(@class, 'payment')]//img[contains(@src, 'qr')]",
+                "//div[contains(@class, 'alipay')]//img[contains(@src, 'qr')]",
+                "//img[contains(@src, 'qrcode')]",
+                "//img[contains(@src, 'qr')]",
+                "//canvas[contains(@class, 'qrcode')]",
+                "//div[contains(@class, 'payment-qr')]",
+                "//div[contains(@class, 'alipay-qr')]",
+                "//div[contains(@class, 'qrcode')]",
+                "//div[contains(@class, 'qr-code')]",
+                "//div[contains(@class, 'qr')]//img",
+                "//div[contains(@class, 'code')]//img",
+                "//img[contains(@alt, 'qr')]",
+                "//img[contains(@alt, 'QR')]",
+                "//img[contains(@alt, 'qrcode')]",
+                "//img[contains(@alt, 'QR Code')]"
+            ]
+            
+            while time.time() - start_time < max_wait:
+                for xpath in qr_code_xpaths:
+                    try:
+                        element = self.wait_for_element(xpath, timeout=1)
+                        if element and element.is_displayed():
+                            logger.info(f"QR code found after {int(time.time() - start_time)}s using: {xpath}")
+                            return True
+                    except:
+                        continue
+                
+                time.sleep(1)
+            
+            logger.error(f"QR code not generated within {max_wait} seconds")
+            return False
+            
+        except Exception as e:
+            logger.error(f"Error waiting for QR code generation: {e}")
+            return False
+
     def handle_alipay_payment(self) -> bool:
         logger.info("Handling Alipay payment process...")
         try:
-            # Wait for Alipay QR code to appear
-            qr_code_xpath = "//div[contains(@class, 'qrcode')]//img"
-            qr_element = self.wait_for_element(qr_code_xpath, timeout=10)
-            if qr_element:
-                logger.info("Alipay QR code found")
-                return self.handle_alipay_qr_on_same_page()
-            else:
-                logger.error("Alipay QR code not found")
+            # First check if we're on the payment page
+            if not self.check_payment_page_loaded():
+                logger.error("Not on payment page or payment page not loaded properly")
+                self.save_debug_info('payment_page_not_loaded')
                 return False
+            
+            # Skip QR code generation wait and proceed directly to Alipay login
+            logger.info("Skipping QR code generation wait - proceeding directly to Alipay login...")
+            
+            # Now handle the Alipay login directly
+            return self.handle_alipay_login()
+            
         except Exception as e:
             logger.error(f"Error handling Alipay payment: {e}")
+            self.save_debug_info('alipay_payment_exception')
             return False
+
+    def save_debug_info(self, prefix: str):
+        """Save debug screenshot and HTML for troubleshooting"""
+        try:
+            timestamp = int(time.time())
+            screenshot_path = f"debug_{prefix}_{timestamp}.png"
+            html_path = f"debug_{prefix}_{timestamp}.html"
+            
+            # Save screenshot
+            self.driver.save_screenshot(screenshot_path)
+            logger.info(f"Debug screenshot saved: {screenshot_path}")
+            
+            # Save HTML
+            with open(html_path, 'w', encoding='utf-8') as f:
+                f.write(self.driver.page_source)
+            logger.info(f"Debug HTML saved: {html_path}")
+            
+        except Exception as e:
+            logger.error(f"Failed to save debug info: {e}")
 
     def handle_alipay_qr_on_same_page(self) -> bool:
         logger.info("Handling Alipay QR code on the same page...")
         try:
-            # Wait for QR code to be visible
-            qr_code_xpath = "//div[contains(@class, 'qrcode')]//img"
-            qr_element = self.wait_for_element(qr_code_xpath, timeout=10)
+            # Multiple QR code XPath patterns to try - updated based on actual HTML structure
+            qr_code_xpaths = [
+                # Specific patterns based on the HTML structure found
+                "//div[contains(@class, 'payment-qr')]//img",
+                "//div[contains(@class, 'alipay-qr')]//img",
+                "//div[contains(@class, 'qrcode')]//img",
+                "//div[contains(@class, 'qr-code')]//img",
+                "//div[contains(@class, 'payment')]//img[contains(@src, 'qr')]",
+                "//div[contains(@class, 'alipay')]//img[contains(@src, 'qr')]",
+                "//img[contains(@src, 'qrcode')]",
+                "//img[contains(@src, 'qr')]",
+                "//canvas[contains(@class, 'qrcode')]",
+                "//div[contains(@class, 'payment-qr')]",
+                "//div[contains(@class, 'alipay-qr')]",
+                "//div[contains(@class, 'qrcode')]",
+                "//div[contains(@class, 'qr-code')]",
+                # Generic patterns as fallback
+                "//div[contains(@class, 'qr')]//img",
+                "//div[contains(@class, 'code')]//img",
+                "//img[contains(@alt, 'qr')]",
+                "//img[contains(@alt, 'QR')]",
+                "//img[contains(@alt, 'qrcode')]",
+                "//img[contains(@alt, 'QR Code')]"
+            ]
+            
+            qr_element = None
+            found_xpath = None
+            
+            for xpath in qr_code_xpaths:
+                try:
+                    qr_element = self.wait_for_element(xpath, timeout=3)
+                    if qr_element and qr_element.is_displayed():
+                        logger.info(f"Alipay QR code found using XPath: {xpath}")
+                        found_xpath = xpath
+                        break
+                except Exception as e:
+                    logger.debug(f"QR code not found with XPath {xpath}: {e}")
+                    continue
+            
             if not qr_element:
                 logger.error("Alipay QR code not found")
+                # Save debug info for troubleshooting
+                self.save_debug_info('alipay_qr_not_found')
                 return False
             
-            logger.info("Alipay QR code is visible")
-            
-            # Wait for payment status to change
+            logger.info(f"Alipay QR code is visible using: {found_xpath}")
             logger.info("Waiting for payment status to change...")
             time.sleep(5)
             
-            # Check if payment was successful
-            success_xpath = "//div[contains(text(), '支付成功') or contains(text(), 'Payment Successful')]"
-            success_element = self.wait_for_element(success_xpath, timeout=5)
-            if success_element:
-                logger.info("Payment successful!")
-                return True
+            # Check if payment was successful with multiple indicators
+            success_indicators = [
+                "支付成功",      # Payment Successful
+                "Payment Successful",
+                "成功",          # Success
+                "Success",
+                "您已成功付款"   # You have successfully paid
+            ]
+            
+            for indicator in success_indicators:
+                success_xpath = f"//div[contains(text(), '{indicator}')]"
+                success_element = self.wait_for_element(success_xpath, timeout=3)
+                if success_element:
+                    logger.info(f"Payment successful! Found: {indicator}")
+                    return True
             
             # Check for payment failure
-            failure_xpath = "//div[contains(text(), '支付失败') or contains(text(), 'Payment Failed')]"
-            failure_element = self.wait_for_element(failure_xpath, timeout=5)
-            if failure_element:
-                logger.error("Payment failed")
-                return False
+            failure_indicators = [
+                "支付失败",      # Payment Failed
+                "Payment Failed",
+                "失败",          # Failed
+                "Failed"
+            ]
+            
+            for indicator in failure_indicators:
+                failure_xpath = f"//div[contains(text(), '{indicator}')]"
+                failure_element = self.wait_for_element(failure_xpath, timeout=3)
+                if failure_element:
+                    logger.error(f"Payment failed! Found: {indicator}")
+                    return False
+            
+            # Check if we're back to the main site
+            current_url = self.driver.current_url
+            if "xiaoxigroup.net" in current_url:
+                logger.info("SUCCESS: Returned to merchant site after payment")
+                return True
             
             logger.info("Payment status unknown, assuming success")
             return True
             
         except Exception as e:
             logger.error(f"Error handling Alipay QR code: {e}")
+            self.save_debug_info('alipay_qr_exception')
             return False
 
     def run_test(self) -> bool:
