@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -8,7 +9,7 @@ import time
 import random
 import string
 
-class AdminPanelActivateDynamicDedicatedPlanTest:
+class AdminPanelPurchaseStaticPremiumPlanTest:
     def __init__(self):
         # Setup Chrome options
         chrome_options = Options()
@@ -93,6 +94,81 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
             print(f"Error clicking 添加VPN button: {e}")
             raise
     
+    def select_static_dedicated_package(self):
+        """Select 静态独享 (Static Dedicated) from the dropdown menu"""
+        print("Selecting 静态独享 (Static Dedicated) from dropdown...")
+        
+        # Click on dropdown using the correct XPath from other file
+        dropdown_xpath = '//*[@id="app"]/div/div[2]/div/div[3]/div/div[2]/form/div/div[2]/div/div/div/div[1]/input'
+        
+        try:
+            # Wait longer for the popup to fully load
+            time.sleep(3)
+            
+            # Try to find the dropdown element
+            dropdown = self.wait_for_element(dropdown_xpath, timeout=30)
+            print("Dropdown element found, clicking...")
+            dropdown.click()
+            time.sleep(2)
+            
+            # Try multiple possible selectors for the 静态独享 option
+            option_selectors = [
+                '/html/body/div[3]/div[1]/div[1]/ul/li[4]',  # XPath provided by user
+                '//li[contains(@class, "el-select-dropdown__item") and contains(text(), "静态独享")]',
+                '//li[@class="el-select-dropdown__item"]//span[text()="静态独享"]',
+                '//li[contains(@class, "el-select-dropdown__item")][4]',  # Fourth item in dropdown
+                '//span[text()="静态独享"]'
+            ]
+            
+            option_found = False
+            for i, selector in enumerate(option_selectors):
+                try:
+                    print(f"Trying selector {i+1}: {selector}")
+                    option = self.wait_for_element(selector, timeout=10)
+                    
+                    # Scroll to element if needed
+                    self.driver.execute_script("arguments[0].scrollIntoView(true);", option)
+                    time.sleep(1)
+                    
+                    option.click()
+                    print("静态独享 (Static Dedicated) selected successfully")
+                    option_found = True
+                    break
+                except Exception as e:
+                    print(f"Selector {i+1} failed: {e}")
+                    continue
+            
+            if not option_found:
+                # Try to find by text content with more specific approach
+                print("Trying to find option by text content...")
+                try:
+                    # Look for the specific element structure
+                    option_by_text = self.driver.find_element(By.XPATH, "//li[contains(@class, 'el-select-dropdown__item')]//span[text()='静态独享']")
+                    option_by_text.click()
+                    print("静态独享 selected successfully by text")
+                    option_found = True
+                except Exception as e:
+                    print(f"Finding by text failed: {e}")
+                    
+                    # Last resort: try to click on any element containing the text
+                    try:
+                        elements_with_text = self.driver.find_elements(By.XPATH, "//*[contains(text(), '静态独享')]")
+                        if elements_with_text:
+                            elements_with_text[0].click()
+                            print("静态独享 selected successfully by any element with text")
+                            option_found = True
+                    except Exception as e2:
+                        print(f"Last resort text search failed: {e2}")
+            
+            if not option_found:
+                raise Exception("Could not find or click on 静态独享 option")
+            
+            time.sleep(2)
+            
+        except Exception as e:
+            print(f"Error selecting package type: {e}")
+            raise
+    
     def enter_vpn_account_name(self):
         """Enter random VPN account name"""
         print("Entering VPN account name...")
@@ -107,6 +183,35 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
             time.sleep(1)
         except Exception as e:
             print(f"Error entering VPN account name: {e}")
+            raise
+    
+    def enter_balance_payment_details(self):
+        """Enter balance payment details - first and last digits"""
+        print("Entering balance payment details...")
+        
+        try:
+            # Click on first digit input field
+            first_digit_xpath = '//input[@placeholder="最首位数字"]'
+            first_digit_input = self.wait_for_element(first_digit_xpath)
+            first_digit_input.click()
+            first_digit_input.clear()
+            first_digit_input.send_keys("1")
+            print("First digit entered: 1")
+            time.sleep(1)
+            
+            # Click on last digit input field
+            last_digit_xpath = '//input[@placeholder="最末位数字"]'
+            last_digit_input = self.wait_for_element(last_digit_xpath)
+            last_digit_input.click()
+            last_digit_input.clear()
+            last_digit_input.send_keys("2")
+            print("Last digit entered: 2")
+            time.sleep(1)
+            
+            print("Balance payment details entered successfully")
+            
+        except Exception as e:
+            print(f"Error entering balance payment details: {e}")
             raise
     
     def click_confirm_button(self):
@@ -165,17 +270,25 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
             print(f"Error clicking payment confirmation button: {e}")
             raise
     
-    def check_success_message(self):
-        """Check for success message"""
-        print("Checking for success message...")
+    def check_success_message(self, payment_type="general"):
+        """Check for success message based on payment type"""
+        print(f"Checking for success message for {payment_type} payment...")
         
-        # Try multiple strategies to catch the fast-disappearing success message
-        success_indicators = [
-            "支付成功!",  # Payment Successful!
-            "成功",      # Success
-            "支付",      # Payment
-            "成功支付"   # Successful Payment
-        ]
+        # Define success indicators based on payment type
+        if payment_type == "balance":
+            success_indicators = [
+                "添加成功",  # Add Success!
+                "成功",      # Success
+                "添加",      # Add
+                "成功添加"   # Successful Add
+            ]
+        else:  # generate orders payment
+            success_indicators = [
+                "支付成功!",  # Payment Successful!
+                "成功",      # Success
+                "支付",      # Payment
+                "成功支付"   # Successful Payment
+            ]
         
         # Try multiple times with short intervals to catch the fast message
         for attempt in range(5):
@@ -271,45 +384,142 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
             print(f"Error in debug: {e}")
         print("=== END DEBUG ===")
     
-    def run_test(self) -> bool:
-        """Run the complete test flow"""
+    def run_balance_payment_test(self):
+        """Run the balance payment test flow"""
         try:
-            print("Starting Dynamic Dedicated Plan Activation Test...")
+            print("\n=== Starting Balance Payment Test ===")
             
-            # Step 1: Navigate to admin panel
-            if not self.navigate_to_admin_panel():
+            # Step 1: Navigate to login page
+            self.navigate_to_login()
+            
+            # Step 2: Navigate to user detail page
+            self.navigate_to_user_detail()
+            
+            # Step 3: Click on 添加VPN button
+            self.click_add_vpn_button()
+            
+            # Step 4: Select 静态独享 (Static Dedicated) from dropdown
+            try:
+                self.select_static_dedicated_package()
+            except Exception as e:
+                print(f"Package selection failed: {e}")
+                print("Running debug to understand page structure...")
+                self.debug_page_structure()
+                raise
+            
+            # Step 5: Enter VPN account name
+            self.enter_vpn_account_name()
+            
+            # Step 6: Enter balance payment details
+            self.enter_balance_payment_details()
+            
+            # Step 7: Click 确定 button
+            self.click_confirm_button()
+            
+            # Step 8: Check for success message immediately after 确定 button
+            print("Checking for success message after balance payment confirmation...")
+            success = self.check_success_message("balance")
+            
+            if success:
+                print("\n🎉 BALANCE PAYMENT TEST PASSED: Static Premium Package activation with balance payment completed successfully!")
+                return True
+            else:
+                print("\n❌ BALANCE PAYMENT TEST FAILED: Could not verify success message")
                 return False
+                
+        except Exception as e:
+            print(f"\n❌ BALANCE PAYMENT TEST FAILED with error: {e}")
+            return False
+    
+    def run_generate_orders_test(self):
+        """Run the generate orders test flow"""
+        try:
+            print("\n=== Starting Generate Orders Test ===")
             
-            # Step 2: Navigate to user management
-            if not self.navigate_to_user_management():
+            # Step 1: Navigate to login page
+            self.navigate_to_login()
+            
+            # Step 2: Navigate to user detail page
+            self.navigate_to_user_detail()
+            
+            # Step 3: Click on 添加VPN button
+            self.click_add_vpn_button()
+            
+            # Step 4: Select 静态独享 (Static Dedicated) from dropdown
+            self.select_static_dedicated_package()
+            
+            # Step 5: Enter VPN account name
+            self.enter_vpn_account_name()
+            
+            # Step 6: Click 确定 button (without balance payment details)
+            self.click_confirm_button()
+            
+            # Step 7: Click on 历史订单 tab
+            self.click_history_orders_tab()
+            
+            # Step 8: Click on 支付 button
+            self.click_pay_button()
+            
+            # Step 9: Click on 确定 button in payment popup
+            self.click_confirm_payment()
+            
+            # Step 10: Check for success message
+            success = self.check_success_message("generate_orders")
+            
+            if success:
+                print("\n🎉 GENERATE ORDERS TEST PASSED: Static Premium Package activation and payment management completed successfully!")
+                return True
+            else:
+                print("\n❌ GENERATE ORDERS TEST FAILED: Could not verify success message")
                 return False
+                
+        except Exception as e:
+            print(f"\n❌ GENERATE ORDERS TEST FAILED with error: {e}")
+            return False
+    
+    def run_comprehensive_test(self):
+        """Run both payment methods in sequence"""
+        print("Starting Comprehensive Admin Panel Purchase Static Premium Plan Test...")
+        
+        balance_success = False
+        generate_orders_success = False
+        
+        try:
+            # Run balance payment test first
+            balance_success = self.run_balance_payment_test()
             
-            # Step 3: Select user
-            if not self.select_user():
-                return False
+            # Wait a bit between tests
+            time.sleep(5)
             
-            # Step 4: Select dynamic dedicated package
-            if not self.select_dynamic_dedicated_package():
-                return False
-            
-            # Step 5: Activate the plan
-            if not self.activate_plan():
-                return False
-            
-            print("✅ Dynamic Dedicated Plan activation test completed successfully!")
-            return True
+            # Run generate orders test
+            generate_orders_success = self.run_generate_orders_test()
             
         except Exception as e:
-            print(f"❌ Test failed with error: {e}")
-            return False
+            print(f"Comprehensive test failed: {e}")
         finally:
-            print("Test completed. Browser will remain open for 3 seconds for inspection...")
-            time.sleep(3)
+            # Keep browser open for inspection
+            print("\nComprehensive test completed. Browser will remain open for 10 seconds for inspection...")
+            time.sleep(10)
+            self.driver.quit()
+        
+        # Print final results
+        print("\n" + "="*60)
+        print("COMPREHENSIVE TEST RESULTS:")
+        print("="*60)
+        print(f"Balance Payment Test: {'✅ PASSED' if balance_success else '❌ FAILED'}")
+        print(f"Generate Orders Test: {'✅ PASSED' if generate_orders_success else '❌ FAILED'}")
+        
+        if balance_success and generate_orders_success:
+            print("\n🎉 ALL TESTS PASSED: Both payment methods work correctly!")
+        elif balance_success or generate_orders_success:
+            print("\n⚠️  PARTIAL SUCCESS: One payment method works, one failed")
+        else:
+            print("\n❌ ALL TESTS FAILED: Both payment methods failed")
 
 def main():
-    """Main function to run the test"""
-    test = AdminPanelActivateDynamicDedicatedPlanTest()
-    test.run_test()
+    """Main function to run the comprehensive test"""
+    test = AdminPanelPurchaseStaticPremiumPlanTest()
+    test.run_comprehensive_test()
 
 if __name__ == "__main__":
     main() 

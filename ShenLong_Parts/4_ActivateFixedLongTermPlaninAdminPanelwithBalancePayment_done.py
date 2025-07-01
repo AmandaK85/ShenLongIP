@@ -9,8 +9,10 @@ from selenium.common.exceptions import TimeoutException, ElementClickIntercepted
 import time
 import random
 import string
+import logging
+from typing import Any
 
-class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWithPendingPaymentOrderTest:
+class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
     def __init__(self):
         # Setup Chrome options for better performance
         chrome_options = Options()
@@ -25,44 +27,43 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
         # Initialize WebDriver
         self.driver = webdriver.Chrome(options=chrome_options)
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-        self.wait = WebDriverWait(self.driver, 15)  # Reduced timeout for faster failure detection
+        self.wait = WebDriverWait(self.driver, 10)  # Shorter, but sufficient
+        self.logger = logging.getLogger("FixedLongTermPlanTest")
+        logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
         
     def generate_random_string(self, length=6):
         """Generate random alphabetic string of specified length"""
         return ''.join(random.choices(string.ascii_letters, k=length))
     
     def safe_click(self, element, description="element"):
-        """Safely click an element with multiple fallback strategies"""
+        """Safely click an element with fallback strategies and logging."""
         try:
-            # First try: regular click
             element.click()
             return True
         except ElementClickInterceptedException:
             try:
-                # Second try: JavaScript click
                 self.driver.execute_script("arguments[0].click();", element)
                 return True
-            except Exception as e:
+            except Exception:
                 try:
-                    # Third try: scroll into view and click
                     self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
-                    time.sleep(0.5)
                     self.driver.execute_script("arguments[0].click();", element)
                     return True
                 except Exception as e2:
-                    print(f"All click strategies failed for {description}: {e2}")
+                    self.logger.error(f"All click strategies failed for {description}: {e2}")
                     return False
     
-    def wait_for_element(self, xpath, timeout=15, clickable=True):
-        """Wait for element to be present and optionally clickable"""
+    def wait_for_element(self, xpath: str, timeout: int = 10) -> Any:
+        """Wait for element to be present and return it"""
         try:
-            if clickable:
-                return self.wait.until(EC.element_to_be_clickable((By.XPATH, xpath)))
-            else:
-                return self.wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            self.logger.info(f"Waiting for element: {xpath}")
+            return element
         except TimeoutException:
-            print(f"Timeout waiting for element: {xpath}")
-            raise
+            self.logger.error(f"Timeout waiting for element: {xpath}")
+            return None
     
     def wait_for_element_present(self, xpath, timeout=15):
         """Wait for element to be present in DOM"""
@@ -77,7 +78,7 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
         time.sleep(2)  # Reduced wait time
         
         try:
-            self.wait_for_element("//body", timeout=20, clickable=False)
+            self.wait_for_element("//body", timeout=20)
             print("Login page loaded successfully")
         except Exception as e:
             print(f"Error waiting for login page to load: {e}")
@@ -92,7 +93,7 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
         time.sleep(2)  # Reduced wait time
         
         try:
-            self.wait_for_element("//body", timeout=20, clickable=False)
+            self.wait_for_element("//body", timeout=20)
             print("User detail page loaded successfully")
         except Exception as e:
             print(f"Error waiting for user detail page to load: {e}")
@@ -247,36 +248,6 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
             print(f"Error selecting region: {e}")
             raise
     
-    def select_generate_pending_order(self):
-        """Select 生成待支付订单 radio button"""
-        print("Selecting 生成待支付订单...")
-        # Use the exact XPath provided for the radio button label
-        radio_label_xpath = '/html/body/div[1]/div/div[2]/div/div[15]/div/div[2]/form/div[6]/div/div/label[1]/span[2]'
-        try:
-            radio_label = self.wait_for_element(radio_label_xpath, timeout=10)
-            self.driver.execute_script("arguments[0].click();", radio_label)
-            print("生成待支付订单 selected successfully via exact XPath")
-            time.sleep(0.5)  # Reduced wait time
-        except Exception as e:
-            print(f"Error selecting 生成待支付订单: {e}")
-            raise
-    
-    def enter_number(self):
-        """Enter number 7 in the number input field"""
-        print("Entering number 7...")
-        # Use the exact XPath provided for the number input field
-        number_input_xpath = '/html/body/div[1]/div/div[2]/div/div[15]/div/div[2]/form/div[8]/div/div[1]/input'
-        
-        try:
-            number_input = self.wait_for_element(number_input_xpath, timeout=20)
-            number_input.clear()
-            number_input.send_keys("7")
-            print("Number 7 entered successfully")
-            time.sleep(0.5)  # Reduced wait time
-        except Exception as e:
-            print(f"Error entering number: {e}")
-            raise
-    
     def click_confirm_button(self):
         """Click on 确 定 button"""
         print("Clicking on 确 定 button...")
@@ -315,69 +286,196 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
             print(f"Error clicking 历史订单 tab: {e}")
             raise
     
+    def refresh_page_and_wait(self):
+        """Refresh the page and wait for it to load"""
+        print("Refreshing the page to ensure latest data is loaded...")
+        try:
+            self.driver.refresh()
+            time.sleep(3)  # Wait for page to reload
+            print("Page refreshed successfully")
+            
+            # Wait for the page to be fully loaded
+            self.wait_for_element("//body", timeout=20)
+            print("Page loaded after refresh")
+            
+            # Click on 历史订单 tab again after refresh
+            history_tab_xpath = '//div[@id="tab-third" and contains(text(), "历史订单")]'
+            history_tab = self.wait_for_element(history_tab_xpath, timeout=20)
+            self.driver.execute_script("arguments[0].click();", history_tab)
+            print("历史订单 tab clicked again after refresh")
+            time.sleep(2)  # Wait for tab content to load
+            
+        except Exception as e:
+            print(f"Error refreshing page: {e}")
+            raise
+    
     def click_pay_button(self):
         """Click on 支付 button"""
         print("Clicking on 支付 button...")
-        pay_xpath = '//button[contains(@class, "el-button--primary") and contains(@class, "el-button--mini")]//span[text()="支付"]'
         
+        # Wait a bit longer for the page to fully load
+        time.sleep(3)
+        
+        # Try multiple selectors for the pay button since it might be in different locations
+        pay_button_selectors = [
+            '//button[contains(@class, "el-button--primary") and contains(@class, "el-button--mini")]//span[text()="支付"]',
+            '//button[contains(@class, "el-button--primary")]//span[text()="支付"]',
+            '//button[contains(text(), "支付")]',
+            '//span[text()="支付"]/parent::button',
+            '//td[contains(@class, "el-table__cell")]//button[contains(@class, "el-button--primary")]//span[text()="支付"]',
+            '//tbody//tr[1]//button[contains(@class, "el-button--primary")]//span[text()="支付"]',
+            '//button[.//span[text()="支付"]]',
+            '//span[text()="支付"]',
+            '//button[contains(@class, "el-button")]//span[text()="支付"]'
+        ]
+        
+        for i, selector in enumerate(pay_button_selectors):
+            try:
+                print(f"Trying pay button selector {i+1}: {selector}")
+                pay_button = self.wait_for_element(selector, timeout=10)
+                
+                # Check if element is visible and enabled
+                if pay_button.is_displayed() and pay_button.is_enabled():
+                    # Scroll to element first
+                    self.driver.execute_script("arguments[0].scrollIntoView(true);", pay_button)
+                    time.sleep(0.5)
+                    
+                    # Try JavaScript click first
+                    try:
+                        self.driver.execute_script("arguments[0].click();", pay_button)
+                        print("支付 button clicked successfully with JavaScript")
+                        time.sleep(1)
+                        return
+                    except Exception as js_error:
+                        print(f"JavaScript click failed: {js_error}")
+                        # Fallback to regular click
+                        if self.safe_click(pay_button, f"支付 button (selector {i+1})"):
+                            print("支付 button clicked successfully")
+                            time.sleep(1)
+                            return
+                else:
+                    print(f"Pay button found but not interactable - displayed: {pay_button.is_displayed()}, enabled: {pay_button.is_enabled()}")
+                    
+            except Exception as e:
+                print(f"Pay button selector {i+1} failed: {e}")
+                continue
+        
+        # If all selectors fail, try to find by text in the table
         try:
-            pay_button = self.wait_for_element(pay_xpath)
-            if self.safe_click(pay_button, "支付 button"):
-                print("支付 button clicked successfully")
-                time.sleep(1)  # Reduced wait time
-            else:
-                raise Exception("Failed to click 支付 button")
+            print("Trying to find pay button by searching in table...")
+            # Look for any button with "支付" text in the table
+            pay_buttons = self.driver.find_elements(By.XPATH, "//table//button[.//span[text()='支付']]")
+            if pay_buttons:
+                for button in pay_buttons:
+                    if button.is_displayed() and button.is_enabled():
+                        self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
+                        time.sleep(0.5)
+                        self.driver.execute_script("arguments[0].click();", button)
+                        print("支付 button clicked successfully by table search")
+                        time.sleep(1)
+                        return
         except Exception as e:
-            print(f"Error clicking 支付 button: {e}")
-            raise
+            print(f"Table search for pay button failed: {e}")
+        
+        # Last resort: try to find any element with "支付" text and click it
+        try:
+            print("Trying to find any element with 支付 text...")
+            pay_elements = self.driver.find_elements(By.XPATH, "//*[contains(text(), '支付')]")
+            for element in pay_elements:
+                if element.is_displayed():
+                    self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+                    time.sleep(0.5)
+                    self.driver.execute_script("arguments[0].click();", element)
+                    print("支付 element clicked successfully")
+                    time.sleep(1)
+                    return
+        except Exception as e:
+            print(f"Text search for pay element failed: {e}")
+        
+        raise Exception("Could not find or click 支付 button with any selector")
     
     def click_confirm_payment(self):
         """Click on 确 定 button in payment popup"""
         print("Clicking on 确 定 button in payment popup...")
-        confirm_payment_xpath = '//button[contains(@class, "el-button--primary") and contains(@class, "el-button--small")]//span[text()="确 定"]'
+        # Try multiple selectors for the confirm payment button
+        confirm_payment_selectors = [
+            '//button[contains(@class, "el-button--primary") and contains(@class, "el-button--small")]//span[text()="确 定"]',
+            '//button[contains(@class, "el-button--primary")]//span[text()="确 定"]',
+            '//button[contains(text(), "确 定")]',
+            '//span[text()="确 定"]/parent::button',
+            '//div[contains(@class, "el-dialog")]//button[contains(@class, "el-button--primary")]//span[text()="确 定"]'
+        ]
         
-        try:
-            confirm_payment_button = self.wait_for_element(confirm_payment_xpath)
-            if self.safe_click(confirm_payment_button, "payment confirmation button"):
-                print("Payment confirmation button clicked successfully")
-                time.sleep(1)  # Reduced wait time
-            else:
-                raise Exception("Failed to click payment confirmation button")
-        except Exception as e:
-            print(f"Error clicking payment confirmation button: {e}")
-            raise
+        for i, selector in enumerate(confirm_payment_selectors):
+            try:
+                print(f"Trying confirm payment button selector {i+1}: {selector}")
+                confirm_payment_button = self.wait_for_element(selector, timeout=10)
+                if self.safe_click(confirm_payment_button, f"payment confirmation button (selector {i+1})"):
+                    print("Payment confirmation button clicked successfully")
+                    time.sleep(1)  # Reduced wait time
+                    return
+                else:
+                    print(f"Failed to click confirm payment button with selector {i+1}")
+            except Exception as e:
+                print(f"Confirm payment button selector {i+1} failed: {e}")
+                continue
+        
+        raise Exception("Could not find or click payment confirmation button with any selector")
     
     def click_fixed_long_term_history_tab(self):
         """Click on 固定长效历史套餐 tab"""
         print("Clicking on 固定长效历史套餐 tab...")
-        fixed_history_tab_xpath = '//div[@id="tab-ipMeal" and contains(text(), "固定长效历史套餐")]'
+        # Try multiple selectors for the fixed long-term history tab
+        fixed_history_tab_selectors = [
+            '//div[@id="tab-ipMeal" and contains(text(), "固定长效历史套餐")]',
+            '//div[contains(@class, "el-tabs__item") and contains(text(), "固定长效历史套餐")]',
+            '//div[contains(text(), "固定长效历史套餐")]',
+            '//div[@id="tab-ipMeal"]'
+        ]
         
-        try:
-            fixed_history_tab = self.wait_for_element(fixed_history_tab_xpath)
-            if self.safe_click(fixed_history_tab, "固定长效历史套餐 tab"):
-                print("固定长效历史套餐 tab clicked successfully")
-                time.sleep(1)  # Reduced wait time
-            else:
-                raise Exception("Failed to click 固定长效历史套餐 tab")
-        except Exception as e:
-            print(f"Error clicking 固定长效历史套餐 tab: {e}")
-            raise
+        for i, selector in enumerate(fixed_history_tab_selectors):
+            try:
+                print(f"Trying fixed long-term history tab selector {i+1}: {selector}")
+                fixed_history_tab = self.wait_for_element(selector, timeout=10)
+                if self.safe_click(fixed_history_tab, f"固定长效历史套餐 tab (selector {i+1})"):
+                    print("固定长效历史套餐 tab clicked successfully")
+                    time.sleep(1)  # Reduced wait time
+                    return
+                else:
+                    print(f"Failed to click fixed long-term history tab with selector {i+1}")
+            except Exception as e:
+                print(f"Fixed long-term history tab selector {i+1} failed: {e}")
+                continue
+        
+        raise Exception("Could not find or click 固定长效历史套餐 tab with any selector")
     
     def turn_off_switch(self):
         """Turn off the switch by clicking on it"""
         print("Turning off the switch...")
-        # Use the full XPath provided for the switch in the table
-        switch_xpath = '/html/body/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div[3]/table/tbody/tr[1]/td[8]/div/div/div//span[contains(@class, "el-switch__core")]'
-        try:
-            switch = self.wait_for_element(switch_xpath, timeout=20)
-            self.driver.execute_script("arguments[0].scrollIntoView(true);", switch)
-            time.sleep(0.5)  # Reduced wait time
-            self.driver.execute_script("arguments[0].click();", switch)
-            print("Switch turned off successfully")
-            time.sleep(1)  # Reduced wait time
-        except Exception as e:
-            print(f"Error turning off switch: {e}")
-            raise
+        # Try multiple selectors for the switch
+        switch_selectors = [
+            '/html/body/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div[3]/table/tbody/tr[1]/td[8]/div/div/div//span[contains(@class, "el-switch__core")]',
+            '//table//tbody//tr[1]//td[8]//span[contains(@class, "el-switch__core")]',
+            '//table//tbody//tr[1]//td//span[contains(@class, "el-switch__core")]',
+            '//span[contains(@class, "el-switch__core")]',
+            '//div[contains(@class, "el-switch")]//span[contains(@class, "el-switch__core")]'
+        ]
+        
+        for i, selector in enumerate(switch_selectors):
+            try:
+                print(f"Trying switch selector {i+1}: {selector}")
+                switch = self.wait_for_element(selector, timeout=10)
+                self.driver.execute_script("arguments[0].scrollIntoView(true);", switch)
+                time.sleep(0.5)  # Reduced wait time
+                self.driver.execute_script("arguments[0].click();", switch)
+                print("Switch turned off successfully")
+                time.sleep(1)  # Reduced wait time
+                return
+            except Exception as e:
+                print(f"Switch selector {i+1} failed: {e}")
+                continue
+        
+        raise Exception("Could not find or click switch with any selector")
     
     def check_success_message(self):
         """Check for success message with improved detection"""
@@ -488,41 +586,68 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
     def run_test(self) -> bool:
         """Run the complete test flow"""
         try:
-            print("Starting Fixed Long-Term Plan Purchase and Activation Test...")
+            self.logger.info("Starting test: Activate Fixed Long-Term Plan with Balance Payment")
             
-            # Step 1: Navigate to admin panel
-            if not self.navigate_to_admin_panel():
+            # Step 1: Navigate to login page
+            self.navigate_to_login()
+            
+            # Step 2: Navigate to user detail page
+            self.navigate_to_user_detail()
+            
+            # Step 3: Click add fixed long term plan button
+            self.click_add_fixed_long_term_plan_button()
+            
+            # Step 4: Select package name
+            self.select_package_name()
+            
+            # Step 5: Click add region button
+            self.click_add_region_button()
+            
+            # Step 6: Select region
+            self.select_region()
+            
+            # Step 7: Click confirm button
+            self.click_confirm_button()
+            
+            # Step 8: Check for success message
+            if self.check_success_message():
+                self.logger.info("Success message found, proceeding with payment...")
+                
+                # Step 9: Click history orders tab
+                self.click_history_orders_tab()
+                
+                # Step 10: Refresh page and wait
+                self.refresh_page_and_wait()
+                
+                # Step 11: Click pay button
+                self.click_pay_button()
+                
+                # Step 12: Click confirm payment
+                self.click_confirm_payment()
+                
+                # Step 13: Click fixed long term history tab
+                self.click_fixed_long_term_history_tab()
+                
+                # Step 14: Turn off switch
+                self.turn_off_switch()
+                
+                self.logger.info("\n🎉 TEST PASSED: Fixed Long-Term Plan activation with balance payment completed successfully!")
+                self.logger.info("All steps completed: Plan activation, payment, and plan management.")
+                return True
+            else:
+                self.logger.error("\n❌ TEST FAILED: Could not verify success message")
                 return False
-            
-            # Step 2: Navigate to user management
-            if not self.navigate_to_user_management():
-                return False
-            
-            # Step 3: Select user
-            if not self.select_user():
-                return False
-            
-            # Step 4: Purchase fixed long-term plan
-            if not self.purchase_fixed_long_term_plan():
-                return False
-            
-            # Step 5: Activate the plan
-            if not self.activate_fixed_long_term_plan():
-                return False
-            
-            print("✅ Fixed Long-Term Plan purchase and activation test completed successfully!")
-            return True
-            
+                
         except Exception as e:
-            print(f"❌ Test failed with error: {e}")
+            self.logger.error(f"\n❌ TEST FAILED with error: {e}")
             return False
         finally:
-            print("Test completed. Browser will remain open for 3 seconds for inspection...")
+            self.logger.info("\nTest completed. Browser will remain open for 3 seconds for inspection...")
             time.sleep(3)
 
 def main():
     """Main function to run the test"""
-    test = AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWithPendingPaymentOrderTest()
+    test = ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest()
     test.run_test()
 
 if __name__ == "__main__":

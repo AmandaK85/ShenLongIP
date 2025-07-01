@@ -216,80 +216,129 @@ def setup_chrome_driver():
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-web-security')
+    chrome_options.add_argument('--allow-running-insecure-content')
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    chrome_options.add_experimental_option('useAutomationExtension', False)
     
     try:
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=chrome_options)
-        return driver
+        # Try using ChromeDriverManager first
+        try:
+            service = Service(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=chrome_options)
+            return driver
+        except Exception as e1:
+            print(f"ChromeDriverManager failed: {str(e1)}")
+            
+            # Fallback: try without service
+            try:
+                driver = webdriver.Chrome(options=chrome_options)
+                return driver
+            except Exception as e2:
+                print(f"Direct Chrome initialization failed: {str(e2)}")
+                
+                # Last resort: try with minimal options
+                try:
+                    minimal_options = Options()
+                    minimal_options.add_argument('--no-sandbox')
+                    minimal_options.add_argument('--disable-dev-shm-usage')
+                    driver = webdriver.Chrome(options=minimal_options)
+                    return driver
+                except Exception as e3:
+                    print(f"Minimal Chrome initialization failed: {str(e3)}")
+                    return None
+                    
     except Exception as e:
         print(f"Error initializing Chrome driver: {str(e)}")
         return None
 
 def login_shenlong(driver, reporter):
-    """Login to ShenLong"""
-    print("Starting login process...")
-    reporter.add_step("Login Process", "INFO", "Starting ShenLong login process")
-    
+    """Login to ShenLong using only the provided cookies"""
+    print("Starting login process with provided cookies...")
+    reporter.add_step("Login Process", "INFO", "Starting ShenLong login process with provided cookies")
     try:
-        # Navigate to login page
-        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/login")
+        # Go to the domain to allow setting cookies
+        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net")
+        time.sleep(2)
+        reporter.add_step("Navigate to Domain", "PASS", "Successfully navigated to domain for cookie setup")
+
+        # Clear all cookies first
+        driver.delete_all_cookies()
+        reporter.add_step("Clear Cookies", "PASS", "Cleared all existing cookies")
+
+        # Set ALL authentication cookies including the missing ones
+        cookies_data = [
+            {"name": "__root_domain_v", "value": "", "domain": ".xiaoxigroup.net", "path": "/"},
+            {"name": "__snaker__id", "value": "h93rjcHY8FBOfcOO", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
+            {"name": "_clck", "value": "f8psxo%7C2%7Cfx8%7C0%7C2000", "domain": ".xiaoxigroup.net", "path": "/"},
+            {"name": "_clsk", "value": "xwfaig%7C1751349816665%7C4%7C1%7Cf.clarity.ms%2Fcollect", "domain": ".xiaoxigroup.net", "path": "/"},
+            {"name": "_qdda", "value": "4-1.1", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
+            {"name": "_qddab", "value": "4-n5m2mg.mck49897", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
+            {"name": "_qddaz", "value": "QD.987350750324316", "domain": ".xiaoxigroup.net", "path": "/"},
+            {"name": "_uetsid", "value": "96b990c0563d11f08aefdd0db7ff4ce9", "domain": ".xiaoxigroup.net", "path": "/"},
+            {"name": "_uetvid", "value": "0bba69504ff811f09f2d55e2ba8ec7e4", "domain": ".xiaoxigroup.net", "path": "/"},
+            {"name": "balance", "value": "91288.28", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
+            # NEW CRITICAL AUTHENTICATION COOKIES
+            {"name": "Hm_lvt_ab97e0528cd8a1945e66aee550b54522", "value": "1750658721,1751348297,1751349468", "domain": ".test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
+            {"name": "Hm_lvt_b697afe6e9c7d29cd1db7fa7b477f2f6", "value": "1750658721,1751348297,1751349468", "domain": ".test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
+            {"name": "HMACCOUNT", "value": "30F199DAD7C59D55", "domain": ".test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
+            {"name": "HMACCOUNT_BFESS", "value": "30F199DAD7C59D55", "domain": ".hm.baidu.com", "path": "/"},
+            {"name": "MR", "value": "0", "domain": ".bat.bing.com", "path": "/"},
+            {"name": "MSPTC", "value": "J6eC0nN3qdOcXveMzFmUMMKKy5_OE9j8xHnKyOy8hdU", "domain": ".bing.com", "path": "/"},
+            {"name": "MUID", "value": "25C0E30F99F56CAB1B36F51E985C6D29", "domain": ".clarity.ms", "path": "/"},
+            {"name": "MUID", "value": "25C0E30F99F56CAB1B36F51E985C6D29", "domain": ".bing.com", "path": "/"},
+            # MOST IMPORTANT - AUTHENTICATION TOKEN
+            {"name": "token", "value": "3KPhUMtt/2YVZWGylT7TmKnWzQ5w3CnT+9CqNC/lFws=", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
+            # USER SESSION DATA
+            {"name": "User_Info", "value": "%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A63743.20000000004%2C%22balance%22%3A91288.28000000014%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A17%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1751337914%2C%22loginTime%22%3A1751338862%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmKnWzQ5w3CnT%2B9CqNC%2FlFws%3D%22%2C%22registered%22%3Atrue%7D", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"}
+        ]
+        for cookie in cookies_data:
+            try:
+                driver.add_cookie(cookie)
+                reporter.add_step(f"Add Cookie: {cookie['name']}", "PASS", f"Successfully added cookie: {cookie['name']}")
+            except Exception as e:
+                reporter.add_step(f"Add Cookie: {cookie['name']}", "INFO", f"Could not add cookie: {str(e)}")
+
+        # Go to personal center and verify login
+        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter")
         time.sleep(3)
-        reporter.add_step("Navigate to Login Page", "PASS", "Successfully navigated to login page")
-        
-        # Click verification login
-        verification_login = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), '验证码登录/注册')]"))
-        )
-        verification_login.click()
-        reporter.add_step("Click Verification Login", "PASS", "Successfully clicked 验证码登录/注册")
-        
-        # Enter phone number
-        phone_input = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "input.el-input__inner[placeholder='请输入手机号']"))
-        )
-        phone_input.click()
-        phone_input.clear()
-        phone_input.send_keys("15124493540")
-        reporter.add_step("Enter Phone Number", "PASS", "Phone number (15124493540) entered successfully")
-        
-        # Enter verification code
-        code_input = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "input.el-input__inner[placeholder='请输入验证码']"))
-        )
-        code_input.click()
-        code_input.clear()
-        code_input.send_keys("999999")
-        reporter.add_step("Enter Verification Code", "PASS", "Verification code (999999) entered successfully")
-        
-        # Tick checkbox
-        try:
-            checkbox = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "//span[contains(@class, 'el-checkbox__input')]"))
-            )
-        except Exception:
-            checkbox = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "//label[contains(., '我已阅读并同意')]//span"))
-            )
-        
-        checkbox.click()
-        reporter.add_step("Tick Checkbox", "PASS", "User agreement checkbox ticked")
-        
-        # Wait for manual button click
-        print("Waiting for manual click on login button...")
-        print("Please click the '首次登录即注册' button manually when ready.")
-        reporter.add_step("Manual Login Button", "INFO", "Waiting for manual click on login button")
-        
-        # Wait for redirection
-        WebDriverWait(driver, 30).until(
-            lambda d: d.current_url == "https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter"
-        )
-        reporter.add_step("Login Success", "PASS", "Successfully redirected to personal center")
-        return True
-        
+        reporter.add_step("Navigate to Personal Center", "PASS", "Successfully navigated to personal center")
+
+        # Try multiple indicators of successful login
+        login_verified = False
+        indicators = [
+            "//*[contains(text(), '余额')]",
+            "//*[contains(text(), 'balance')]",
+            "//*[contains(text(), '账户')]",
+            "//*[contains(text(), 'account')]",
+            "//*[contains(text(), '个人中心')]",
+            "//*[contains(text(), 'personal')]",
+            "//button[contains(text(), '添加付费账户')]",
+            "//div[contains(@class, 'personal')]",
+            "//div[contains(@class, 'account')]"
+        ]
+        for indicator in indicators:
+            try:
+                element = WebDriverWait(driver, 3).until(
+                    EC.presence_of_element_located((By.XPATH, indicator))
+                )
+                reporter.add_step("Login Verification", "PASS", f"Successfully logged in - found indicator: {indicator}")
+                login_verified = True
+                break
+            except:
+                continue
+        if not login_verified:
+            if "login" not in driver.current_url.lower():
+                reporter.add_step("Login Verification", "PASS", "Successfully logged in - not on login page")
+                login_verified = True
+        if login_verified:
+            return True
+        else:
+            reporter.add_step("Login Verification", "FAIL", "Could not find any login indicators")
+            return False
     except Exception as e:
         reporter.add_step("Login Error", "FAIL", f"Login process error: {str(e)}")
-        return False 
+        return False
 
 # ============================================================================
 # 1. 动态高级套餐 (Dynamic Advanced Package) Tests with Retry

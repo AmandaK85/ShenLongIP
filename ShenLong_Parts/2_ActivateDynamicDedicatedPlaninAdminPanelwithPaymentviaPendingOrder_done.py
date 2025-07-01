@@ -109,34 +109,7 @@ class AdminPanelActivateDynamicDedicatedPlanWithPaymentViaPendingOrderTest:
             print(f"Error entering VPN account name: {e}")
             raise
     
-    def enter_balance_payment_details(self):
-        """Enter balance payment details - first and last digits"""
-        print("Entering balance payment details...")
-        
-        try:
-            # Click on first digit input field
-            first_digit_xpath = '//input[@placeholder="最首位数字"]'
-            first_digit_input = self.wait_for_element(first_digit_xpath)
-            first_digit_input.click()
-            first_digit_input.clear()
-            first_digit_input.send_keys("1")
-            print("First digit entered: 1")
-            time.sleep(1)
-            
-            # Click on last digit input field
-            last_digit_xpath = '//input[@placeholder="最末位数字"]'
-            last_digit_input = self.wait_for_element(last_digit_xpath)
-            last_digit_input.click()
-            last_digit_input.clear()
-            last_digit_input.send_keys("2")
-            print("Last digit entered: 2")
-            time.sleep(1)
-            
-            print("Balance payment details entered successfully")
-            
-        except Exception as e:
-            print(f"Error entering balance payment details: {e}")
-            raise
+
     
     def click_confirm_button(self):
         """Click on 确定 button"""
@@ -200,10 +173,10 @@ class AdminPanelActivateDynamicDedicatedPlanWithPaymentViaPendingOrderTest:
         
         # Try multiple strategies to catch the fast-disappearing success message
         success_indicators = [
-            "添加成功",  # Add Success!
+            "支付成功!",  # Payment Successful!
             "成功",      # Success
-            "添加",      # Add
-            "成功添加"   # Successful Add
+            "支付",      # Payment
+            "成功支付"   # Successful Payment
         ]
         
         # Try multiple times with short intervals to catch the fast message
@@ -305,28 +278,39 @@ class AdminPanelActivateDynamicDedicatedPlanWithPaymentViaPendingOrderTest:
         try:
             print("Starting Dynamic Dedicated Plan Activation with Pending Order Test...")
             
-            # Step 1: Navigate to admin panel
-            if not self.navigate_to_admin_panel():
-                return False
+            # Step 1: Navigate to login page
+            self.navigate_to_login()
             
-            # Step 2: Navigate to user management
-            if not self.navigate_to_user_management():
-                return False
+            # Step 2: Navigate to user detail page
+            self.navigate_to_user_detail()
             
-            # Step 3: Select user
-            if not self.select_user():
-                return False
+            # Step 3: Click add VPN button
+            self.click_add_vpn_button()
             
-            # Step 4: Select dynamic dedicated package
-            if not self.select_dynamic_dedicated_package():
-                return False
+            # Step 4: Enter VPN account name
+            self.enter_vpn_account_name()
             
-            # Step 5: Generate pending payment order
-            if not self.generate_pending_payment_order():
-                return False
+            # Step 5: Click confirm button
+            self.click_confirm_button()
             
-            print("✅ Dynamic Dedicated Plan activation with pending order test completed successfully!")
-            return True
+            # Step 6: Click history orders tab
+            self.click_history_orders_tab()
+            
+            # Step 7: Click pay button
+            self.click_pay_button()
+            
+            # Step 8: Click confirm payment
+            self.click_confirm_payment()
+            
+            # Step 9: Check for success message
+            success = self.check_success_message()
+            
+            if success:
+                print("✅ Dynamic Dedicated Plan activation with pending order test completed successfully!")
+            else:
+                print("⚠️ Test completed but success message not confirmed")
+            
+            return success
             
         except Exception as e:
             print(f"❌ Test failed with error: {e}")

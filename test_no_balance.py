@@ -1,3 +1,5 @@
+print('=== Script started ===')
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -8,144 +10,134 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import os
 from datetime import datetime
-from driver_utils import setup_chrome_driver
+
+def setup_chrome_driver():
+    """
+    Setup and configure Chrome WebDriver with optimized settings.
+    
+    Returns:
+        webdriver.Chrome: Configured Chrome WebDriver instance or None if failed
+    """
+    try:
+        # Configure Chrome options
+        chrome_options = Options()
+        
+        # Performance optimizations
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--disable-web-security')
+        chrome_options.add_argument('--disable-extensions')
+        chrome_options.add_argument('--disable-images')
+        chrome_options.add_argument('--disable-background-timer-throttling')
+        chrome_options.add_argument('--disable-backgrounding-occluded-windows')
+        chrome_options.add_argument('--disable-renderer-backgrounding')
+        chrome_options.add_argument('--disable-default-apps')
+        chrome_options.add_argument('--disable-sync')
+        chrome_options.add_argument('--disable-translate')
+        chrome_options.add_argument('--disable-notifications')
+        chrome_options.add_argument('--disable-plugins')
+        chrome_options.add_argument('--disable-logging')
+        chrome_options.add_argument('--disable-software-rasterizer')
+        chrome_options.add_argument('--disable-features=VizDisplayCompositor')
+        chrome_options.add_argument('--memory-pressure-off')
+        chrome_options.add_argument('--max_old_space_size=2048')
+        chrome_options.add_argument('--aggressive-cache-discard')
+        chrome_options.add_argument('--disable-cache')
+        chrome_options.add_argument('--disable-application-cache')
+        chrome_options.add_argument('--disable-offline-load-stale-cache')
+        chrome_options.add_argument('--disk-cache-size=0')
+        chrome_options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
+        
+        # Anti-detection
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_experimental_option('useAutomationExtension', False)
+        
+        # Initialize the Chrome driver
+        driver = webdriver.Chrome(options=chrome_options)
+        print('=== Chrome driver created ===')
+        
+        # Configure driver settings
+        driver.set_page_load_timeout(15)
+        driver.implicitly_wait(2)
+        driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+        driver.maximize_window()
+        
+        print("✅ Chrome WebDriver initialized successfully")
+        return driver
+        
+    except Exception as e:
+        print(f"❌ Failed to initialize Chrome WebDriver: {str(e)}")
+        return None
 
 def wait_for_personal_center(driver, timeout=30):
     """
     Wait for the personal center page to be fully loaded and ready.
-    
-    Args:
-        driver: Selenium WebDriver instance
-        timeout: Maximum time to wait in seconds (default: 30)
-    
-    Returns:
-        bool: True if personal center page is loaded successfully, False otherwise
+    Accepts the page as loaded if the URL contains '/personalCenter', even if isGuide=true is present.
     """
     print("🔄 Waiting for personal center page to load...")
-    
     try:
-        # Wait for URL to change to personal center
+        # Wait for URL to contain personal center
         WebDriverWait(driver, timeout).until(
-            lambda driver: driver.current_url == "https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter"
+            lambda driver: "/personalCenter" in driver.current_url
         )
         print("✅ URL successfully redirected to personal center")
-        
         # Wait for page to fully load (wait for body or main content)
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.TAG_NAME, "body"))
         )
-        
         # Additional wait for any dynamic content to load
         time.sleep(2)
-        
-        # Try to verify the page content by looking for common elements
-        try:
-            # Look for the main heading or title
-            WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.XPATH, "//h1[contains(text(), '一站式国内网络解决方案')]"))
-            )
-            print("✅ Personal center page content verified")
-        except:
-            # If specific content not found, just verify page is loaded
-            print("ℹ️ Page loaded, content verification skipped")
-        
         print("✅ SUCCESS! Personal center page is fully loaded and ready.")
         return True
-        
     except Exception as e:
         print(f"❌ Failed to load personal center page: {str(e)}")
         print(f"Current URL: {driver.current_url}")
         return False
 
 def login_shenlong(driver):
-    """Login to ShenLong using the provided driver instance"""
-    print("Starting login process...")
+    """Login to ShenLong using cookies and tokens"""
+    print("Starting login process with cookies...")
     
     try:
-        # Navigate to login page
-        print("Navigating to login page...")
-        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/login")
+        # Navigate to the main domain first to set cookies
+        print("Navigating to main domain to set cookies...")
+        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net")
+        time.sleep(2)
         
-        # Wait for page to load
-        print("Waiting for page to load...")
+        # Add authentication cookies
+        print("Adding authentication cookies...")
+        cookies = [
+            {'name': 'Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1751348297', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'Hm_lvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1750658721,1751348297', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'Hm_lvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1750658721,1751348297', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'HMACCOUNT', 'value': '30F199DAD7C59D55', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'token', 'value': 'z7PFxmh3SZngVpqpfaUcke1/085rxctJp++6+nabvNE=', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+            {'name': 'User_Info', 'value': '%7B%22_id%22%3A%226848ec1665510850cc139ec5%22%2C%22id%22%3A10621%2C%22username%22%3A%2214562485478%22%2C%22realMoney%22%3A1%2C%22balance%22%3A0%2C%22phone%22%3A%2214562485478%22%2C%22state%22%3A1%2C%22createTime%22%3A1749609493%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749611980%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A0%2C%22registFingerPrint%22%3A%221cb3b2bdbae44e7c77615a01d626fe77%22%2C%22dailyActive%22%3A11%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1751338945%2C%22loginTime%22%3A1751348156%2C%22userLevel%22%3A40%2C%22lastCreator%22%3A6839%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%22z7PFxmh3SZngVpqpfaUcke1%2F085rxctJp%2B%2B6%2BnabvNE%3D%22%2C%22registered%22%3Atrue%7D', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'}
+        ]
+        
+        success_count = 0
+        for cookie in cookies:
+            try:
+                driver.add_cookie(cookie)
+                success_count += 1
+                print(f"✅ Added cookie: {cookie['name']}")
+            except Exception as e:
+                print(f"⚠️ Failed to add cookie {cookie['name']}: {e}")
+        
+        print(f"✅ Successfully added {success_count}/{len(cookies)} cookies")
+        
+        # Navigate to personal center to verify login
+        print("Navigating to personal center to verify login...")
+        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter")
         time.sleep(3)
         
-        # Click on verification code login/register
-        print("Clicking on verification code login option...")
-        verification_login = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), '验证码登录/注册')]"))
-        )
-        verification_login.click()
-        
-        print("✅ Successfully clicked on verification code login/register option!")
-        
-        # Wait for the phone number input to appear and enter the phone number
-        print("Waiting for phone number input field...")
-        try:
-            phone_input = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "input.el-input__inner[placeholder='请输入手机号']"))
-            )
-            print("✅ Phone number input found by CSS selector!")
-        except Exception as e:
-            print("❌ Could not find phone number input by CSS selector, trying alternative selector...")
-            phone_input = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.ID, "el-id-1024-168"))
-            )
-            print("✅ Phone number input found by ID!")
-        
-        phone_input.click()
-        phone_input.clear()
-        phone_input.send_keys("14562485478")
-        print("✅ Phone number entered successfully!")
-        
-        # Wait for the verification code input to appear and enter the code
-        print("Waiting for verification code input field...")
-        try:
-            code_input = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "input.el-input__inner[placeholder='请输入验证码']"))
-            )
-            print("✅ Verification code input found by CSS selector!")
-        except Exception as e:
-            print("❌ Could not find verification code input by CSS selector, trying alternative selector...")
-            code_input = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, "//input[@type='text' and @maxlength='6']"))
-            )
-            print("✅ Verification code input found by alternative selector!")
-        
-        code_input.click()
-        code_input.clear()
-        code_input.send_keys("999999")
-        print("✅ Verification code entered successfully!")
-        
-        # Tick the checkbox for user agreement
-        print("Ticking the user agreement checkbox...")
-        try:
-            checkbox = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "//span[contains(@class, 'el-checkbox__input')]"))
-            )
-            print("✅ User agreement checkbox found!")
-        except Exception as e:
-            print("❌ Could not find checkbox by class, trying alternative selector...")
-            checkbox = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "//label[contains(., '我已阅读并同意')]//span"))
-            )
-            print("✅ User agreement checkbox found by alternative selector!")
-        
-        checkbox.click()
-        print("✅ User agreement checkbox ticked!")
-        
-        # Wait for manual button click
-        print("⏳ Waiting for manual click on '首次登录即注册' button...")
-        print("Please click the registration button manually when ready.")
-        
-        # Wait for redirection after manual click
-        print("Waiting for redirection after manual click...")
-        
-        # Use the new wait function for personal center
-        login_success = wait_for_personal_center(driver, timeout=40)
+        # Use the wait function for personal center
+        login_success = wait_for_personal_center(driver, timeout=30)
         
         if login_success:
-            print("✅ SUCCESS! Login successful - redirected to personal center.")
+            print("✅ SUCCESS! Login successful using cookies - redirected to personal center.")
             return True
         else:
             print(f"❌ Login verification failed. Current URL: {driver.current_url}")
@@ -404,4 +396,9 @@ def test_no_balance_scenario():
         driver.quit()
 
 if __name__ == "__main__":
-    test_no_balance_scenario() 
+    try:
+        print('=== Entering main ===')
+        test_no_balance_scenario()
+        print('=== Script finished ===')
+    except Exception as e:
+        print(f'=== Unhandled exception: {e} ===') 
