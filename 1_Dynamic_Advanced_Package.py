@@ -150,30 +150,32 @@ class DynamicAdvancedPackageTest:
 
     def get_authentication_cookies(self) -> list:
         return [
-            {'name': '__root_domain_v', 'value': '.xiaoxigroup.net', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': '__snaker__id', 'value': 'h93rjcHY8FBOfcOO', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': '_clck', 'value': 'f8psxo%7C2%7Cfx9%7C0%7C2000', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': '_clsk', 'value': '1eor2r5%7C1751421222358%7C6%7C1%7Cf.clarity.ms%2Fcollect', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': '_qddab', 'value': '4-n5m2mg.mck49897', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': '_qddaz', 'value': 'QD.987350750324316', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': '_uetsid', 'value': '96b990c0563d11f08aefdd0db7ff4ce9', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': '_uetvid', 'value': '0bba69504ff811f09f2d55e2ba8ec7e4', 'domain': '.xiaoxigroup.net', 'path': '/'},
-            {'name': 'balance', 'value': '89806.27', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'CLID', 'value': 'a5c2908c138b40d6bdddad2621376c38.20250620.20260702', 'domain': 'www.clarity.ms', 'path': '/'},
-            {'name': 'gdxidpyhxdE', 'value': 'w3T0jS1qeXRt58b9Vt%5CgL10WTZBYkAD9GZqlfBsnZ4Q0UqUiBaP58dCBQPE5tdc0OsAo49L2JPI%2Bm7ddhDDIMMPulKpleHWlpafJ3CqXLbN2t9a63lQ%5CoDVe85EmUB83%5C8Yh%2Fp1DKXH%2FLLL2%2FqetaDjp%2FWDJ9w0nORP9wAWST9MHJdNB%3A1751421756503', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'Hm_lpvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1751421221', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1751421221', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'Hm_lvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1750658721,1751348297,1751349468', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'Hm_lvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1750658721,1751348297,1751349468', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'HMACCOUNT', 'value': '30F199DAD7C59D55', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'HMACCOUNT_BFESS', 'value': '30F199DAD7C59D55', 'domain': '.hm.baidu.com', 'path': '/'},
-            {'name': 'MR', 'value': '0', 'domain': '.bat.bing.com', 'path': '/'},
-            {'name': 'MSPTC', 'value': 'J6eC0nN3qdOcXveMzFmUMMKKy5_OE9j8xHnKyOy8hdU', 'domain': '.bing.com', 'path': '/'},
-            {'name': 'MUID', 'value': '25C0E30F99F56CAB1B36F51E985C6D29', 'domain': '.bing.com', 'path': '/'},
-            {'name': 'MUID', 'value': '25C0E30F99F56CAB1B36F51E985C6D29', 'domain': '.clarity.ms', 'path': '/'},
-            {'name': 'token', 'value': '3KPhUMtt/2YVZWGylT7TmKnWzQ5w3CnT+9CqNC/lFws=', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'User_Info', 'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A63743.20000000004%2C%22balance%22%3A91288.28000000014%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A17%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1751337914%2C%22loginTime%22%3A1751338862%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmKnWzQ5w3CnT%2B9CqNC%2FlFws%3D%22%2C%22registered%22%3Atrue%7D', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'}
-        ]
+ 
+        {'name': '__root_domain_v', 'value': '.xiaoxigroup.net', 'domain': '.xiaoxigroup.net', 'path': '/'},
+        {'name': '__snaker__id', 'value': 'h93rjcHY8FBOfcOO', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+        {'name': '_clck', 'value': 'f8psxo%7C2%7Cfxa%7C0%7C2000', 'domain': '.xiaoxigroup.net', 'path': '/'},
+        {'name': '_clsk', 'value': '3i4c9y%7C1751507102990%7C3%7C1%7Cf.clarity.ms%2Fcollect', 'domain': '.xiaoxigroup.net', 'path': '/'},
+        {'name': '_qddaz', 'value': 'QD.987350750324316', 'domain': '.xiaoxigroup.net', 'path': '/'},
+        {'name': '_uetsid', 'value': '96b990c0563d11f08aefdd0db7ff4ce9', 'domain': '.xiaoxigroup.net', 'path': '/'},
+        {'name': '_uetvid', 'value': '0bba69504ff811f09f2d55e2ba8ec7e4', 'domain': '.xiaoxigroup.net', 'path': '/'},
+        {'name': 'balance', 'value': '88428.26', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+        {'name': 'CLID', 'value': 'a5c2908c138b40d6bdddad2621376c38.20250620.20260703', 'domain': 'www.clarity.ms', 'path': '/'},
+        {'name': 'gdxidpyhxdE', 'value': 'JImlfwR1mfB%5CXA3y7PrskGGORuL5UTf8iRpz70qx%2BeN3rNbCnGpoCm18h6cpAKWM5jWOrc9%2B42tDlk0zyJc1awQMVDj9EVMjf%5CE7%5CNiNvdsiOLx%2FKqH58GQ3mDdyohJpvP7zNqhu5ppYnW01i8i2vt8%2Bobl9cp%2BXgNkEi4d6t1W02PpU%3A1751507951777', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+        {'name': 'Hm_lpvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1751506933', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+        {'name': 'Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1751506933', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+        {'name': 'Hm_lvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1751348297,1751349468,1751439990,1751506933', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+        {'name': 'Hm_lvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1751348297,1751349468,1751439990,1751506933', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+        {'name': 'HMACCOUNT', 'value': '30F199DAD7C59D55', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+        {'name': 'HMACCOUNT_BFESS', 'value': '30F199DAD7C59D55', 'domain': '.hm.baidu.com', 'path': '/'},
+        {'name': 'MR', 'value': '0', 'domain': '.bat.bing.com', 'path': '/'},
+        {'name': 'MSPTC', 'value': 'J6eC0nN3qdOcXveMzFmUMMKKy5_OE9j8xHnKyOy8hdU', 'domain': '.bing.com', 'path': '/'},
+        {'name': 'MUID', 'value': '25C0E30F99F56CAB1B36F51E985C6D29', 'domain': '.bing.com', 'path': '/'},
+        {'name': 'MUID', 'value': '25C0E30F99F56CAB1B36F51E985C6D29', 'domain': '.clarity.ms', 'path': '/'},
+        {'name': 'token', 'value': '3KPhUMtt/2YVZWGylT7TmNvD5h/gNawhKtJ7I2DXA4g=', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
+        {'name': 'User_Info', 'value': '%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A66985.22000000004%2C%22balance%22%3A88428.26000000015%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A19%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1751502091%2C%22loginTime%22%3A1751503103%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmNvD5h%2FgNawhKtJ7I2DXA4g%3D%22%2C%22registered%22%3Atrue%7D', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'}
+    ]
+
+    
 
     def add_authentication_cookies(self) -> bool:
         logger.info("Adding authentication cookies...")

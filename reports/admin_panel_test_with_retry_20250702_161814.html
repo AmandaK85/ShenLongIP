@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel Test Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .header { background-color: #2c3e50; color: white; padding: 20px; border-radius: 5px; }
+        .summary { background-color: white; padding: 20px; margin: 20px 0; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-step { background-color: white; margin: 10px 0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .pass { border-left: 5px solid #27ae60; }
+        .fail { border-left: 5px solid #e74c3c; }
+        .info { border-left: 5px solid #3498db; }
+        .retry { border-left: 5px solid #f39c12; }
+        .stats { display: flex; justify-content: space-around; }
+        .stat-box { text-align: center; padding: 15px; }
+        .stat-number { font-size: 2em; font-weight: bold; }
+        .pass-color { color: #27ae60; }
+        .fail-color { color: #e74c3c; }
+        .info-color { color: #3498db; }
+        .retry-color { color: #f39c12; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Admin Panel Test Report (With Auto-Retry)</h1>
+        <p>Generated on: 2025-07-02 16:22:27</p>
+        <p>Test Duration: 0:04:13</p>
+    </div>
+    <div class="summary">
+        <h2>Test Summary</h2>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number pass-color">19</div>
+                <div>Passed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number fail-color">3</div>
+                <div>Failed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number retry-color">0</div>
+                <div>Retried</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">22</div>
+                <div>Total Tests</div>
+            </div>
+        </div>
+    </div>
+    <div class="summary">
+        <h2>Test Steps</h2>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:17</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:37</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:37</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:38</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:38</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Balance Payment Error</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:53</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff610fd6f95+76917]
+	GetHandleVerifier [0x0x7ff610fd6ff0+77008]
+	(No symbol) [0x0x7ff610d89dea]
+	(No symbol) [0x0x7ff610de0256]
+	(No symbol) [0x0x7ff610de050c]
+	(No symbol) [0x0x7ff610e33887]
+	(No symbol) [0x0x7ff610e084af]
+	(No symbol) [0x0x7ff610e3065c]
+	(No symbol) [0x0x7ff610e08243]
+	(No symbol) [0x0x7ff610dd1431]
+	(No symbol) [0x0x7ff610dd21c3]
+	GetHandleVerifier [0x0x7ff6112ad2cd+3051437]
+	GetHandleVerifier [0x0x7ff6112a7923+3028483]
+	GetHandleVerifier [0x0x7ff6112c58bd+3151261]
+	GetHandleVerifier [0x0x7ff610ff185e+185662]
+	GetHandleVerifier [0x0x7ff610ff971f+218111]
+	GetHandleVerifier [0x0x7ff610fdfb14+112628]
+	GetHandleVerifier [0x0x7ff610fdfcc9+113065]
+	GetHandleVerifier [0x0x7ff610fc6c98+10616]
+	BaseThreadInitThunk [0x0x7ffd9a7fe8d7+23]
+	RtlUserThreadStart [0x0x7ffd9b33c34c+44]
+</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:53</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:55</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:55</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:56</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:56</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:58</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Add VPN button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Enter VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:18:58</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Entering VPN account name</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:00</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> VPN account name entered: TWrZkf</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:00</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:02</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click history orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:02</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking history orders tab</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] History orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:06</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> History orders tab clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:06</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking pay button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:41</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Pay button clicked using selector: //*[@id="pane-third"]/div/div[2]/div[3]/table/tbody/tr[1]/td[14]/div/button[1]</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:41</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm payment button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:44</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm payment button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Check success message</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:44</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Checking for success message</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Dynamic Dedicated Pending Payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:46</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Success message found: '支付成功!'</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:46</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:51</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:51</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:56</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:19:56</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:20:01</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Add VPN button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Select Static Dedicated</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:20:01</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Selecting 静态独享 (Static Dedicated) from dropdown</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Dedicated selection</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:16</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Could not select 静态独享 option</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:16</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:17</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:17</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:18</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:18</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:21</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Add VPN button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Select Static Dedicated</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:21</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Selecting 静态独享 (Static Dedicated) from dropdown</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Static Dedicated selected</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:25</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> 静态独享 (Static Dedicated) selected</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Enter VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:25</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Entering VPN account name</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:27</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> VPN account name entered: VHpFOU</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:27</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm button (without balance payment details)</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Generate Orders Error</h3>
+            <p><strong>Time:</strong> 2025-07-02 16:22:27</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: Message: target frame detached
+  (failed to check if window was closed: disconnected: Unable to receive message from renderer)
+  (Session info: chrome=138.0.7204.97)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff610fd6f95+76917]
+	GetHandleVerifier [0x0x7ff610fd6ff0+77008]
+	(No symbol) [0x0x7ff610d89c1c]
+	(No symbol) [0x0x7ff610d7725b]
+	(No symbol) [0x0x7ff610d7611e]
+	(No symbol) [0x0x7ff610d9abf4]
+	(No symbol) [0x0x7ff610e0fa85]
+	(No symbol) [0x0x7ff610e2ff72]
+	(No symbol) [0x0x7ff610e08243]
+	(No symbol) [0x0x7ff610dd1431]
+	(No symbol) [0x0x7ff610dd21c3]
+	GetHandleVerifier [0x0x7ff6112ad2cd+3051437]
+	GetHandleVerifier [0x0x7ff6112a7923+3028483]
+	GetHandleVerifier [0x0x7ff6112c58bd+3151261]
+	GetHandleVerifier [0x0x7ff610ff185e+185662]
+	GetHandleVerifier [0x0x7ff610ff971f+218111]
+	GetHandleVerifier [0x0x7ff610fdfb14+112628]
+	GetHandleVerifier [0x0x7ff610fdfcc9+113065]
+	GetHandleVerifier [0x0x7ff610fc6c98+10616]
+	BaseThreadInitThunk [0x0x7ffd9a7fe8d7+23]
+	RtlUserThreadStart [0x0x7ffd9b33c34c+44]
+</p>
+        </div>
+
+    </div>
+</body>
+</html>

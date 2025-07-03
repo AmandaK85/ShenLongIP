@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel Test Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .header { background-color: #2c3e50; color: white; padding: 20px; border-radius: 5px; }
+        .summary { background-color: white; padding: 20px; margin: 20px 0; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-step { background-color: white; margin: 10px 0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .pass { border-left: 5px solid #27ae60; }
+        .fail { border-left: 5px solid #e74c3c; }
+        .info { border-left: 5px solid #3498db; }
+        .retry { border-left: 5px solid #f39c12; }
+        .stats { display: flex; justify-content: space-around; }
+        .stat-box { text-align: center; padding: 15px; }
+        .stat-number { font-size: 2em; font-weight: bold; }
+        .pass-color { color: #27ae60; }
+        .fail-color { color: #e74c3c; }
+        .info-color { color: #3498db; }
+        .retry-color { color: #f39c12; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Admin Panel Test Report (With Auto-Retry)</h1>
+        <p>Generated on: 2025-07-02 13:56:12</p>
+        <p>Test Duration: 0:03:03</p>
+    </div>
+    <div class="summary">
+        <h2>Test Summary</h2>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number pass-color">49</div>
+                <div>Passed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number fail-color">2</div>
+                <div>Failed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number retry-color">0</div>
+                <div>Retried</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">51</div>
+                <div>Total Tests</div>
+            </div>
+        </div>
+    </div>
+    <div class="summary">
+        <h2>Test Steps</h2>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:12</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:26</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:26</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:30</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:30</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:32</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Add VPN button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Enter VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:32</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Entering VPN account name</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:33</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> VPN account name entered: dMlhol</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:33</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:35</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click history orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:35</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking history orders tab</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] History orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:37</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> History orders tab clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:37</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking pay button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:40</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Pay button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:40</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm payment button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:42</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm payment button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Check success message</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:42</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Checking for success message</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Dynamic Dedicated Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:47</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Success message found: '添加VPN'</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:47</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:50</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:50</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:53</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:53</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:55</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Add VPN button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Enter VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:55</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Entering VPN account name</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:56</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> VPN account name entered: MGlHEn</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:56</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:59</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click history orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:53:59</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking history orders tab</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] History orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:01</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> History orders tab clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:01</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking pay button</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Pending Payment Error</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:21</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: Message: 
+</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:21</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:24</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:24</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:27</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:27</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:30</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Add VPN button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Enter VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:30</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Entering VPN account name</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:31</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> VPN account name entered: IANGGL</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:31</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:33</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click history orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:33</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking history orders tab</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] History orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:35</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> History orders tab clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:35</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking pay button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:37</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Pay button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:37</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm payment button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:39</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm payment button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Check success message</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:39</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Checking for success message</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Dynamic Dedicated Pending Payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:45</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Success message found: '支付账号信息'</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:45</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:48</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:48</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:51</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:51</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:53</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Add VPN button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Select Static Dedicated</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:53</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Selecting 静态独享 (Static Dedicated) from dropdown</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Static Dedicated selected</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:56</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> 静态独享 (Static Dedicated) selected</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Enter VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:56</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Entering VPN account name</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:58</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> VPN account name entered: HyEeSj</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Enter balance payment details</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:54:58</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Entering balance payment details</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Balance payment details</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:00</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Balance payment details entered</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:00</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:02</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Check success message</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:02</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Checking for success message after balance payment confirmation</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Static Premium Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:07</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Success message found: '添加VPN'</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:07</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:10</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:10</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:13</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:13</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:16</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Add VPN button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Select Static Dedicated</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:16</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Selecting 静态独享 (Static Dedicated) from dropdown</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Static Dedicated selected</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:19</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> 静态独享 (Static Dedicated) selected</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Enter VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:19</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Entering VPN account name</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:20</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> VPN account name entered: QvoWJu</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:20</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm button (without balance payment details)</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:23</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click history orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:23</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking history orders tab</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] History orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:25</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> History orders tab clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:25</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking pay button</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Generate Orders Error</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:45</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: Message: 
+</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:45</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to admin login page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Login</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:48</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Admin login page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Navigate to user detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:48</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Navigating to user detail page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] User detail</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:51</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> User detail page loaded</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:51</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking add VPN button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add VPN</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:53</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Add VPN button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Select Static Dedicated</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:53</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Selecting 静态独享 (Static Dedicated) from dropdown</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Static Dedicated selected</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:57</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> 静态独享 (Static Dedicated) selected</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Enter VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:57</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Entering VPN account name</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] VPN account name</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:58</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> VPN account name entered: KEJhej</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:55:58</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm button (without balance payment details)</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:56:00</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click history orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:56:00</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking history orders tab</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] History orders tab</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:56:02</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> History orders tab clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:56:02</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking pay button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Pay button</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:56:05</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Pay button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Click confirm payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:56:05</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Clicking confirm payment button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm payment</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:56:07</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Confirm payment button clicked</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Check success message</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:56:07</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Checking for success message</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Static Premium Generate Orders</h3>
+            <p><strong>Time:</strong> 2025-07-02 13:56:12</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Success message found: '支付账号信息'</p>
+        </div>
+
+    </div>
+</body>
+</html>
