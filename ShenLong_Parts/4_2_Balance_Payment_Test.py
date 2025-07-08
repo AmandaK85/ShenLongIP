@@ -323,7 +323,7 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             raise
     
     def select_region(self):
-        """Select 陕西-西安 from region dropdown"""
+        """Select 福建-福州 from region dropdown"""
         print("Selecting region...")
         
         # Wait for the region dropdown to appear after clicking add region button
@@ -343,11 +343,11 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             time.sleep(0.5)
             
             # Wait for the region options to appear
-            region_option_xpath = '//li[contains(@class, "el-select-dropdown__item")]//span[contains(text(), "陕西-西安")]'
+            region_option_xpath = '//li[contains(@class, "el-select-dropdown__item")]//span[contains(text(), "福建-福州")]'
             region_option = self.wait_for_element(region_option_xpath, timeout=8)
             # Use JavaScript click for reliability
             self.driver.execute_script("arguments[0].click();", region_option)
-            print("陕西-西安 selected successfully by visible text")
+            print("福建-福州 selected successfully by visible text")
             time.sleep(0.5)
         except Exception as e:
             print(f"Error selecting region: {e}")
@@ -371,6 +371,61 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             time.sleep(1)  # Reduced wait time
         except Exception as e:
             print(f"Error clicking 确 定 button: {e}")
+            raise
+
+    def click_fixed_long_term_history_tab(self):
+        """Click on 固定长效历史套餐 tab"""
+        print("Clicking on 固定长效历史套餐 tab...")
+        fixed_history_tab_xpath = '//div[@id="tab-ipMeal" and contains(text(), "固定长效历史套餐")]'
+        try:
+            fixed_history_tab = self.wait_for_element(fixed_history_tab_xpath)
+            if self.safe_click(fixed_history_tab, "固定长效历史套餐 tab"):
+                print("固定长效历史套餐 tab clicked successfully")
+                time.sleep(1)
+            else:
+                raise Exception("Failed to click 固定长效历史套餐 tab")
+        except Exception as e:
+            print(f"Error clicking 固定长效历史套餐 tab: {e}")
+            raise
+
+    def refresh_page_and_wait(self):
+        """Refresh page to get latest plan data"""
+        print("Refreshing page to get latest plan data...")
+        self.driver.refresh()
+        time.sleep(3)
+        try:
+            self.wait_for_element("//body", timeout=20)
+            print("Page refreshed successfully")
+        except Exception as e:
+            print(f"Error waiting for page to load after refresh: {e}")
+            raise
+
+    def turn_off_switch(self):
+        """Turn off the switch"""
+        print("Turning off the switch...")
+        switch_xpath = '/html/body/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div[3]/table/tbody/tr[1]/td[8]/div/div/div//span[contains(@class, "el-switch__core")]'
+        try:
+            # First check if the switch is currently ON (enabled)
+            switch = self.wait_for_element(switch_xpath, timeout=20)
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", switch)
+            time.sleep(0.5)
+            
+            # Check switch state (if it has 'is-checked' class, it's ON)
+            switch_container = self.driver.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div[3]/table/tbody/tr[1]/td[8]/div/div/div')
+            is_currently_on = 'is-checked' in switch_container.get_attribute('class') if switch_container.get_attribute('class') else False
+            
+            print(f"Switch current state: {'ON' if is_currently_on else 'OFF'}")
+            
+            # Only click if it's currently ON (to turn it OFF)
+            if is_currently_on:
+                self.driver.execute_script("arguments[0].click();", switch)
+                print("Switch turned OFF successfully")
+            else:
+                print("Switch is already OFF, no action needed")
+            
+            time.sleep(1)
+        except Exception as e:
+            print(f"Error turning off switch: {e}")
             raise
     
 
@@ -457,7 +512,16 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             # Step 7: Click confirm button
             self.click_confirm_button()
             
-            # Step 8: Check for success message
+            # Step 8: Click fixed long-term history tab
+            self.click_fixed_long_term_history_tab()
+            
+            # Step 9: Refresh page to load latest plan data
+            self.refresh_page_and_wait()
+            
+            # Step 10: Turn off switch
+            self.turn_off_switch()
+            
+            # Step 11: Check for success message
             if self.check_success_message():
 
                 self.logger.info("\n🎉 TEST PASSED: Fixed Long-Term Plan activation with balance payment completed successfully!")

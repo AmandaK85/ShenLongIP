@@ -883,42 +883,15 @@ class AdminPanelActivateDynamicDedicatedPlanPendingOrderTest:
     def click_pay_button(self):
         """Click on 支付 button"""
         print("Clicking on 支付 button...")
-        pay_xpaths = [
-            '//*[@id="pane-third"]/div/div[2]/div[3]/table/tbody/tr[1]/td[14]/div/button[1]',
-            '//button[contains(text(), "支付")]',
-            '//button[contains(@class, "el-button") and contains(text(), "支付")]',
-            '//*[@id="pane-third"]//button[contains(text(), "支付")]',
-            '//table//button[contains(text(), "支付")]',
-            '//tbody//button[contains(text(), "支付")]',
-            '//button[text()="支付"]'
-        ]
-        
-        button_found = False
-        for i, xpath in enumerate(pay_xpaths):
-            try:
-                print(f"Trying xpath {i+1}: {xpath}")
-                pay_button = self.wait_for_element_present(xpath, timeout=10)
-                self.driver.execute_script("arguments[0].scrollIntoView(true);", pay_button)
-                time.sleep(1)
-                pay_button = self.wait_for_element(xpath, timeout=10)
-                try:
-                    pay_button.click()
-                    print(f"支付 button clicked successfully using xpath {i+1}")
-                    button_found = True
-                    break
-                except Exception as click_error:
-                    print(f"Regular click failed, trying JavaScript click: {click_error}")
-                    self.driver.execute_script("arguments[0].click();", pay_button)
-                    print(f"支付 button clicked successfully using JavaScript with xpath {i+1}")
-                    button_found = True
-                    break
-            except Exception as e:
-                print(f"Xpath {i+1} failed: {e}")
-                continue
-        
-        if not button_found:
-            raise Exception("Could not find or click on 支付 button")
-        time.sleep(2)
+        pay_xpath = '//*[@id="pane-third"]/div/div[2]/div[3]/table/tbody/tr[1]/td[14]/div/button[1]'
+        try:
+            pay_button = self.wait_for_element(pay_xpath)
+            pay_button.click()
+            print("支付 button clicked successfully")
+            time.sleep(2)
+        except Exception as e:
+            print(f"Error clicking 支付 button: {e}")
+            raise
 
     def click_confirm_payment(self):
         """Click on 确定 button in payment popup"""
@@ -1818,7 +1791,7 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
             raise
 
     def select_region(self):
-        """Select 陕西-西安 from region dropdown"""
+        """Select 福建-福州 from region dropdown"""
         print("Selecting region...")
         
         # Use the specific XPath for the region dropdown
@@ -1832,14 +1805,14 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
             time.sleep(2)  # Wait for dropdown options to load
             
             # Use the working text search method
-            print("Selecting 陕西-西安 by text...")
-            region_option_by_text = "//li[contains(@class, 'el-select-dropdown__item')]//span[contains(text(), '陕西-西安')]"
+            print("Selecting 福建-福州 by text...")
+            region_option_by_text = "//li[contains(@class, 'el-select-dropdown__item')]//span[contains(text(), '福建-福州')]"
             region_option = WebDriverWait(self.driver, 10).until(
                 EC.visibility_of_element_located((By.XPATH, region_option_by_text))
             )
             self.driver.execute_script("arguments[0].scrollIntoView(true);", region_option)
             self.driver.execute_script("arguments[0].click();", region_option)
-            print("陕西-西安 selected successfully")
+            print("福建-福州 selected successfully")
             
             time.sleep(1)  # Wait for selection to take effect
             
@@ -2359,7 +2332,7 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             raise
 
     def select_region(self):
-        """Select 陕西-西安 from region dropdown"""
+        """Select 福建-福州 from region dropdown"""
         print("Selecting region...")
         
         # Wait for the region dropdown to appear after clicking add region button
@@ -2379,11 +2352,11 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             time.sleep(0.5)
             
             # Wait for the region options to appear
-            region_option_xpath = '//li[contains(@class, "el-select-dropdown__item")]//span[contains(text(), "陕西-西安")]'
+            region_option_xpath = '//li[contains(@class, "el-select-dropdown__item")]//span[contains(text(), "福建-福州")]'
             region_option = self.wait_for_element(region_option_xpath, timeout=8)
             # Use JavaScript click for reliability
             self.driver.execute_script("arguments[0].click();", region_option)
-            print("陕西-西安 selected successfully by visible text")
+            print("福建-福州 selected successfully by visible text")
             time.sleep(0.5)
         except Exception as e:
             print(f"Error selecting region: {e}")
@@ -2475,15 +2448,39 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             print(f"Error clicking 固定长效历史套餐 tab: {e}")
             raise
 
+    def refresh_page_and_wait(self):
+        print("Refreshing page to get latest plan data...")
+        self.driver.refresh()
+        time.sleep(3)
+        try:
+            self.wait_for_element("//body", timeout=20)
+            print("Page refreshed successfully")
+        except Exception as e:
+            print(f"Error waiting for page to load after refresh: {e}")
+            raise
+
     def turn_off_switch(self):
         print("Turning off the switch...")
         switch_xpath = '/html/body/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div[3]/table/tbody/tr[1]/td[8]/div/div/div//span[contains(@class, "el-switch__core")]'
         try:
+            # First check if the switch is currently ON (enabled)
             switch = self.wait_for_element(switch_xpath, timeout=20)
             self.driver.execute_script("arguments[0].scrollIntoView(true);", switch)
             time.sleep(0.5)
-            self.driver.execute_script("arguments[0].click();", switch)
-            print("Switch turned off successfully")
+            
+            # Check switch state (if it has 'is-checked' class, it's ON)
+            switch_container = self.driver.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/div[3]/table/tbody/tr[1]/td[8]/div/div/div')
+            is_currently_on = 'is-checked' in switch_container.get_attribute('class') if switch_container.get_attribute('class') else False
+            
+            print(f"Switch current state: {'ON' if is_currently_on else 'OFF'}")
+            
+            # Only click if it's currently ON (to turn it OFF)
+            if is_currently_on:
+                self.driver.execute_script("arguments[0].click();", switch)
+                print("Switch turned OFF successfully")
+            else:
+                print("Switch is already OFF, no action needed")
+            
             time.sleep(1)
         except Exception as e:
             print(f"Error turning off switch: {e}")
@@ -2570,7 +2567,16 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             # Step 7: Click confirm button
             self.click_confirm_button()
             
-            # Step 8: Check for success message
+            # Step 8: Click fixed long-term history tab
+            self.click_fixed_long_term_history_tab()
+            
+            # Step 9: Refresh page to load latest plan data
+            self.refresh_page_and_wait()
+            
+            # Step 10: Turn off switch
+            self.turn_off_switch()
+            
+            # Step 11: Check for success message
             if self.check_success_message():
                 self.logger.info("\n🎉 TEST PASSED: Fixed Long-Term Plan activation with balance payment completed successfully!")
                 self.logger.info("All steps completed: Plan activation, payment, and plan management.")

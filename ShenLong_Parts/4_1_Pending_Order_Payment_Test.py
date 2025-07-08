@@ -155,7 +155,7 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
             raise
     
     def select_region(self):
-        """Select 陕西-西安 from region dropdown"""
+        """Select 福建-福州 from region dropdown"""
         print("Selecting region...")
         
         # Use the specific XPath for the region dropdown
@@ -169,14 +169,14 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
             time.sleep(2)  # Wait for dropdown options to load
             
             # Use the working text search method
-            print("Selecting 陕西-西安 by text...")
-            region_option_by_text = "//li[contains(@class, 'el-select-dropdown__item')]//span[contains(text(), '陕西-西安')]"
+            print("Selecting 福建-福州 by text...")
+            region_option_by_text = "//li[contains(@class, 'el-select-dropdown__item')]//span[contains(text(), '福建-福州')]"
             region_option = WebDriverWait(self.driver, 10).until(
                 EC.visibility_of_element_located((By.XPATH, region_option_by_text))
             )
             self.driver.execute_script("arguments[0].scrollIntoView(true);", region_option)
             self.driver.execute_script("arguments[0].click();", region_option)
-            print("陕西-西安 selected successfully")
+            print("福建-福州 selected successfully")
             
             time.sleep(1)  # Wait for selection to take effect
             
