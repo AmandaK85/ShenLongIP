@@ -109,6 +109,35 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
             print(f"Error entering VPN account name: {e}")
             raise
     
+    def enter_balance_payment_details(self):
+        """Enter balance payment details - first and last digits"""
+        print("Entering balance payment details...")
+        
+        try:
+            # Click on first digit input field
+            first_digit_xpath = '//input[@placeholder="最首位数字"]'
+            first_digit_input = self.wait_for_element(first_digit_xpath)
+            first_digit_input.click()
+            first_digit_input.clear()
+            first_digit_input.send_keys("1")
+            print("First digit entered: 1")
+            time.sleep(1)
+            
+            # Click on last digit input field
+            last_digit_xpath = '//input[@placeholder="最末位数字"]'
+            last_digit_input = self.wait_for_element(last_digit_xpath)
+            last_digit_input.click()
+            last_digit_input.clear()
+            last_digit_input.send_keys("2")
+            print("Last digit entered: 2")
+            time.sleep(1)
+            
+            print("Balance payment details entered successfully")
+            
+        except Exception as e:
+            print(f"Error entering balance payment details: {e}")
+            raise
+    
     def click_confirm_button(self):
         """Click on 确定 button"""
         print("Clicking on 确定 button...")
@@ -140,16 +169,72 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
     def click_pay_button(self):
         """Click on 支付 button"""
         print("Clicking on 支付 button...")
-        pay_xpath = '//*[@id="pane-third"]/div/div[2]/div[3]/table/tbody/tr[1]/td[14]/div/button[1]'
         
-        try:
-            pay_button = self.wait_for_element(pay_xpath)
-            pay_button.click()
-            print("支付 button clicked successfully")
-            time.sleep(2)
-        except Exception as e:
-            print(f"Error clicking 支付 button: {e}")
-            raise
+        # Multiple xpath selectors to try
+        pay_xpaths = [
+            '//*[@id="pane-third"]/div/div[2]/div[3]/table/tbody/tr[1]/td[14]/div/button[1]',
+            '//button[contains(text(), "支付")]',
+            '//button[contains(@class, "el-button") and contains(text(), "支付")]',
+            '//*[@id="pane-third"]//button[contains(text(), "支付")]',
+            '//table//button[contains(text(), "支付")]',
+            '//tbody//button[contains(text(), "支付")]',
+            '//button[text()="支付"]'
+        ]
+        
+        button_found = False
+        for i, xpath in enumerate(pay_xpaths):
+            try:
+                print(f"Trying xpath {i+1}: {xpath}")
+                
+                # Wait for the button to be present first
+                pay_button = self.wait_for_element_present(xpath, timeout=10)
+                
+                # Scroll to the button to ensure it's visible
+                self.driver.execute_script("arguments[0].scrollIntoView(true);", pay_button)
+                time.sleep(1)
+                
+                # Wait for the button to be clickable
+                pay_button = self.wait_for_element(xpath, timeout=10)
+                
+                # Try clicking with JavaScript if regular click fails
+                try:
+                    pay_button.click()
+                    print(f"支付 button clicked successfully using xpath {i+1}")
+                    button_found = True
+                    break
+                except Exception as click_error:
+                    print(f"Regular click failed, trying JavaScript click: {click_error}")
+                    self.driver.execute_script("arguments[0].click();", pay_button)
+                    print(f"支付 button clicked successfully using JavaScript with xpath {i+1}")
+                    button_found = True
+                    break
+                    
+            except Exception as e:
+                print(f"Xpath {i+1} failed: {e}")
+                continue
+        
+        if not button_found:
+            # Last resort: try to find any button in the payment area
+            try:
+                print("Trying to find any button in payment area...")
+                buttons = self.driver.find_elements(By.XPATH, '//*[@id="pane-third"]//button')
+                for button in buttons:
+                    if button.is_displayed() and button.is_enabled():
+                        print(f"Found clickable button with text: '{button.text}'")
+                        if "支付" in button.text or button.text.strip() == "":
+                            self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
+                            time.sleep(1)
+                            button.click()
+                            print("支付 button clicked successfully using fallback method")
+                            button_found = True
+                            break
+            except Exception as e:
+                print(f"Fallback method failed: {e}")
+        
+        if not button_found:
+            raise Exception("Could not find or click on 支付 button")
+        
+        time.sleep(2)
     
     def click_confirm_payment(self):
         """Click on 确定 button in payment popup"""
@@ -171,10 +256,10 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
         
         # Try multiple strategies to catch the fast-disappearing success message
         success_indicators = [
-            "支付成功!",  # Payment Successful!
+            "添加成功",  # Add Success!
             "成功",      # Success
-            "支付",      # Payment
-            "成功支付"   # Successful Payment
+            "添加",      # Add
+            "成功添加"   # Successful Add
         ]
         
         # Try multiple times with short intervals to catch the fast message
@@ -288,19 +373,13 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
             # Step 4: Enter VPN account name
             self.enter_vpn_account_name()
             
-            # Step 5: Click confirm button
+            # Step 5: Enter balance payment details
+            self.enter_balance_payment_details()
+            
+            # Step 6: Click confirm button
             self.click_confirm_button()
             
-            # Step 6: Click history orders tab
-            self.click_history_orders_tab()
-            
-            # Step 7: Click pay button
-            self.click_pay_button()
-            
-            # Step 8: Click confirm payment
-            self.click_confirm_payment()
-            
-            # Step 9: Check for success message
+            # Step 7: Check for success message
             success = self.check_success_message()
             
             if success:
