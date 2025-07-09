@@ -875,9 +875,22 @@ class AdminPanelActivateDynamicDedicatedPlanPendingOrderTest:
             history_tab = self.wait_for_element(history_tab_xpath)
             history_tab.click()
             print("历史订单 tab clicked successfully")
-            time.sleep(2)
+            # Wait longer for order data to load after creating new order
+            time.sleep(5)
         except Exception as e:
             print(f"Error clicking 历史订单 tab: {e}")
+            raise
+
+    def refresh_page_and_wait(self):
+        """Refresh page to get latest order data"""
+        print("Refreshing page to get latest order data...")
+        self.driver.refresh()
+        time.sleep(3)
+        try:
+            self.wait_for_element("//body", timeout=20)
+            print("Page refreshed successfully")
+        except Exception as e:
+            print(f"Error waiting for page to load after refresh: {e}")
             raise
 
     def click_pay_button(self):
@@ -885,7 +898,22 @@ class AdminPanelActivateDynamicDedicatedPlanPendingOrderTest:
         print("Clicking on 支付 button...")
         pay_xpath = '//*[@id="pane-third"]/div/div[2]/div[3]/table/tbody/tr[1]/td[14]/div/button[1]'
         try:
+            # Wait for order data to fully load before trying to click pay button
+            print("Waiting for order data to load...")
+            time.sleep(3)
+            
+            # Wait for the button to be present and clickable
             pay_button = self.wait_for_element(pay_xpath)
+            
+            # Scroll to ensure the button is visible
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", pay_button)
+            time.sleep(1)
+            
+            # Wait for the button to be fully clickable with longer timeout
+            pay_button = WebDriverWait(self.driver, 15).until(
+                EC.element_to_be_clickable((By.XPATH, pay_xpath))
+            )
+            
             pay_button.click()
             print("支付 button clicked successfully")
             time.sleep(2)
@@ -965,6 +993,7 @@ class AdminPanelActivateDynamicDedicatedPlanPendingOrderTest:
             self.enter_vpn_account_name()
             self.click_confirm_button()
             self.click_history_orders_tab()
+            self.refresh_page_and_wait()
             self.click_pay_button()
             self.click_confirm_payment()
             success = self.check_success_message()
@@ -1132,72 +1161,15 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
     def click_pay_button(self):
         """Click on 支付 button"""
         print("Clicking on 支付 button...")
-        
-        # Multiple xpath selectors to try
-        pay_xpaths = [
-            '//*[@id="pane-third"]/div/div[2]/div[3]/table/tbody/tr[1]/td[14]/div/button[1]',
-            '//button[contains(text(), "支付")]',
-            '//button[contains(@class, "el-button") and contains(text(), "支付")]',
-            '//*[@id="pane-third"]//button[contains(text(), "支付")]',
-            '//table//button[contains(text(), "支付")]',
-            '//tbody//button[contains(text(), "支付")]',
-            '//button[text()="支付"]'
-        ]
-        
-        button_found = False
-        for i, xpath in enumerate(pay_xpaths):
-            try:
-                print(f"Trying xpath {i+1}: {xpath}")
-                
-                # Wait for the button to be present first
-                pay_button = self.wait_for_element_present(xpath, timeout=10)
-                
-                # Scroll to the button to ensure it's visible
-                self.driver.execute_script("arguments[0].scrollIntoView(true);", pay_button)
-                time.sleep(1)
-                
-                # Wait for the button to be clickable
-                pay_button = self.wait_for_element(xpath, timeout=10)
-                
-                # Try clicking with JavaScript if regular click fails
-                try:
-                    pay_button.click()
-                    print(f"支付 button clicked successfully using xpath {i+1}")
-                    button_found = True
-                    break
-                except Exception as click_error:
-                    print(f"Regular click failed, trying JavaScript click: {click_error}")
-                    self.driver.execute_script("arguments[0].click();", pay_button)
-                    print(f"支付 button clicked successfully using JavaScript with xpath {i+1}")
-                    button_found = True
-                    break
-                    
-            except Exception as e:
-                print(f"Xpath {i+1} failed: {e}")
-                continue
-        
-        if not button_found:
-            # Last resort: try to find any button in the payment area
-            try:
-                print("Trying to find any button in payment area...")
-                buttons = self.driver.find_elements(By.XPATH, '//*[@id="pane-third"]//button')
-                for button in buttons:
-                    if button.is_displayed() and button.is_enabled():
-                        print(f"Found clickable button with text: '{button.text}'")
-                        if "支付" in button.text or button.text.strip() == "":
-                            self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
-                            time.sleep(1)
-                            button.click()
-                            print("支付 button clicked successfully using fallback method")
-                            button_found = True
-                            break
-            except Exception as e:
-                print(f"Fallback method failed: {e}")
-        
-        if not button_found:
-            raise Exception("Could not find or click on 支付 button")
-        
-        time.sleep(2)
+        pay_xpath = '//*[@id="pane-third"]/div/div[2]/div[3]/table/tbody/tr[1]/td[14]/div/button[1]'
+        try:
+            pay_button = self.wait_for_element(pay_xpath)
+            pay_button.click()
+            print("支付 button clicked successfully")
+            time.sleep(2)
+        except Exception as e:
+            print(f"Error clicking 支付 button: {e}")
+            raise
 
     def click_confirm_payment(self):
         """Click on 确定 button in payment popup"""
@@ -2749,15 +2721,32 @@ def main():
     print("4. 固定长效套餐 (Fixed Long-Term Package)")
     print("=" * 80)
     
-    # Setup Chrome options
+    # Setup Chrome options (simplified to avoid conflicts)
     chrome_options = Options()
     chrome_options.add_argument("--start-maximized")
-    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    chrome_options.add_experimental_option('useAutomationExtension', False)
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
     
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    try:
+        # Try default ChromeDriver location first
+        driver = webdriver.Chrome(options=chrome_options)
+        print("Chrome driver started successfully")
+    except Exception as e:
+        print(f"Chrome driver error: {e}")
+        print("\nTroubleshooting steps:")
+        print("1. Check Chrome version: chrome://version/")
+        print("2. Download matching ChromeDriver from: https://chromedriver.chromium.org/")
+        print("3. Place chromedriver.exe in project folder or add to PATH")
+        print("4. Ensure Chrome browser is properly installed")
+        
+        # Try with explicit chromedriver path (if exists in current directory)
+        try:
+            print("Trying chromedriver.exe in current directory...")
+            driver = webdriver.Chrome(executable_path="./chromedriver.exe", options=chrome_options)
+            print("Chrome driver started with explicit path")
+        except:
+            print("Failed with explicit path as well")
+            raise
     
     # Setup reporter
     reporter = TestReporter()
