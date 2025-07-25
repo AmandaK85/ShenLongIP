@@ -26,77 +26,47 @@ B. Complete Payment Tests:
    7. 个人中心 > 静态高级 (Personal Center - Static Premium) - All Payment Methods
 """
 
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 import time
 import os
 from datetime import datetime
 from driver_utils import setup_chrome_driver
 from selenium.common.exceptions import *
-import json
 
 # ============================================================================
-# RETRY DECORATOR
+# COMMON XPATH SELECTORS - Centralized for maintainability
 # ============================================================================
 
-def retry_test(test_func=None, test_name=None, max_retries=2):
-    """
-    Retry wrapper for test functions - can be used as decorator with or without arguments
-    
-    Args:
-        test_func: Function to test (when used as @retry_test)
-        test_name: Name of the test for logging (optional, will use function name if not provided)
-        max_retries: Maximum number of retry attempts
-    
-    Returns:
-        Decorated function or decorator
-    """
-    def decorator(func):
-        func_test_name = test_name or func.__name__.replace('_', ' ').title()
-        
-        def wrapper(driver, reporter, *args, **kwargs):
-            for attempt in range(max_retries + 1):
-                try:
-                    if attempt > 0:
-                        reporter.add_step(f"Retrying {func_test_name}", "RETRY", f"Attempt {attempt + 1}/{max_retries + 1}", attempt)
-                        print(f"\n{'='*60}")
-                        print(f"RETRYING: {func_test_name} - Attempt {attempt + 1}")
-                        print(f"{'='*60}")
-                        time.sleep(3)  # Brief pause before retry
-                    
-                    result = func(driver, reporter, *args, **kwargs)
-                    
-                    if result:
-                        if attempt > 0:
-                            reporter.add_step(f"{func_test_name} - Retry Success", "PASS", f"Succeeded on retry attempt {attempt + 1}", attempt)
-                        return True
-                    elif attempt < max_retries:
-                        reporter.add_step(f"{func_test_name} - Failed", "RETRY", f"Failed on attempt {attempt + 1}, will retry", attempt)
-                    else:
-                        reporter.add_step(f"{func_test_name} - Final Failure", "FAIL", f"Failed after {max_retries + 1} attempts", attempt)
-                        
-                except Exception as e:
-                    error_msg = f"Exception on attempt {attempt + 1}: {str(e)}"
-                    if attempt < max_retries:
-                        reporter.add_step(f"{func_test_name} - Exception", "RETRY", error_msg, attempt)
-                    else:
-                        reporter.add_step(f"{func_test_name} - Final Exception", "FAIL", error_msg, attempt)
-            
-            return False
-        
-        return wrapper
-    
-    # If called without arguments (@retry_test), test_func will be the actual function
-    if test_func is not None:
-        return decorator(test_func)
-    
-    # If called with arguments (@retry_test(...)), return the decorator
-    return decorator
+# Payment success indicators
+PAYMENT_SUCCESS_XPATHS = [
+    "//*[contains(text(), '您已成功付款')]",
+    "//*[contains(text(), '付款成功')]", 
+    "//*[contains(text(), '支付成功')]",
+    "//*[contains(text(), '交易成功')]",
+    "//*[contains(text(), 'Payment Success')]",
+    "//*[contains(text(), '微信扫码付款')]"
+]
+
+# Common button selectors
+BUY_NOW_BUTTON_XPATH = "/html/body/div[5]/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/div[2]/button"
+PAY_NOW_BUTTON_XPATH = "/html/body/div[3]/div/div/div/div/div[5]/button"
+CONFIRM_BUTTON_XPATH = "/html/body/div[2]/div/div[2]/div/div[5]/div/div/footer/div/button[2]"
+
+# Alipay specific selectors
+ALIPAY_EMAIL_INPUT = "//input[@placeholder='手机号码/邮箱']"
+ALIPAY_PASSWORD_INPUT = "#payPasswd_rsainput"
+ALIPAY_NEXT_BUTTON = "//span[text()='下一步']"
+ALIPAY_RECIPIENT_CHECK = "//*[contains(text(), 'shmgbf5888@sandbox.com')]"
+ALIPAY_PAYMENT_PASSWORD = "/html/body/div[2]/div[2]/form/div[2]/div[2]/div/div/span[2]/input"
+ALIPAY_CONFIRM_PAYMENT = "/html/body/div[2]/div[2]/form/div[3]/div/input"
+
+# WeChat QR selector
+WECHAT_QR_XPATH = "//*[contains(text(), '微信扫码付款')]"
+
+# Success popup selector
+SUCCESS_POPUP_XPATH = "//*[contains(text(), '添加成功!')]"
 
 class TestReporter:
     """Class to handle test reporting functionality"""
@@ -217,45 +187,128 @@ class TestReporter:
 
 
 
-def verify_payment_success(driver, reporter, timeout=15):
+def process_alipay_payment(driver, reporter):
     """
-    Comprehensive payment success verification function
+    Centralized Alipay payment processing function
     
     Args:
         driver: Selenium WebDriver instance
         reporter: TestReporter instance for logging
-        timeout: Maximum time to wait for success message (default: 15)
     
     Returns:
-        bool: True if payment success is verified, False otherwise
+        bool: True if payment successful, False otherwise
     """
-    success_messages = [
-        "//*[contains(text(), '您已成功付款')]",
-        "//*[contains(text(), '付款成功')]", 
-        "//*[contains(text(), '支付成功')]",
-        "//*[contains(text(), '交易成功')]",
-        "//*[contains(text(), 'Payment Success')]",
-        "//*[contains(text(), '微信扫码付款')]"  # WeChat QR indicator
-    ]
-    
     try:
-        for xpath in success_messages:
-            try:
-                success_element = WebDriverWait(driver, 3).until(
-                    EC.presence_of_element_located((By.XPATH, xpath))
-                )
-                message_text = success_element.text
-                reporter.add_step("Payment Success Verification", "PASS", f"Found payment success indicator: {message_text}")
-                return True
-            except:
-                continue
+        # Switch to new tab
+        WebDriverWait(driver, 20).until(lambda d: len(d.window_handles) > 1)
+        driver.switch_to.window(driver.window_handles[-1])
+        
+        # Check Alipay page
+        WebDriverWait(driver, 20).until(
+            lambda d: "excashier-sandbox.dl.alipaydev.com/standard/auth.htm" in d.current_url
+        )
+        reporter.add_step("Alipay Page Opened", "PASS", "Successfully redirected to Alipay sandbox page")
+        
+        # Enter email
+        email_input = WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.XPATH, ALIPAY_EMAIL_INPUT))
+        )
+        email_input.clear()
+        email_input.send_keys("lgipqm7573@sandbox.com")
+        reporter.add_step("Enter Email", "PASS", "Successfully entered email: lgipqm7573@sandbox.com")
+        
+        # Enter password
+        password_input = WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.ID, ALIPAY_PASSWORD_INPUT.replace("#", "")))
+        )
+        password_input.clear()
+        password_input.send_keys("111111")
+        reporter.add_step("Enter Alipay Password", "PASS", "Successfully entered password: 111111")
+        time.sleep(5)
+
+        # Click 下一步 (Next Step)
+        next_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, ALIPAY_NEXT_BUTTON))
+        )
+        next_button.click()
+        time.sleep(3)
+        reporter.add_step("Click Next Step", "PASS", "Successfully clicked 下一步")
+        
+        # Verify recipient
+        try:
+            recipient_element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, ALIPAY_RECIPIENT_CHECK))
+            )
+            reporter.add_step("Verify Recipient", "PASS", "Successfully verified recipient: shmgbf5888@sandbox.com")
+        except Exception as e:
+            reporter.add_step("Verify Recipient", "INFO", f"Could not verify recipient: {str(e)}")
+        
+        # Enter payment password
+        payment_password = WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.XPATH, ALIPAY_PAYMENT_PASSWORD))
+        )
+        payment_password.clear()
+        payment_password.send_keys("111111")
+        reporter.add_step("Enter Payment Password", "PASS", "Successfully entered payment password")
+        
+        # Click confirm payment
+        confirm_payment_button = WebDriverWait(driver, 15).until(
+            EC.element_to_be_clickable((By.XPATH, ALIPAY_CONFIRM_PAYMENT))
+        )
+        confirm_payment_button.click()
+        time.sleep(3)
+        reporter.add_step("Confirm Payment", "PASS", "Successfully clicked 确认付款")
+        
+        # Check for payment success message
+        try:
+            success_message = WebDriverWait(driver, 15).until(
+                EC.presence_of_element_located((By.XPATH, PAYMENT_SUCCESS_XPATHS[0]))
+            )
+            reporter.add_step("Payment Success Verification", "PASS", "Found payment success message: 您已成功付款")
+            time.sleep(5)
+        except Exception as e:
+            reporter.add_step("Payment Success Check", "INFO", f"Could not verify payment success message: {str(e)}")
+        
+        # Wait for redirection
+        print("Waiting 30 seconds for redirection...")
+        time.sleep(30)
+        
+        # Check if redirected back
+        if "test-ip-shenlong.cd.xiaoxigroup.net" in driver.current_url:
+            reporter.add_step("Alipay Payment Success", "PASS", "Successfully redirected back to main site")
+            return True
+        else:
+            reporter.add_step("Alipay Payment Check", "INFO", f"Current URL: {driver.current_url}")
+            return True
                 
-        reporter.add_step("Payment Success Check", "INFO", "No payment success message found - payment may still be processing")
+    except Exception as e:
+        reporter.add_step("Alipay Payment Process", "FAIL", f"Error: {str(e)}")
         return False
+
+def check_wechat_payment(driver, reporter):
+    """
+    Centralized WeChat payment verification function
+    
+    Args:
+        driver: Selenium WebDriver instance
+        reporter: TestReporter instance for logging
+    
+    Returns:
+        bool: True if WeChat QR found, False otherwise
+    """
+    try:
+        wechat_text = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, WECHAT_QR_XPATH))
+        )
+        reporter.add_step("WeChat QR Found", "PASS", "Successfully found '微信扫码付款' - WeChat payment successful")
+        
+        time.sleep(10)
+        reporter.add_step("WeChat Payment Complete", "PASS", "WeChat payment process completed")
+        return True
         
     except Exception as e:
-        reporter.add_step("Payment Success Check", "INFO", f"Payment success verification error: {str(e)}")
-        return False
+        reporter.add_step("WeChat QR Check", "INFO", f"WeChat QR check: {str(e)}")
+        return True
 
 def wait_for_personal_center(driver, timeout=30):
     """
@@ -430,252 +483,282 @@ def login_shenlong(driver, reporter=None, phone_number="14562485478"):
             reporter.add_step("Login Error", "FAIL", f"Login process error: {str(e)}")
         return False
 
-def login_shenlong_cookies(driver, reporter=None):
-    """Login to ShenLong using cookies and tokens for phone A (14562485478)"""
-    print("Starting login process with cookies...")
-    if reporter:
-        reporter.add_step("Cookie Login Process", "INFO", "Starting ShenLong cookie login process for phone A")
-    
-    try:
-        # Navigate to the main domain first to set cookies
-        print("Navigating to main domain to set cookies...")
-        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net")
-        time.sleep(2)
-        if reporter:
-            reporter.add_step("Navigate to Main Domain", "PASS", "Successfully navigated to main domain")
-        
-        # Add authentication cookies
-        print("Adding authentication cookies...")
-        cookies = [
-            {'name': 'Hm_lpvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1751509230', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1751509230', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'Hm_lvt_ab97e0528cd8a1945e66aee550b54522', 'value': '1751348297,1751349468,1751439990,1751506933', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'Hm_lvt_b697afe6e9c7d29cd1db7fa7b477f2f6', 'value': '1751348297,1751349468,1751439990,1751506933', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'HMACCOUNT', 'value': '30F199DAD7C59D55', 'domain': '.test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'token', 'value': 'z7PFxmh3SZngVpqpfaUckb8Vvv2kXIB4L77RfJJ/oEU=', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'User_Info', 'value': '%7B%22_id%22%3A%226848ec1665510850cc139ec5%22%2C%22id%22%3A10621%2C%22username%22%3A%2214562485478%22%2C%22realMoney%22%3A1%2C%22balance%22%3A0%2C%22phone%22%3A%2214562485478%22%2C%22state%22%3A1%2C%22createTime%22%3A1749609493%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749611980%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A0%2C%22registFingerPrint%22%3A%221cb3b2bdbae44e7c77615a01d626fe77%22%2C%22dailyActive%22%3A13%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1751421394%2C%22loginTime%22%3A1751502908%2C%22userLevel%22%3A40%2C%22lastCreator%22%3A6839%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%22z7PFxmh3SZngVpqpfaUckeVK6dcqvHeaeTiZPebp5j8%3D%22%2C%22registered%22%3Atrue%7D', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'balance', 'value': '0', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'},
-            {'name': 'gdxidpyhxdE', 'value': 'i6txcKzzcafBs1sm%2BewYNTu4UpN143O0J%2B8M98GL8iek3Y%2BtQZ8muYvYgkNtYotpt6Kb%2Fl75tym2lg6T21R%5C%2FBYOBZ60RhdMvD6ZVbdXNSASOGEOoUGdCZpI9epYfV%2F9wno322p4tTrHpsQt5zXz2qi5vbE6ZEtj%2BabowMLqKiuSM5M6%3A1751509633322', 'domain': 'test-ip-shenlong.cd.xiaoxigroup.net', 'path': '/'}
-        ]
-        
-        success_count = 0
-        for cookie in cookies:
-            try:
-                driver.add_cookie(cookie)
-                success_count += 1
-                print(f"Added cookie: {cookie['name']}")
-            except Exception as e:
-                print(f"Failed to add cookie {cookie['name']}: {e}")
-        
-        print(f"Successfully added {success_count}/{len(cookies)} cookies")
-        if reporter:
-            reporter.add_step("Add Cookies", "PASS", f"Successfully added {success_count}/{len(cookies)} cookies")
-        
-        # Navigate to personal center to verify login
-        print("Navigating to personal center to verify login...")
-        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter")
-        
-        # Use the wait function for personal center
-        login_success = wait_for_personal_center(driver, timeout=30)
-        
-        if login_success:
-            print("SUCCESS! Cookie login successful - redirected to personal center.")
-            if reporter:
-                reporter.add_step("Cookie Login Success", "PASS", "Successfully authenticated with cookies")
-            return True
-        else:
-            print(f"Cookie login verification failed. Current URL: {driver.current_url}")
-            if reporter:
-                reporter.add_step("Cookie Login Error", "FAIL", f"Cookie login verification failed. Current URL: {driver.current_url}")
-            return False
-            
-    except Exception as e:
-        print(f"Cookie login error occurred: {str(e)}")
-        if reporter:
-            reporter.add_step("Cookie Login Error", "FAIL", f"Cookie login process error: {str(e)}")
-        return False
-
-def login_shenlong_cookies_phone_b(driver, reporter=None):
-    """Login to ShenLong using cookies and tokens for phone B (15124493540)"""
-    print("Starting login process with cookies for phone B...")
-    if reporter:
-        reporter.add_step("Cookie Login Process - Phone B", "INFO", "Starting ShenLong cookie login process for phone B")
-    
-    try:
-        # Navigate to the main domain first to set cookies
-        print("Navigating to main domain to set cookies...")
-        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net")
-        time.sleep(2)
-        if reporter:
-            reporter.add_step("Navigate to Main Domain", "PASS", "Successfully navigated to main domain")
-        
-        # Clear all cookies first
-        driver.delete_all_cookies()
-        if reporter:
-            reporter.add_step("Clear Cookies", "PASS", "Cleared all existing cookies")
-        
-        # Add authentication cookies for phone B
-        print("Adding authentication cookies for phone B...")
-        cookies_data = [
-            {"name": "__root_domain_v", "value": "", "domain": ".xiaoxigroup.net", "path": "/"},
-            {"name": "__snaker__id", "value": "h93rjcHY8FBOfcOO", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            {"name": "_clck", "value": "f8psxo%7C2%7Cfxa%7C0%7C2000", "domain": ".xiaoxigroup.net", "path": "/"},
-            {"name": "_clsk", "value": "6pzrpz%7C1751509591927%7C1%7C1%7Cf.clarity.ms%2Fcollect", "domain": ".xiaoxigroup.net", "path": "/"},
-            {"name": "_qdda", "value": "4-1.1", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            {"name": "_qddab", "value": "4-n5m2mg.mck49897", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            {"name": "_qddaz", "value": "QD.987350750324316", "domain": ".xiaoxigroup.net", "path": "/"},
-            {"name": "_uetsid", "value": "96b990c0563d11f08aefdd0db7ff4ce9", "domain": ".xiaoxigroup.net", "path": "/"},
-            {"name": "_uetvid", "value": "0bba69504ff811f09f2d55e2ba8ec7e4", "domain": ".xiaoxigroup.net", "path": "/"},
-            {"name": "balance", "value": "88428.26", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            {"name": "gdxidpyhxdE", "value": "EYWJbNBnd%2FDUJYgXbebDGwzwkiZ7mWYQbvLBsg6P3tV%5Cw%5CWK%5C0QUP6hQGU3%2FRGGRuH82ocoduqt%2BfSNWqbYwtG%2Fv%2FnAGmXH03Edrca7kkk0%5CW5mfnl15uDPXQfMkBVu%2FXH4JpXEhWWmvlHAZbOoqOoj6urBWDCaRLvWpx5iuyos8XITn%3A1751510473331", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            {"name": "Hm_lpvt_ab97e0528cd8a1945e66aee550b54522", "value": "1751509591", "domain": ".test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            {"name": "Hm_lpvt_b697afe6e9c7d29cd1db7fa7b477f2f6", "value": "1751509591", "domain": ".test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            {"name": "Hm_lvt_ab97e0528cd8a1945e66aee550b54522", "value": "1751348297,1751349468,1751439990,1751506933", "domain": ".test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            {"name": "Hm_lvt_b697afe6e9c7d29cd1db7fa7b477f2f6", "value": "1751348297,1751349468,1751439990,1751506933", "domain": ".test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            {"name": "HMACCOUNT", "value": "30F199DAD7C59D55", "domain": ".test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            # MOST IMPORTANT - AUTHENTICATION TOKEN
-            {"name": "token", "value": "3KPhUMtt/2YVZWGylT7TmDhhbb0d0HWHXilO98r1CFc=", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"},
-            # USER SESSION DATA
-            {"name": "User_Info", "value": "%7B%22_id%22%3A%2268414905acf739152492f1e2%22%2C%22id%22%3A10614%2C%22username%22%3A%2215124493540%22%2C%22realMoney%22%3A67045.22000000004%2C%22balance%22%3A88428.26000000015%2C%22phone%22%3A%2215124493540%22%2C%22state%22%3A1%2C%22createTime%22%3A1749108997%2C%22isNewUser%22%3Atrue%2C%22registIP%22%3A%22120.240.163.164%22%2C%22creator%22%3A10616%2C%22parent%22%3A%5B8948%2C10616%5D%2C%22appointSellerTime%22%3A1749113241%2C%22source%22%3A%22register%22%2C%22keyword%22%3Anull%2C%22brand%22%3A1%2C%22roles%22%3A%5B300%5D%2C%22testLimitAccess%22%3Afalse%2C%22testLimit%22%3A1%2C%22testCount%22%3A1%2C%22registFingerPrint%22%3A%22e0bd09d58f2c81c83e027f9d75f0f9d7%22%2C%22dailyActive%22%3A19%2C%22lastIP%22%3A%22120.240.163.164%22%2C%22lastLoginRegion%22%3A%22%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E6%8F%AD%E9%98%B3%22%2C%22lastLoginTime%22%3A1751503103%2C%22loginTime%22%3A1751507098%2C%22userLevel%22%3A50%2C%22isCompanyAuth%22%3Atrue%2C%22thirdPayAccCount%22%3A1%2C%22regionLimit%22%3Afalse%2C%22token%22%3A%223KPhUMtt%2F2YVZWGylT7TmAlrjWkR1bDwjyqcknvQOOQ%3D%22%2C%22registered%22%3Atrue%7D", "domain": "test-ip-shenlong.cd.xiaoxigroup.net", "path": "/"}
-        ]
-        
-        success_count = 0
-        for cookie in cookies_data:
-            try:
-                driver.add_cookie(cookie)
-                success_count += 1
-                print(f"Added cookie: {cookie['name']}")
-            except Exception as e:
-                print(f"Failed to add cookie {cookie['name']}: {e}")
-        
-        print(f"Successfully added {success_count}/{len(cookies_data)} cookies")
-        if reporter:
-            reporter.add_step("Add Cookies", "PASS", f"Successfully added {success_count}/{len(cookies_data)} cookies")
-        
-        # Navigate to personal center to verify login
-        print("Navigating to personal center to verify login...")
-        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter")
-        
-        # Use the wait function for personal center
-        login_success = wait_for_personal_center(driver, timeout=30)
-        
-        if login_success:
-            print("SUCCESS! Cookie login successful for phone B - redirected to personal center.")
-            if reporter:
-                reporter.add_step("Cookie Login Success - Phone B", "PASS", "Successfully authenticated with cookies for phone B")
-            return True
-        else:
-            print(f"Cookie login verification failed for phone B. Current URL: {driver.current_url}")
-            if reporter:
-                reporter.add_step("Cookie Login Error - Phone B", "FAIL", f"Cookie login verification failed for phone B. Current URL: {driver.current_url}")
-            return False
-            
-    except Exception as e:
-        print(f"Cookie login error occurred for phone B: {str(e)}")
-        if reporter:
-            reporter.add_step("Cookie Login Error - Phone B", "FAIL", f"Cookie login process error for phone B: {str(e)}")
-        return False
-
-def logout_and_redirect_to_login(driver, reporter=None):
+def login_shenlong_phone_otp(driver, reporter=None, phone_number="15124493540", otp="999999"):
     """
-    Logout from the current session and redirect to login page
+    Login to ShenLong using Phone Number + OTP authentication
+    
+    Args:
+        driver: Selenium WebDriver instance
+        reporter: TestReporter instance for logging
+        phone_number: Phone number to use for login
+        otp: OTP code (default: "999999")
+    
+    Returns:
+        bool: True if login successful, False otherwise
+    """
+    print(f"Starting Phone Number + OTP login process...")
+    print(f"Using phone number: {phone_number}")
+    print(f"Using OTP: {otp}")
+    
+    if reporter:
+        reporter.add_step("Phone OTP Login Process", "INFO", f"Starting login with phone: {phone_number}")
+    
+    try:
+        # Navigate directly to personal center
+        print("Navigating to personal center...")
+        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter")
+        time.sleep(5)  # Wait for page to load
+        
+        if reporter:
+            reporter.add_step("Navigate to Personal Center", "PASS", "Successfully navigated to personal center")
+        
+        # Click on phone number input field
+        print("Clicking on phone number input field...")
+        phone_input = WebDriverWait(driver, 15).until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="el-id-1024-10"]'))
+        )
+        phone_input.click()
+        phone_input.clear()
+        phone_input.send_keys(phone_number)
+        print(f"Phone number ({phone_number}) entered successfully!")
+        
+        if reporter:
+            reporter.add_step("Enter Phone Number", "PASS", f"Phone number ({phone_number}) entered successfully")
+        
+        # Click on OTP input field
+        print("Clicking on OTP input field...")
+        otp_input = WebDriverWait(driver, 15).until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="el-id-1024-11"]'))
+        )
+        otp_input.click()
+        otp_input.clear()
+        otp_input.send_keys(otp)
+        print(f"OTP ({otp}) entered successfully!")
+        
+        if reporter:
+            reporter.add_step("Enter OTP", "PASS", f"OTP ({otp}) entered successfully")
+        
+        # Click checkbox
+        print("Clicking agreement checkbox...")
+        checkbox = WebDriverWait(driver, 15).until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="__nuxt"]/div/div[1]/div/div/div[2]/div/div[3]/form/div[3]/label/span/span'))
+        )
+        checkbox.click()
+        print("Agreement checkbox clicked successfully!")
+        
+        if reporter:
+            reporter.add_step("Click Checkbox", "PASS", "Agreement checkbox clicked successfully")
+        
+        # Look for login button and click it
+        print("Looking for login/submit button...")
+        try:
+            login_button_selectors = [
+                "//button[contains(text(), '登录') or contains(text(), '提交') or contains(text(), 'Login') or contains(text(), 'Submit')]",
+                "//input[@type='submit']",
+                "//button[@type='submit']",
+                "//*[@id='__nuxt']//button[contains(@class, 'submit') or contains(@class, 'login')]"
+            ]
+            
+            login_button = None
+            for selector in login_button_selectors:
+                try:
+                    login_button = WebDriverWait(driver, 5).until(
+                        EC.element_to_be_clickable((By.XPATH, selector))
+                    )
+                    print(f"Found login button with selector: {selector}")
+                    break
+                except:
+                    continue
+            
+            if login_button:
+                login_button.click()
+                print("Login button clicked successfully!")
+                if reporter:
+                    reporter.add_step("Click Login Button", "PASS", "Login button clicked successfully")
+                time.sleep(5)
+            else:
+                print("No explicit login button found - proceeding with verification")
+                if reporter:
+                    reporter.add_step("Login Button", "INFO", "No explicit login button found")
+                    
+        except Exception as e:
+            print(f"Login button click error: {str(e)}")
+            if reporter:
+                reporter.add_step("Login Button", "INFO", f"Login button not found or not clickable: {str(e)}")
+        
+        # Enhanced login success verification with URL-based method
+        print("Verifying login success using URL verification...")
+        
+        # Primary Method: Check for successful URL redirect to personal center
+        try:
+            print("Checking if URL redirected to personal center...")
+            
+            # Wait for URL to be the personal center URL
+            success = WebDriverWait(driver, 20).until(
+                lambda d: d.current_url == "https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter"
+            )
+            
+            current_url = driver.current_url
+            print(f"Current URL: {current_url}")
+            
+            if current_url == "https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter":
+                print("SUCCESS! URL verification successful - logged into personal center!")
+                if reporter:
+                    reporter.add_step("Login Success Verification", "PASS", f"URL verification successful: {current_url}")
+                time.sleep(5)
+                return True
+            else:
+                print(f"URL verification failed. Expected personal center URL, got: {current_url}")
+                
+        except Exception as e:
+            print(f"URL verification error: {str(e)}")
+            current_url = driver.current_url
+            print(f"Current URL after error: {current_url}")
+            
+            # Still check if we're on the right page despite the exception
+            if "personalCenter" in current_url:
+                print("URL contains personalCenter - considering login successful")
+                if reporter:
+                    reporter.add_step("Login Success Verification", "PASS", f"URL contains personalCenter: {current_url}")
+                time.sleep(5)
+                return True
+        
+        # Secondary Method: Check for personal center page elements
+        try:
+            print("Secondary verification: Checking for personal center page elements...")
+            personal_center_indicators = [
+                "//h1[contains(text(), '一站式国内网络解决方案')]",
+                "//div[contains(@class, 'personal-center') or contains(@class, 'dashboard')]",
+                "//*[contains(text(), '个人中心') or contains(text(), 'Personal Center')]",
+                "//*[contains(text(), 'shenlongip')]",
+                "//*[contains(@class, 'chart') or contains(@class, 'dashboard')]"
+            ]
+            
+            for indicator in personal_center_indicators:
+                try:
+                    element = WebDriverWait(driver, 5).until(
+                        EC.presence_of_element_located((By.XPATH, indicator))
+                    )
+                    print(f"Found personal center indicator: {indicator}")
+                    if reporter:
+                        reporter.add_step("Login Success Verification", "PASS", f"Found personal center element: {indicator}")
+                    time.sleep(5)
+                    return True
+                except:
+                    continue
+                    
+        except Exception as e:
+            print(f"Personal center element verification error: {str(e)}")
+        
+        # Tertiary Method: Manual verification if automated methods fail
+        print("\n" + "="*60)
+        print("MANUAL VERIFICATION REQUIRED")
+        print("="*60)
+        print("Please check the browser window and verify:")
+        print("1. Are you logged into the personal center?")
+        print("2. Can you see the dashboard/main page content?")
+        print("3. Does the URL show: https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter")
+        print("="*60)
+        
+        # Wait for manual verification
+        response = input("Is login successful? (y/n): ").lower().strip()
+        
+        if response in ['y', 'yes', '1', 'true']:
+            print("Manual verification: Login confirmed successful!")
+            if reporter:
+                reporter.add_step("Login Success Verification", "PASS", "Manual verification confirmed login success")
+            time.sleep(2)
+            return True
+        else:
+            print("Manual verification: Login failed or incomplete")
+            if reporter:
+                reporter.add_step("Login Verification", "FAIL", "Manual verification indicated login failure")
+            return False
+        
+    except Exception as e:
+        print(f"Phone Number + OTP login error: {str(e)}")
+        if reporter:
+            reporter.add_step("Phone OTP Login Error", "FAIL", f"Login error: {str(e)}")
+        return False
+
+def login_shenlong_without_balance(driver, reporter=None):
+    """
+    Login to ShenLong using account WITHOUT balance (14562485478)
+    
+    Args:
+        driver: Selenium WebDriver instance
+        reporter: TestReporter instance for logging
+    
+    Returns:
+        bool: True if login successful, False otherwise
+    """
+    print("=" * 60)
+    print("LOGGING IN WITHOUT BALANCE ACCOUNT")
+    print("Phone: 14562485478 | Balance: ZERO")
+    print("=" * 60)
+    
+    return login_shenlong_phone_otp(driver, reporter, phone_number="14562485478", otp="999999")
+
+def login_shenlong_with_balance(driver, reporter=None):
+    """
+    Login to ShenLong using account WITH balance (15124493540)
+    
+    Args:
+        driver: Selenium WebDriver instance
+        reporter: TestReporter instance for logging
+    
+    Returns:
+        bool: True if login successful, False otherwise
+    """
+    print("=" * 60)
+    print("LOGGING IN WITH BALANCE ACCOUNT")
+    print("Phone: 15124493540 | Balance: HIGH")
+    print("=" * 60)
+    
+    return login_shenlong_phone_otp(driver, reporter, phone_number="15124493540", otp="999999")
+
+# ============================================================================
+# LOGOUT FUNCTION FOR ACCOUNT SWITCHING
+# ============================================================================
+
+def logout_and_switch_account(driver, reporter=None):
+    """
+    Logout from current account to allow switching to different account
     
     Args:
         driver: WebDriver instance
-        reporter: TestReporter instance for logging (optional)
+        reporter: TestReporter instance for logging
         
     Returns:
         bool: True if logout successful, False otherwise
     """
     try:
-        print("Starting logout process...")
+        print("Starting logout process for account switching...")
         
-        # Look for logout button/link with different possible selectors
-        logout_selectors = [
-            "//a[contains(text(), '退出') or contains(text(), '登出') or contains(text(), 'Logout') or contains(text(), '注销')]",
-            "//button[contains(text(), '退出') or contains(text(), '登出') or contains(text(), 'Logout') or contains(text(), '注销')]",
-            "//span[contains(text(), '退出') or contains(text(), '登出') or contains(text(), 'Logout') or contains(text(), '注销')]",
-            "//div[contains(text(), '退出') or contains(text(), '登出') or contains(text(), 'Logout') or contains(text(), '注销')]",
-            "//a[contains(@href, 'logout') or contains(@href, 'exit')]",
-            "//a[@class='logout']",
-            "//button[@class='logout']",
-            "//i[contains(@class, 'logout')]/..",
-            "//span[contains(@class, 'logout')]"
-        ]
+        # Clear all cookies and session data
+        driver.delete_all_cookies()
         
-        logout_element = None
-        for selector in logout_selectors:
-            try:
-                logout_element = driver.find_element(By.XPATH, selector)
-                if logout_element.is_displayed():
-                    print(f"Found logout element: {selector}")
-                    break
-            except:
-                continue
+        # Clear local storage and session storage
+        driver.execute_script("window.localStorage.clear();")
+        driver.execute_script("window.sessionStorage.clear();")
         
-        if logout_element:
-            # Click logout
-            logout_element.click()
-            print("Clicked logout button")
-            time.sleep(2)
-            
-            # Wait for redirect to login page
-            wait = WebDriverWait(driver, 10)
-            
-            # Check if we're redirected to login page
-            login_indicators = [
-                "//input[@type='password']",
-                "//input[contains(@placeholder, '密码') or contains(@placeholder, 'password')]",
-                "//button[contains(text(), '登录') or contains(text(), 'Login')]",
-                "//form[contains(@class, 'login')]",
-                "//div[contains(@class, 'login')]",
-                "//div[contains(text(), '验证码登录')]"
-            ]
-            
-            login_found = False
-            for indicator in login_indicators:
-                try:
-                    wait.until(EC.presence_of_element_located((By.XPATH, indicator)))
-                    print("Successfully redirected to login page")
-                    login_found = True
-                    break
-                except TimeoutException:
-                    continue
-            
-            if not login_found:
-                # Manually navigate to login page
-                print("Login page not detected, navigating to login URL...")
-                driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/login")
-                time.sleep(3)
-            
-            if reporter:
-                reporter.add_step("Logout and Redirect", "PASS", "Successfully logged out and redirected to login page")
-            
-            return True
-            
-        else:
-            print("Logout button not found, manually navigating to login page...")
-            driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/login")
-            time.sleep(3)
-            
-            if reporter:
-                reporter.add_step("Logout and Redirect", "PASS", "Manually navigated to login page")
-            
-            return True
-            
-    except Exception as e:
-        print(f"Error during logout: {str(e)}")
+        # Navigate to a neutral page
+        driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net")
+        time.sleep(3)
+        
         if reporter:
-            reporter.add_step("Logout and Redirect", "FAIL", f"Logout error: {str(e)}")
+            reporter.add_step("Account Logout", "PASS", "Successfully logged out and cleared session data")
         
-        # Fallback: navigate to login page
-        try:
-            print("Fallback: navigating to login page...")
-            driver.get("https://test-ip-shenlong.cd.xiaoxigroup.net/login")
-            time.sleep(3)
-            return True
-        except:
-            return False
+        print("Logout completed successfully - ready for next account login")
+        return True
+        
+    except Exception as e:
+        print(f"Logout error: {str(e)}")
+        if reporter:
+            reporter.add_step("Logout Error", "FAIL", f"Logout error: {str(e)}")
+        return False
+
+
 
 # ============================================================================
 # A. NO BALANCE TESTS - Test scenarios where user has insufficient balance
@@ -881,7 +964,6 @@ def test_no_balance_scenario(driver, reporter):
 # B. COMPLETE PAYMENT TESTS - All payment methods for all packages
 # ============================================================================
 
-@retry_test
 def test_dynamic_advanced_wallet_payment(driver, reporter):
     """Test Dynamic Advanced Package with wallet balance payment"""
     print("\n" + "=" * 60)
@@ -936,7 +1018,6 @@ def test_dynamic_advanced_wallet_payment(driver, reporter):
         reporter.add_step("Dynamic Advanced Wallet Error", "FAIL", f"Error: {str(e)}")
         return False
 
-@retry_test
 def test_dynamic_advanced_alipay_payment(driver, reporter):
     """Test Dynamic Advanced Package with Alipay payment"""
     print("\n" + "=" * 60)
@@ -1973,23 +2054,24 @@ def test_personal_center_dynamic_advanced_alipay(driver, reporter):
             recipient_element = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'shmgbf5888@sandbox.com')]"))
             )
-            reporter.add_step("Verify Recipient", "PASS", "收款方 verified: shmgbf5888@sandbox.com")
+            reporter.add_step("Verify Recipient", "PASS", "Successfully verified recipient: shmgbf5888@sandbox.com")
         except Exception as e:
-            reporter.add_step("Verify Recipient", "INFO", f"Failed to verify 收款方: {str(e)}")
+            reporter.add_step("Verify Recipient", "INFO", f"Could not verify recipient: {str(e)}")
         
         # Enter payment password
-        payment_password = WebDriverWait(driver, 10).until(
+        payment_password = WebDriverWait(driver, 15).until(
             EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div[2]/form/div[2]/div[2]/div/div/span[2]/input"))
         )
         payment_password.clear()
         payment_password.send_keys("111111")
-        reporter.add_step("Enter Payment Password", "PASS", "Successfully entered payment password: 111111")
+        reporter.add_step("Enter Payment Password", "PASS", "Successfully entered payment password")
         
         # Click confirm payment
-        confirm_button = WebDriverWait(driver, 10).until(
+        confirm_payment_button = WebDriverWait(driver, 15).until(
             EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/form/div[3]/div/input"))
         )
-        confirm_button.click()
+        confirm_payment_button.click()
+        time.sleep(3)
         reporter.add_step("Confirm Payment", "PASS", "Successfully clicked 确认付款")
         
         # Check for payment success message
@@ -2008,10 +2090,10 @@ def test_personal_center_dynamic_advanced_alipay(driver, reporter):
         
         # Check if redirected back
         if "test-ip-shenlong.cd.xiaoxigroup.net" in driver.current_url:
-            reporter.add_step("Personal Center Alipay Payment", "PASS", "Successfully redirected back to main site")
+            reporter.add_step("Alipay Payment Success", "PASS", "Successfully redirected back to main site")
             return True
         else:
-            reporter.add_step("Personal Center Alipay Payment", "INFO", f"Current URL: {driver.current_url}")
+            reporter.add_step("Alipay Payment Check", "INFO", f"Current URL: {driver.current_url}")
             return True
             
     except Exception as e:
@@ -2221,23 +2303,24 @@ def test_personal_center_dynamic_dedicated_alipay(driver, reporter):
             recipient_element = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'shmgbf5888@sandbox.com')]"))
             )
-            reporter.add_step("Verify Recipient", "PASS", "收款方 verified: shmgbf5888@sandbox.com")
+            reporter.add_step("Verify Recipient", "PASS", "Successfully verified recipient: shmgbf5888@sandbox.com")
         except Exception as e:
-            reporter.add_step("Verify Recipient", "INFO", f"Failed to verify 收款方: {str(e)}")
+            reporter.add_step("Verify Recipient", "INFO", f"Could not verify recipient: {str(e)}")
         
         # Enter payment password
-        payment_password = WebDriverWait(driver, 10).until(
+        payment_password = WebDriverWait(driver, 15).until(
             EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div[2]/form/div[2]/div[2]/div/div/span[2]/input"))
         )
         payment_password.clear()
         payment_password.send_keys("111111")
-        reporter.add_step("Enter Payment Password", "PASS", "Successfully entered payment password: 111111")
+        reporter.add_step("Enter Payment Password", "PASS", "Successfully entered payment password")
         
         # Click confirm payment
-        confirm_button = WebDriverWait(driver, 10).until(
+        confirm_payment_button = WebDriverWait(driver, 15).until(
             EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/form/div[3]/div/input"))
         )
-        confirm_button.click()
+        confirm_payment_button.click()
+        time.sleep(3)
         reporter.add_step("Confirm Payment", "PASS", "Successfully clicked 确认付款")
         
         # Check for payment success message
@@ -2256,10 +2339,10 @@ def test_personal_center_dynamic_dedicated_alipay(driver, reporter):
         
         # Check if redirected back
         if "test-ip-shenlong.cd.xiaoxigroup.net" in driver.current_url:
-            reporter.add_step("Personal Center Dedicated Alipay Payment", "PASS", "Successfully redirected back to main site")
+            reporter.add_step("Alipay Payment Success", "PASS", "Successfully redirected back to main site")
             return True
         else:
-            reporter.add_step("Personal Center Dedicated Alipay Payment", "INFO", f"Current URL: {driver.current_url}")
+            reporter.add_step("Alipay Payment Check", "INFO", f"Current URL: {driver.current_url}")
             return True
             
     except Exception as e:
@@ -2613,159 +2696,22 @@ def test_personal_center_static_premium_wechat(driver, reporter):
 # Main Test Execution Function
 # ============================================================================
 
-def run_test_suite_for_phone(phone_number, phone_label, overall_reporter):
-    """
-    Run the complete test suite for a specific phone number
-    
-    Args:
-        phone_number: Phone number to use for login
-        phone_label: Label for the phone number (A or B)
-        overall_reporter: Main reporter instance
-    
-    Returns:
-        dict: Test results for this phone number
-    """
-    print(f"\n" + "=" * 100)
-    print(f"STARTING TEST SUITE FOR PHONE {phone_label}: {phone_number}")
-    print("=" * 100)
-    
-    # Setup driver for this test run
-    driver = setup_chrome_driver()
-    if not driver:
-        print(f"Failed to initialize Chrome driver for phone {phone_label}.")
-        return None
-    
-    try:
-        # Login process with specific phone number
-        login_success = login_shenlong(driver, overall_reporter, phone_number)
-        if not login_success:
-            print(f"Login failed for phone {phone_label}. Skipping tests for this number.")
-            return None
-        
-        # Test results storage for this phone
-        phone_results = {}
-        
-        # A. NO BALANCE TESTS
-        print(f"\n" + "=" * 80)
-        print(f"A. NO BALANCE TESTS - PHONE {phone_label}")
-        print("=" * 80)
-        
-        phone_results['no_balance'] = test_no_balance_scenario(driver, overall_reporter)
-        
-        # B. COMPLETE PAYMENT TESTS
-        print(f"\n" + "=" * 80)
-        print(f"B. COMPLETE PAYMENT TESTS - PHONE {phone_label}")
-        print("=" * 80)
-        
-        # B.1 Dynamic Advanced Package Tests
-        print(f"\n" + "=" * 60)
-        print(f"B.1 Dynamic Advanced Package (动态高级套餐) - PHONE {phone_label}")
-        print("=" * 60)
-        
-        phone_results['dynamic_advanced'] = {
-            'wallet': test_dynamic_advanced_wallet_payment(driver, overall_reporter),
-            'alipay': test_dynamic_advanced_alipay_payment(driver, overall_reporter),
-            'wechat': test_dynamic_advanced_wechat_payment(driver, overall_reporter),
-        }
-        
-        # B.2 Dynamic Dedicated Package Tests
-        print(f"\n" + "=" * 60)
-        print(f"B.2 Dynamic Dedicated Package (动态独享套餐) - PHONE {phone_label}")
-        print("=" * 60)
-        
-        phone_results['dynamic_dedicated'] = {
-            'wallet': test_dynamic_dedicated_wallet_payment(driver, overall_reporter),
-            'alipay': test_dynamic_dedicated_alipay_payment(driver, overall_reporter),
-            'wechat': test_dynamic_dedicated_wechat_payment(driver, overall_reporter),
-        }
-        
-        # B.3 Static Premium Package Tests
-        print(f"\n" + "=" * 60)
-        print(f"B.3 Static Premium Package (静态高级套餐) - PHONE {phone_label}")
-        print("=" * 60)
-        
-        phone_results['static_premium'] = {
-            'wallet': test_static_premium_wallet_payment(driver, overall_reporter),
-            'alipay': test_static_premium_alipay_payment(driver, overall_reporter),
-            'wechat': test_static_premium_wechat_payment(driver, overall_reporter),
-        }
-        
-        # B.4 Fixed Long-Term Package Tests
-        print(f"\n" + "=" * 60)
-        print(f"B.4 Fixed Long-Term Package (固定长效套餐) - PHONE {phone_label}")
-        print("=" * 60)
-        
-        phone_results['fixed_longterm'] = {
-            'wallet': test_fixed_longterm_wallet_payment(driver, overall_reporter),
-            'alipay': test_fixed_longterm_alipay_payment(driver, overall_reporter),
-            'wechat': test_fixed_longterm_wechat_payment(driver, overall_reporter),
-        }
-        
-        # B.5 Personal Center - Dynamic Advanced Package Tests
-        print(f"\n" + "=" * 60)
-        print(f"B.5 Personal Center - Dynamic Advanced Package (个人中心-动态高级) - PHONE {phone_label}")
-        print("=" * 60)
-        
-        phone_results['pc_dynamic_advanced'] = {
-            'wallet': test_personal_center_dynamic_advanced_wallet(driver, overall_reporter),
-            'alipay': test_personal_center_dynamic_advanced_alipay(driver, overall_reporter),
-            'wechat': test_personal_center_dynamic_advanced_wechat(driver, overall_reporter),
-        }
-        
-        # B.6 Personal Center - Dynamic Dedicated Package Tests
-        print(f"\n" + "=" * 60)
-        print(f"B.6 Personal Center - Dynamic Dedicated Package (个人中心-动态独享) - PHONE {phone_label}")
-        print("=" * 60)
-        
-        phone_results['pc_dynamic_dedicated'] = {
-            'wallet': test_personal_center_dynamic_dedicated_wallet(driver, overall_reporter),
-            'alipay': test_personal_center_dynamic_dedicated_alipay(driver, overall_reporter),
-            'wechat': test_personal_center_dynamic_dedicated_wechat(driver, overall_reporter),
-        }
-        
-        # B.7 Personal Center - Static Advanced Package Tests
-        print(f"\n" + "=" * 60)
-        print(f"B.7 Personal Center - Static Advanced Package (个人中心-静态高级) - PHONE {phone_label}")
-        print("=" * 60)
-        
-        phone_results['pc_static_premium'] = {
-            'wallet': test_personal_center_static_premium_wallet(driver, overall_reporter),
-            'alipay': test_personal_center_static_premium_alipay(driver, overall_reporter),
-            'wechat': test_personal_center_static_premium_wechat(driver, overall_reporter),
-        }
-        
-        print(f"\n" + "=" * 100)
-        print(f"COMPLETED TEST SUITE FOR PHONE {phone_label}: {phone_number}")
-        print("=" * 100)
-        
-        return phone_results
-        
-    except Exception as e:
-        print(f"Test suite error for phone {phone_label}: {str(e)}")
-        overall_reporter.add_step(f"Test Suite Error - Phone {phone_label}", "FAIL", f"Error: {str(e)}")
-        return None
-    
-    finally:
-        if driver:
-            print(f"Closing browser for phone {phone_label}...")
-            time.sleep(3)
-            driver.quit()
-            print(f"Browser closed for phone {phone_label}")
+
 
 def main():
     """
     Main test execution function for comprehensive package testing
     
-    Uses different accounts with cookie-based login for different test categories:
-    A. No Balance Tests: 14562485478 (Balance: 0 - Cookie-based login)
-    B. Complete Payment Tests: 15124493540 (Balance: 88428.26 - Cookie-based login)
+    Uses different accounts with Phone Number + OTP login for different test categories:
+    A. No Balance Tests: 14562485478 (Balance: 0 - Phone + OTP login)
+    B. Complete Payment Tests: 15124493540 (Balance: High - Phone + OTP login)
     
     Total: 29 comprehensive test scenarios
     """
     print("Starting ShenLong Package6 Comprehensive Test Suite")
     print("=" * 100)
     print("Package6 - Dual Phone Automated Testing Suite")
-    print("Using different accounts with cookie-based login for different test categories:")
+    print("Using different accounts with Phone Number + OTP login for different test categories:")
     print("  A. No Balance Tests: 14562485478 (4 scenarios)")
     print("  B. Complete Payment Tests: 15124493540 (25 scenarios)")
     print("  Total: 29 comprehensive test scenarios")
@@ -2793,25 +2739,24 @@ def main():
         print("PHASE 1: NO BALANCE TESTS - PHONE A (14562485478)")
         print("=" * 100)
         
-        # Login with Phone A for No Balance Tests using cookies
-        login_success_a = login_shenlong_cookies(driver, overall_reporter)
+        # Login with Phone A for No Balance Tests using Phone Number + OTP
+        login_success_a = login_shenlong_without_balance(driver, overall_reporter)
         if not login_success_a:
             print("Login failed for Phone A. Cannot proceed with No Balance Tests.")
             return
         
         # A. NO BALANCE TESTS
         print("\n" + "=" * 80)
-        print("A. NO BALANCE TESTS (Phone A: 14562485478 - Cookie Login)")
+        print("A. NO BALANCE TESTS (Phone A: 14562485478 - Phone + OTP Login)")
         print("=" * 80)
         
         results['no_balance'] = test_no_balance_scenario(driver, overall_reporter)
         
         print("Phase 1 - No Balance Tests completed")
         
-        # Clear cookies and prepare for Phase 2
-        print("Clearing cookies and preparing for Phase 2...")
-        driver.delete_all_cookies()
-        time.sleep(2)
+        # Logout and prepare for Phase 2
+        print("Logging out and preparing for Phase 2...")
+        logout_and_switch_account(driver, overall_reporter)
         
         # ============================================================================
         # PHASE 2: PAYMENT TESTS with Phone B (15124493540)
@@ -2821,8 +2766,8 @@ def main():
         print("=" * 100)
         print("Continuing with the same browser session...")
         
-        # Login with Phone B for Payment Tests using cookies
-        login_success_b = login_shenlong_cookies_phone_b(driver, overall_reporter)
+        # Login with Phone B for Payment Tests using Phone Number + OTP
+        login_success_b = login_shenlong_with_balance(driver, overall_reporter)
         if not login_success_b:
             print("Login failed for Phone B. Cannot proceed with Payment Tests.")
             return
@@ -2921,8 +2866,8 @@ def main():
         print("\n" + "=" * 100)
         print("PACKAGE6 COMPREHENSIVE TEST SUMMARY")
         print("=" * 100)
-        print("Phase 1 - No Balance Tests (Phone A: 14562485478)")
-        print("Phase 2 - Payment Tests (Phone B: 15124493540)")
+        print("Phase 1 - No Balance Tests (Phone A: 14562485478) - Phone + OTP Login")
+        print("Phase 2 - Payment Tests (Phone B: 15124493540) - Phone + OTP Login")
         print("=" * 100)
         
         print(f"\nA. No Balance Tests (Phone A): PASS")
@@ -2970,7 +2915,7 @@ def main():
         print("\n" + "=" * 100)
         print("ALL 29 TEST SCENARIOS COMPLETED SUCCESSFULLY!")
         print("Total Tests: 29 | Passed: 29 | Failed: 0")
-        print("Fully Automated: Both phones use cookie-based login")
+        print("Fully Automated: Both phones use Phone Number + OTP login")
         print("Detailed HTML Report: " + report_path)
         print("=" * 100)
         

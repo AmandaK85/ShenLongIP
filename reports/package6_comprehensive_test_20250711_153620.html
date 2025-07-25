@@ -1,0 +1,1139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ShenLong Package6 Comprehensive Test Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .header { background-color: #2c3e50; color: white; padding: 20px; border-radius: 5px; }
+        .summary { background-color: white; padding: 20px; margin: 20px 0; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-step { background-color: white; margin: 10px 0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .pass { border-left: 5px solid #27ae60; }
+        .fail { border-left: 5px solid #e74c3c; }
+        .info { border-left: 5px solid #3498db; }
+        .stats { display: flex; justify-content: space-around; }
+        .stat-box { text-align: center; padding: 15px; }
+        .stat-number { font-size: 2em; font-weight: bold; }
+        .pass-color { color: #27ae60; }
+        .fail-color { color: #e74c3c; }
+        .info-color { color: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ShenLong Package6 Comprehensive Test Report</h1>
+        <p>Generated on: 2025-07-11 15:55:14</p>
+        <p>Test Duration: 0:18:53</p>
+    </div>
+    
+    <div class="summary">
+        <h2>Test Summary</h2>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number pass-color">9</div>
+                <div>Passed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number fail-color">73</div>
+                <div>Failed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">82</div>
+                <div>Total Tests</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="summary">
+        <h2>Test Steps</h2>
+
+        <div class="test-step info">
+            <h3>[INFO] Cookie Login Process</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:36:23</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Starting ShenLong cookie login process for phone A</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Main Domain</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:37:00</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to main domain</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add Cookies</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:37:01</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully added 9/9 cookies</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Cookie Login Success</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:37:14</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully authenticated with cookies</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Advanced - No Balance</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:37:32</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic advanced package page</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] No Balance Test Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:15</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6df8a6f75+76917]
+	GetHandleVerifier [0x0x7ff6df8a6fd0+77008]
+	(No symbol) [0x0x7ff6df659dea]
+	(No symbol) [0x0x7ff6df6b0256]
+	(No symbol) [0x0x7ff6df6b050c]
+	(No symbol) [0x0x7ff6df703887]
+	(No symbol) [0x0x7ff6df6d84af]
+	(No symbol) [0x0x7ff6df70065c]
+	(No symbol) [0x0x7ff6df6d8243]
+	(No symbol) [0x0x7ff6df6a1431]
+	(No symbol) [0x0x7ff6df6a21c3]
+	GetHandleVerifier [0x0x7ff6dfb7d2ad+3051437]
+	GetHandleVerifier [0x0x7ff6dfb77903+3028483]
+	GetHandleVerifier [0x0x7ff6dfb9589d+3151261]
+	GetHandleVerifier [0x0x7ff6df8c183e+185662]
+	GetHandleVerifier [0x0x7ff6df8c96ff+218111]
+	GetHandleVerifier [0x0x7ff6df8afaf4+112628]
+	GetHandleVerifier [0x0x7ff6df8afca9+113065]
+	GetHandleVerifier [0x0x7ff6df896c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Cookie Login Process - Phone B</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:17</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Starting ShenLong cookie login process for phone B</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Main Domain</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:28</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to main domain</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Clear Cookies</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:28</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Cleared all existing cookies</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add Cookies</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:29</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully added 18/18 cookies</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Cookie Login Success - Phone B</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:32</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully authenticated with cookies for phone B</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Advanced</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:37</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic advanced package page</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:48</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Dynamic Advanced Wallet Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:48</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Dynamic Advanced Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:38:48</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:39:08</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03350>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Dynamic Advanced Wallet Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:39:08</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Dynamic Advanced Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:39:08</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:39:27</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03C50>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Dynamic Advanced Wallet Payment - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:39:27</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:39:43</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03B60>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Dynamic Advanced Alipay Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:39:43</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Dynamic Advanced Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:39:43</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:40:03</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E032F0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Dynamic Advanced Alipay Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:40:03</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Dynamic Advanced Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:40:03</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:40:22</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C350>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Dynamic Advanced Alipay Payment - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:40:22</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:40:39</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3CCE0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:40:55</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E02EA0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Dynamic Dedicated Wallet Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:40:55</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Dynamic Dedicated Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:40:55</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:41:14</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03FE0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Dynamic Dedicated Wallet Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:41:14</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Dynamic Dedicated Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:41:14</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:41:34</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C950>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Dynamic Dedicated Wallet Payment - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:41:34</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:41:50</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C170>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Dynamic Dedicated Alipay Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:41:50</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Dynamic Dedicated Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:41:50</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:42:09</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03B30>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Dynamic Dedicated Alipay Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:42:09</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Dynamic Dedicated Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:42:09</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:42:29</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E032C0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Dynamic Dedicated Alipay Payment - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:42:29</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:42:45</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C200>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:01</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3D100>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Static Premium Wallet Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:01</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Static Premium Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:01</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:21</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E02DE0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Static Premium Wallet Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:21</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Static Premium Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:21</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:40</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03A10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Static Premium Wallet Payment - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:40</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:56</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3CAA0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Static Premium Alipay Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:56</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Static Premium Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:43:56</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:44:16</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C890>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Static Premium Alipay Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:44:16</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Static Premium Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:44:16</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:44:35</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E029C0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Static Premium Alipay Payment - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:44:35</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:44:51</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E00F80>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:45:08</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C650>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Fixed Longterm Wallet Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:45:08</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Fixed Longterm Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:45:08</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:45:27</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3CA70>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Fixed Longterm Wallet Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:45:27</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Fixed Longterm Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:45:27</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:45:46</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E02A80>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Fixed Longterm Wallet Payment - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:45:46</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:46:03</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03860>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Fixed Longterm Alipay Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:46:03</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Fixed Longterm Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:46:03</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:46:22</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3CE90>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Fixed Longterm Alipay Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:46:22</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Fixed Longterm Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:46:22</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:46:42</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C590>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Fixed Longterm Alipay Payment - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:46:42</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:46:58</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E02ED0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Advanced Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:47:14</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03EF0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Advanced Wallet - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:47:14</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Advanced Wallet</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:47:14</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Advanced Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:47:34</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C2C0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Advanced Wallet - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:47:34</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Advanced Wallet</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:47:34</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Advanced Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:47:53</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3CD70>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Personal Center Dynamic Advanced Wallet - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:47:53</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Advanced Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:48:09</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E033E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Advanced Alipay - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:48:09</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Advanced Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:48:09</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Advanced Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:48:29</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E038C0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Advanced Alipay - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:48:29</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Advanced Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:48:29</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Advanced Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:48:48</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C530>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Personal Center Dynamic Advanced Alipay - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:48:48</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Advanced WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:04</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C3E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Advanced Wechat - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:04</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Advanced Wechat</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:04</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Advanced WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:24</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E039B0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Advanced Wechat - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:24</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Advanced Wechat</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:24</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Advanced WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:43</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E02A20>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Personal Center Dynamic Advanced Wechat - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:43</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Dedicated Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:59</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3D220>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Dedicated Wallet - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:59</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Dedicated Wallet</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:49:59</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Dedicated Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:50:19</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C740>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Dedicated Wallet - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:50:19</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Dedicated Wallet</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:50:19</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Dedicated Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:50:38</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E02E10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Personal Center Dynamic Dedicated Wallet - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:50:38</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Dedicated Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:50:55</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03290>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Dedicated Alipay - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:50:55</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Dedicated Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:50:55</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Dedicated Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:51:14</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C500>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Dedicated Alipay - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:51:14</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Dedicated Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:51:14</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Dedicated Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:51:33</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3D490>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Personal Center Dynamic Dedicated Alipay - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:51:33</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Dedicated WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:51:50</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03980>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Dedicated Wechat - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:51:50</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Dedicated Wechat</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:51:50</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Dedicated WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:52:09</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03650>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Dynamic Dedicated Wechat - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:52:09</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Dynamic Dedicated Wechat</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:52:09</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Dynamic Dedicated WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:52:28</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3D2E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Personal Center Dynamic Dedicated Wechat - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:52:28</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Static Premium Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:52:45</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3D460>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Static Premium Wallet - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:52:45</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Static Premium Wallet</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:52:45</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Static Premium Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:04</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E02960>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Static Premium Wallet - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:04</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Static Premium Wallet</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:04</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Static Premium Wallet Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:23</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E01490>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Personal Center Static Premium Wallet - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:23</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Static Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:40</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C590>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Static Premium Alipay - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:40</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Static Premium Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:40</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Static Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:59</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C9E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Static Premium Alipay - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:59</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Static Premium Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:53:59</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Static Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:54:19</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E030E0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Personal Center Static Premium Alipay - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:54:19</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Static WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:54:35</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E03A10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Static Premium Wechat - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:54:35</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Static Premium Wechat</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:54:35</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Static WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:54:54</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3D3D0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Personal Center Static Premium Wechat - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:54:54</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Personal Center Static Premium Wechat</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:54:54</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Personal Center Static WeChat Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:55:14</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: HTTPConnectionPool(host='localhost', port=55016): Max retries exceeded with url: /session/23eb8b8b3837716e8aadc5ce0389fa70/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000028F47E3C950>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Test Personal Center Static Premium Wechat - Final Failure</h3>
+            <p><strong>Time:</strong> 2025-07-11 15:55:14</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+    </div>
+</body>
+</html>

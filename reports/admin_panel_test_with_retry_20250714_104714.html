@@ -1,0 +1,1019 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ShenLong Admin Panel Test Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .header { background-color: #2c3e50; color: white; padding: 20px; border-radius: 5px; }
+        .summary { background-color: white; padding: 20px; margin: 20px 0; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-step { background-color: white; margin: 10px 0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .pass { border-left: 5px solid #27ae60; }
+        .fail { border-left: 5px solid #e74c3c; }
+        .info { border-left: 5px solid #3498db; }
+        .retry { border-left: 5px solid #f39c12; }
+        .stats { display: flex; justify-content: space-around; }
+        .stat-box { text-align: center; padding: 15px; }
+        .stat-number { font-size: 2em; font-weight: bold; }
+        .pass-color { color: #27ae60; }
+        .fail-color { color: #e74c3c; }
+        .info-color { color: #3498db; }
+        .retry-color { color: #f39c12; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ShenLong Admin Panel Test Report (With Auto-Retry)</h1>
+        <p>Generated on: 2025-07-14 10:51:51</p>
+        <p>Test Duration: 0:04:37</p>
+    </div>
+    
+    <div class="summary">
+        <h2>Test Summary</h2>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number pass-color">0</div>
+                <div>Passed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number fail-color">32</div>
+                <div>Failed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number retry-color">32</div>
+                <div>Retried</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">32</div>
+                <div>Total Tests</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="summary">
+        <h2>Test Steps</h2>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Advanced Package Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:47:14</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Package - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:39</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Dynamic Advanced Pending Order Test - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:39</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Dynamic Advanced Pending Order Test (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:39</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Advanced Package Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:42</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Package - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:42</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Dynamic Advanced Pending Order Test - Failed (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:42</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Dynamic Advanced Pending Order Test (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:42</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Advanced Package Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:45</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Package - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:45</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Run Dynamic Advanced Pending Order Test - Final Failure (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:45</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Advanced Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:45</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Package - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:45</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Dynamic Advanced Balance Payment Test - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:45</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Dynamic Advanced Balance Payment Test (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:45</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Advanced Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:48</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Package - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:48</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Dynamic Advanced Balance Payment Test - Failed (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:48</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Dynamic Advanced Balance Payment Test (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:48</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Advanced Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:51</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Advanced Package - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:51</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Run Dynamic Advanced Balance Payment Test - Final Failure (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:51</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Dedicated Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:51</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:54</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test returned False</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Dynamic Dedicated Pending Order Test - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:54</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Dynamic Dedicated Pending Order Test (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:54</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Dedicated Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:50:57</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:00</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test returned False</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Dynamic Dedicated Pending Order Test - Failed (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:00</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Dynamic Dedicated Pending Order Test (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:00</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Dedicated Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:03</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:06</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test returned False</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Run Dynamic Dedicated Pending Order Test - Final Failure (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:06</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Dedicated Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:06</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:09</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test returned False</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Dynamic Dedicated Balance Payment Test - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:09</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Dynamic Dedicated Balance Payment Test (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:09</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Dedicated Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:12</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:15</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test returned False</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Dynamic Dedicated Balance Payment Test - Failed (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:15</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Dynamic Dedicated Balance Payment Test (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:15</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Dedicated Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:18</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:21</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test returned False</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Run Dynamic Dedicated Balance Payment Test - Final Failure (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:21</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Static Premium Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:21</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:21</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Static Premium Pending Order Test - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:21</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Static Premium Pending Order Test (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:21</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Static Premium Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:24</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:24</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Static Premium Pending Order Test - Failed (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:24</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Static Premium Pending Order Test (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:24</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Static Premium Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:27</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:27</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Run Static Premium Pending Order Test - Final Failure (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:27</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Static Premium Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:27</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:27</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Static Premium Balance Payment Test - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:27</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Static Premium Balance Payment Test (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:27</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Static Premium Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:30</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:30</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Static Premium Balance Payment Test - Failed (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:30</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Static Premium Balance Payment Test (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:30</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Static Premium Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:33</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Static Premium Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:33</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Run Static Premium Balance Payment Test - Final Failure (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:33</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Fixed Long-Term Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:33</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:33</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Fixed Long Term Pending Order Test - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:33</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Fixed Long Term Pending Order Test (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:33</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Fixed Long-Term Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:36</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:36</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Fixed Long Term Pending Order Test - Failed (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:36</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Fixed Long Term Pending Order Test (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:36</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Fixed Long-Term Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:39</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:39</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test failed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.101)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7ebc46f75+76917]
+	GetHandleVerifier [0x0x7ff7ebc46fd0+77008]
+	(No symbol) [0x0x7ff7eb9f9dea]
+	(No symbol) [0x0x7ff7eb9d2191]
+	(No symbol) [0x0x7ff7eba7f83e]
+	(No symbol) [0x0x7ff7eba9ff72]
+	(No symbol) [0x0x7ff7eba78243]
+	(No symbol) [0x0x7ff7eba41431]
+	(No symbol) [0x0x7ff7eba421c3]
+	GetHandleVerifier [0x0x7ff7ebf1d2ad+3051437]
+	GetHandleVerifier [0x0x7ff7ebf17903+3028483]
+	GetHandleVerifier [0x0x7ff7ebf3589d+3151261]
+	GetHandleVerifier [0x0x7ff7ebc6183e+185662]
+	GetHandleVerifier [0x0x7ff7ebc696ff+218111]
+	GetHandleVerifier [0x0x7ff7ebc4faf4+112628]
+	GetHandleVerifier [0x0x7ff7ebc4fca9+113065]
+	GetHandleVerifier [0x0x7ff7ebc36c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Run Fixed Long Term Pending Order Test - Final Failure (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:39</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Fixed Long-Term Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:39</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:41</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test returned False</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Fixed Long Term Balance Payment Test - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:41</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Fixed Long Term Balance Payment Test (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:41</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Fixed Long-Term Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:44</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:46</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test returned False</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Run Fixed Long Term Balance Payment Test - Failed (Retry 1)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:46</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 2, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[RETRY] Retrying Run Fixed Long Term Balance Payment Test (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:46</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 3/3</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Fixed Long-Term Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:49</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Fixed Long-Term Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:51</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Test returned False</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Run Fixed Long Term Balance Payment Test - Final Failure (Retry 2)</h3>
+            <p><strong>Time:</strong> 2025-07-14 10:51:51</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Failed after 3 attempts</p>
+        </div>
+
+    </div>
+</body>
+</html>

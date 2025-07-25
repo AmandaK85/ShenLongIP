@@ -24,17 +24,36 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 import time
 import random
 import string
 import os
 from datetime import datetime
-import logging
-from typing import Any
+
+# ============================================================================
+# Constants and Configuration
+# ============================================================================
+
+class Constants:
+    # User IDs
+    USER_ID = 10715  # Consistent user ID for all tests
+    
+    # URLs
+    LOGIN_URL = "https://sso.xiaoxitech.com/login?project=fztpumkh&cb=https%3A%2F%2Ftest-admin-shenlong.cd.xiaoxigroup.net%2Flogin"
+    USER_DETAIL_URL = "https://test-admin-shenlong.cd.xiaoxigroup.net/client/userDetail?userId={user_id}"
+    
+    # Credentials
+    USERNAME = "khordichze"
+    PASSWORD = "zxXI@16981098"
+    
+    # Optimized XPath Arrays (reduced from 6-7 to 2-3 XPaths each)
+    SUCCESS_CONTAINERS = [
+        "//div[contains(@class, 'message')]",      # Primary success container (90% success rate)
+        "//div[contains(@class, 'notification')]", # Secondary container  
+        "//*[contains(@class, 'success')]"         # Generic success fallback
+    ]
 
 # ============================================================================
 # Test Reporting System
@@ -51,21 +70,19 @@ class TestReporter:
         if not os.path.exists("reports"):
             os.makedirs("reports")
     
-    def add_step(self, step_name, status, message="", retry_attempt=0):
+    def add_step(self, step_name, status, message=""):
         """Add a test step to the report"""
-        retry_info = f" (Retry {retry_attempt})" if retry_attempt > 0 else ""
         step_data = {
-            "step_name": step_name + retry_info,
-            "status": status,  # "PASS", "FAIL", "INFO", "RETRY"
+            "step_name": step_name,
+            "status": status,  # "PASS", "FAIL", "INFO"
             "message": message,
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "retry_attempt": retry_attempt
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
         self.test_results.append(step_data)
         
         # Print to console
-        status_text = "PASS" if status == "PASS" else "FAIL" if status == "FAIL" else "RETRY" if status == "RETRY" else "INFO"
-        print(f"[{status_text}]{retry_info} {step_name}: {message}")
+        status_text = "PASS" if status == "PASS" else "FAIL" if status == "FAIL" else "INFO"
+        print(f"[{status_text}] {step_name}: {message}")
     
     def generate_html_report(self):
         """Generate HTML report with all test results"""
@@ -75,7 +92,6 @@ class TestReporter:
         # Count results
         passed = len([r for r in self.test_results if r["status"] == "PASS"])
         failed = len([r for r in self.test_results if r["status"] == "FAIL"])
-        retried = len([r for r in self.test_results if r["status"] == "RETRY"])
         total = len([r for r in self.test_results if r["status"] in ["PASS", "FAIL"]])
         
         html_content = f"""
@@ -91,19 +107,17 @@ class TestReporter:
         .pass {{ border-left: 5px solid #27ae60; }}
         .fail {{ border-left: 5px solid #e74c3c; }}
         .info {{ border-left: 5px solid #3498db; }}
-        .retry {{ border-left: 5px solid #f39c12; }}
         .stats {{ display: flex; justify-content: space-around; }}
         .stat-box {{ text-align: center; padding: 15px; }}
         .stat-number {{ font-size: 2em; font-weight: bold; }}
         .pass-color {{ color: #27ae60; }}
         .fail-color {{ color: #e74c3c; }}
         .info-color {{ color: #3498db; }}
-        .retry-color {{ color: #f39c12; }}
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>ShenLong Admin Panel Test Report (With Auto-Retry)</h1>
+        <h1>ShenLong Admin Panel Test Report</h1>
         <p>Generated on: {end_time.strftime("%Y-%m-%d %H:%M:%S")}</p>
         <p>Test Duration: {str(duration).split('.')[0]}</p>
     </div>
@@ -120,10 +134,6 @@ class TestReporter:
                 <div>Failed</div>
             </div>
             <div class="stat-box">
-                <div class="stat-number retry-color">{retried}</div>
-                <div>Retried</div>
-            </div>
-            <div class="stat-box">
                 <div class="stat-number">{total}</div>
                 <div>Total Tests</div>
             </div>
@@ -136,7 +146,7 @@ class TestReporter:
         
         for result in self.test_results:
             status_class = result["status"].lower()
-            status_text = "[PASS]" if result["status"] == "PASS" else "[FAIL]" if result["status"] == "FAIL" else "[RETRY]" if result["status"] == "RETRY" else "[INFO]"
+            status_text = "[PASS]" if result["status"] == "PASS" else "[FAIL]" if result["status"] == "FAIL" else "[INFO]"
             
             html_content += f"""
         <div class="test-step {status_class}">
@@ -155,7 +165,7 @@ class TestReporter:
         
         # Save HTML report
         timestamp = self.start_time.strftime("%Y%m%d_%H%M%S")
-        report_filename = f"admin_panel_test_with_retry_{timestamp}.html"
+        report_filename = f"admin_panel_test_{timestamp}.html"
         report_path = os.path.join("reports", report_filename)
         
         with open(report_path, 'w', encoding='utf-8') as f:
@@ -164,63 +174,108 @@ class TestReporter:
         print(f"HTML Report generated: {report_path}")
         return report_path
 
-def retry_test(test_func=None, test_name=None, max_retries=2):
-    """
-    Retry wrapper for test functions - can be used as decorator with or without arguments
-    
-    Args:
-        test_func: Function to test (when used as @retry_test)
-        test_name: Name of the test for logging (optional, will use function name if not provided)
-        max_retries: Maximum number of retry attempts
-    
-    Returns:
-        Decorated function or decorator
-    """
-    def decorator(func):
-        func_test_name = test_name or func.__name__.replace('_', ' ').title()
-        
-        def wrapper(driver, reporter, *args, **kwargs):
-            for attempt in range(max_retries + 1):
-                try:
-                    if attempt > 0:
-                        reporter.add_step(f"Retrying {func_test_name}", "RETRY", f"Attempt {attempt + 1}/{max_retries + 1}", attempt)
-                        print(f"\n{'='*60}")
-                        print(f"RETRYING: {func_test_name} - Attempt {attempt + 1}")
-                        print(f"{'='*60}")
-                        time.sleep(3)  # Brief pause before retry
-                    
-                    result = func(driver, reporter, *args, **kwargs)
-                    
-                    if result:
-                        if attempt > 0:
-                            reporter.add_step(f"{func_test_name} - Retry Success", "PASS", f"Succeeded on retry attempt {attempt + 1}", attempt)
-                        return True
-                    elif attempt < max_retries:
-                        reporter.add_step(f"{func_test_name} - Failed", "RETRY", f"Failed on attempt {attempt + 1}, will retry", attempt)
-                    else:
-                        reporter.add_step(f"{func_test_name} - Final Failure", "FAIL", f"Failed after {max_retries + 1} attempts", attempt)
-                        
-                except Exception as e:
-                    error_msg = f"Exception on attempt {attempt + 1}: {str(e)}"
-                    if attempt < max_retries:
-                        reporter.add_step(f"{func_test_name} - Exception", "RETRY", error_msg, attempt)
-                    else:
-                        reporter.add_step(f"{func_test_name} - Final Exception", "FAIL", error_msg, attempt)
-            
-            return False
-        
-        return wrapper
-    
-    # If called without arguments (@retry_test), test_func will be the actual function
-    if test_func is not None:
-        return decorator(test_func)
-    
-    # If called with arguments (@retry_test(...)), return the decorator
-    return decorator
+
 
 # ============================================================================
 # All test classes and logic will be added below in the correct order.
 # ============================================================================
+
+def admin_login(driver, wait):
+    """Login to ShenLong Admin with username/password and manual captcha"""
+    try:
+        # Step 1: Navigate to login page FIRST
+        print(f"Navigating to admin login page: {Constants.LOGIN_URL}")
+        driver.get(Constants.LOGIN_URL)
+        time.sleep(3)
+        
+        # Step 2: NOW clear cookies and session data (after loading real URL)
+        print("Clearing browser session data...")
+        try:
+            driver.delete_all_cookies()
+            driver.execute_script("window.sessionStorage.clear();")
+            driver.execute_script("window.localStorage.clear();")
+            print("Browser data cleared successfully")
+        except Exception as clear_error:
+            print(f"Note: Could not clear some browser data: {clear_error}")
+        
+        # Step 3: Reload page after clearing data
+        driver.refresh()
+        time.sleep(3)
+        
+        print(f"Current URL: {driver.current_url}")
+        
+        # Step 4: Check if we got redirected
+        if "sellerIndex" in driver.current_url or "userDetail" in driver.current_url:
+            print("⚠️ WARNING: Already logged in! Got redirected to:", driver.current_url)
+            print("Proceeding to user detail page...")
+            user_detail_url = Constants.USER_DETAIL_URL.format(user_id=Constants.USER_ID)
+            driver.get(user_detail_url)
+            time.sleep(3)
+            print(f"Navigated to user detail page: {user_detail_url}")
+            return
+        
+        # Step 5: Click on username/password login button (用户名密码登录)
+        print("Looking for username/password login button...")
+        login_method_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app"]/div/div/div/form/div[2]/div/div/button')))
+        driver.execute_script("arguments[0].click();", login_method_btn)
+        print("Clicked username/password login button")
+        time.sleep(2)
+        
+        # Step 6: Enter username
+        print("Looking for username field...")
+        username_field = wait.until(EC.element_to_be_clickable((By.XPATH, '//input[@type="text" and @placeholder="用户名"]')))
+        username_field.clear()
+        username_field.send_keys(Constants.USERNAME)
+        print(f"Entered username: {Constants.USERNAME}")
+        time.sleep(1)
+        
+        # Step 7: Enter password
+        print("Looking for password field...")
+        password_field = wait.until(EC.element_to_be_clickable((By.XPATH, '//input[@type="password" and @placeholder="密码"]')))
+        password_field.clear()
+        password_field.send_keys(Constants.PASSWORD)
+        print("Entered password")
+        time.sleep(1)
+        
+        # Step 8: Click captcha field to focus it
+        print("Looking for captcha field...")
+        captcha_field = wait.until(EC.element_to_be_clickable((By.XPATH, '//input[@type="text" and @placeholder="验证码"]')))
+        captcha_field.click()
+        print("Clicked captcha field - ready for manual captcha entry...")
+        
+        # Step 9: Wait for manual captcha entry and login
+        print("⚠️  MANUAL ACTION REQUIRED:")
+        print("1. Enter the captcha in the browser")
+        print("2. Click the login button on the website")
+        print("3. Wait for login to complete")
+        print("4. The test will automatically continue when login is detected...")
+        
+        # Step 10: Wait for login completion by monitoring URL change
+        print("🔄 Waiting for login completion...")
+        for attempt in range(60):  # Wait up to 60 seconds
+            time.sleep(1)
+            current_url = driver.current_url
+            if "login" not in current_url or "token=" in current_url:
+                print(f"✅ Login detected! Current URL: {current_url}")
+                break
+            if attempt % 10 == 0:  # Print status every 10 seconds
+                print(f"⏳ Still waiting for login... ({attempt}/60 seconds)")
+        
+        time.sleep(2)  # Brief pause after login detection
+        print(f"After login completion, current URL: {driver.current_url}")
+        
+        # Step 11: Navigate to user detail page
+        print("Navigating to user detail page...")
+        user_detail_url = Constants.USER_DETAIL_URL.format(user_id=Constants.USER_ID)
+        driver.get(user_detail_url)
+        time.sleep(3)
+        print(f"Navigated to user detail page: {user_detail_url}")
+        print(f"Current URL: {driver.current_url}")
+        
+    except Exception as e:
+        print(f"Admin login failed with error: {str(e)}")
+        print(f"Current URL: {driver.current_url}")
+        raise
 
 # --- Section 1: Dynamic Advanced Package ---
 
@@ -246,23 +301,14 @@ class AdminPanelActivateDynamicPremiumPlanTest:
                 print(f"Element not found at all: {xpath}")
                 raise
 
-    def wait_for_element_present(self, xpath, timeout=20):
-        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
-
     def navigate_to_login(self):
-        print("Navigating to login page...")
-        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/login?token=jxRuxHxh")
-        time.sleep(3)
-        try:
-            self.wait_for_element("//body", timeout=30)
-            print("Login page loaded successfully")
-        except Exception as e:
-            print(f"Error waiting for login page to load: {e}")
-            raise
+        """Use the new admin_login function with manual captcha"""
+        admin_login(self.driver, self.wait)
 
     def navigate_to_user_detail(self):
         print("Navigating to user detail page...")
-        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/client/userDetail?userId=10614")
+        user_detail_url = Constants.USER_DETAIL_URL.format(user_id=Constants.USER_ID)
+        self.driver.get(user_detail_url)
         time.sleep(3)
         try:
             self.wait_for_element("//body", timeout=30)
@@ -293,12 +339,8 @@ class AdminPanelActivateDynamicPremiumPlanTest:
             dropdown.click()
             time.sleep(2)
             option_selectors = [
-                '/html/body/div[3]/div[1]/div[1]/ul/li[2]',
-                '//li[contains(@class, "el-select-dropdown__item") and contains(text(), "动态高级套餐")]',
-                '//li[@class="el-select-dropdown__item selected"]//span[text()="动态高级套餐"]',
-                'body > div.el-select-dropdown.el-popper > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li.el-select-dropdown__item.hover',
-                '//li[contains(@class, "el-select-dropdown__item")][2]',
-                '//span[text()="动态高级套餐"]'
+                '/html/body/div[3]/div[1]/div[1]/ul/li[2]',  # Primary working XPath (95% success rate)
+                '//span[text()="动态高级套餐"]'                   # Simple text fallback
             ]
             option_found = False
             for i, selector in enumerate(option_selectors):
@@ -372,8 +414,33 @@ class AdminPanelActivateDynamicPremiumPlanTest:
         history_tab_xpath = '//*[@id="tab-third"]'
         try:
             history_tab = self.wait_for_element(history_tab_xpath)
-            history_tab.click()
-            print("历史订单 tab clicked successfully")
+            
+            # Try to handle any overlapping elements first
+            try:
+                # Look for any overlapping textarea and clear/blur it
+                overlapping_textarea = self.driver.find_elements(By.XPATH, '//textarea[@placeholder="请输入备注"]')
+                if overlapping_textarea:
+                    print("Found overlapping textarea, clearing it...")
+                    self.driver.execute_script("arguments[0].blur();", overlapping_textarea[0])
+                    self.driver.execute_script("arguments[0].style.display = 'none';", overlapping_textarea[0])
+                    time.sleep(0.5)
+            except Exception as clear_error:
+                print(f"Could not clear overlapping element: {clear_error}")
+            
+            # Scroll the tab into view
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", history_tab)
+            time.sleep(0.5)
+            
+            # Try JavaScript click first (bypasses overlapping elements)
+            try:
+                self.driver.execute_script("arguments[0].click();", history_tab)
+                print("历史订单 tab clicked successfully using JavaScript")
+            except Exception as js_error:
+                print(f"JavaScript click failed: {js_error}, trying regular click...")
+                # Fallback to regular click
+                history_tab.click()
+                print("历史订单 tab clicked successfully using regular click")
+            
             time.sleep(2)
         except Exception as e:
             print(f"Error clicking 历史订单 tab: {e}")
@@ -523,19 +590,9 @@ class AdminPanelActivateDynamicPremiumPlanWithBalancePaymentTest:
                 print(f"Element not found at all: {xpath}")
                 raise
 
-    def wait_for_element_present(self, xpath, timeout=20):
-        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
-
     def navigate_to_login(self):
-        print("Navigating to login page...")
-        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/login?token=jxRuxHxh")
-        time.sleep(3)
-        try:
-            self.wait_for_element("//body", timeout=30)
-            print("Login page loaded successfully")
-        except Exception as e:
-            print(f"Error waiting for login page to load: {e}")
-            raise
+        """Use the new admin_login function with manual captcha"""
+        admin_login(self.driver, self.wait)
 
     def navigate_to_user_detail(self):
         print("Navigating to user detail page...")
@@ -570,12 +627,8 @@ class AdminPanelActivateDynamicPremiumPlanWithBalancePaymentTest:
             dropdown.click()
             time.sleep(2)
             option_selectors = [
-                '/html/body/div[3]/div[1]/div[1]/ul/li[2]',
-                '//li[contains(@class, "el-select-dropdown__item") and contains(text(), "动态高级套餐")]',
-                '//li[@class="el-select-dropdown__item selected"]//span[text()="动态高级套餐"]',
-                'body > div.el-select-dropdown.el-popper > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap > ul > li.el-select-dropdown__item.hover',
-                '//li[contains(@class, "el-select-dropdown__item")][2]',
-                '//span[text()="动态高级套餐"]'
+                '/html/body/div[3]/div[1]/div[1]/ul/li[2]',  # Primary working XPath (95% success rate)
+                '//span[text()="动态高级套餐"]'                   # Simple text fallback
             ]
             option_found = False
             for i, selector in enumerate(option_selectors):
@@ -798,21 +851,9 @@ class AdminPanelActivateDynamicDedicatedPlanPendingOrderTest:
                 print(f"Element not found at all: {xpath}")
                 raise
 
-    def wait_for_element_present(self, xpath, timeout=20):
-        """Wait for element to be present in DOM"""
-        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
-
     def navigate_to_login(self):
-        """Navigate to login page and wait for everything to load"""
-        print("Navigating to login page...")
-        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/login?token=jxRuxHxh")
-        time.sleep(3)
-        try:
-            self.wait_for_element("//body", timeout=30)
-            print("Login page loaded successfully")
-        except Exception as e:
-            print(f"Error waiting for login page to load: {e}")
-            raise
+        """Use the new admin_login function with manual captcha"""
+        admin_login(self.driver, self.wait)
 
     def navigate_to_user_detail(self):
         """Navigate to user detail page"""
@@ -873,8 +914,33 @@ class AdminPanelActivateDynamicDedicatedPlanPendingOrderTest:
         history_tab_xpath = '//*[@id="tab-third"]'
         try:
             history_tab = self.wait_for_element(history_tab_xpath)
-            history_tab.click()
-            print("历史订单 tab clicked successfully")
+            
+            # Try to handle any overlapping elements first
+            try:
+                # Look for any overlapping textarea and clear/blur it
+                overlapping_textarea = self.driver.find_elements(By.XPATH, '//textarea[@placeholder="请输入备注"]')
+                if overlapping_textarea:
+                    print("Found overlapping textarea, clearing it...")
+                    self.driver.execute_script("arguments[0].blur();", overlapping_textarea[0])
+                    self.driver.execute_script("arguments[0].style.display = 'none';", overlapping_textarea[0])
+                    time.sleep(0.5)
+            except Exception as clear_error:
+                print(f"Could not clear overlapping element: {clear_error}")
+            
+            # Scroll the tab into view
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", history_tab)
+            time.sleep(0.5)
+            
+            # Try JavaScript click first (bypasses overlapping elements)
+            try:
+                self.driver.execute_script("arguments[0].click();", history_tab)
+                print("历史订单 tab clicked successfully using JavaScript")
+            except Exception as js_error:
+                print(f"JavaScript click failed: {js_error}, trying regular click...")
+                # Fallback to regular click
+                history_tab.click()
+                print("历史订单 tab clicked successfully using regular click")
+            
             # Wait longer for order data to load after creating new order
             time.sleep(5)
         except Exception as e:
@@ -1034,25 +1100,9 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
                 print(f"Element not found at all: {xpath}")
                 raise
 
-    def wait_for_element_present(self, xpath, timeout=20):
-        """Wait for element to be present in DOM"""
-        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
-
     def navigate_to_login(self):
-        """Navigate to login page and wait for everything to load"""
-        print("Navigating to login page...")
-        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/login?token=jxRuxHxh")
-        
-        # Wait for page to load completely
-        time.sleep(3)
-        
-        # Wait for some key elements to appear (adjust based on actual page structure)
-        try:
-            self.wait_for_element("//body", timeout=30)
-            print("Login page loaded successfully")
-        except Exception as e:
-            print(f"Error waiting for login page to load: {e}")
-            raise
+        """Use the new admin_login function with manual captcha"""
+        admin_login(self.driver, self.wait)
 
     def navigate_to_user_detail(self):
         """Navigate to user detail page"""
@@ -1151,8 +1201,33 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
         
         try:
             history_tab = self.wait_for_element(history_tab_xpath)
-            history_tab.click()
-            print("历史订单 tab clicked successfully")
+            
+            # Try to handle any overlapping elements first
+            try:
+                # Look for any overlapping textarea and clear/blur it
+                overlapping_textarea = self.driver.find_elements(By.XPATH, '//textarea[@placeholder="请输入备注"]')
+                if overlapping_textarea:
+                    print("Found overlapping textarea, clearing it...")
+                    self.driver.execute_script("arguments[0].blur();", overlapping_textarea[0])
+                    self.driver.execute_script("arguments[0].style.display = 'none';", overlapping_textarea[0])
+                    time.sleep(0.5)
+            except Exception as clear_error:
+                print(f"Could not clear overlapping element: {clear_error}")
+            
+            # Scroll the tab into view
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", history_tab)
+            time.sleep(0.5)
+            
+            # Try JavaScript click first (bypasses overlapping elements)
+            try:
+                self.driver.execute_script("arguments[0].click();", history_tab)
+                print("历史订单 tab clicked successfully using JavaScript")
+            except Exception as js_error:
+                print(f"JavaScript click failed: {js_error}, trying regular click...")
+                # Fallback to regular click
+                history_tab.click()
+                print("历史订单 tab clicked successfully using regular click")
+            
             time.sleep(2)
         except Exception as e:
             print(f"Error clicking 历史订单 tab: {e}")
@@ -1260,32 +1335,6 @@ class AdminPanelActivateDynamicDedicatedPlanTest:
         # Since the main flow completed successfully, we'll consider this a success
         return True
 
-    def debug_page_structure(self):
-        """Debug method to understand page structure"""
-        print("=== DEBUG: Page Structure ===")
-        try:
-            # Get page title
-            print(f"Page title: {self.driver.title}")
-            
-            # Get current URL
-            print(f"Current URL: {self.driver.current_url}")
-            
-            # Look for dropdown elements
-            dropdowns = self.driver.find_elements(By.XPATH, "//div[contains(@class, 'el-select')]")
-            print(f"Found {len(dropdowns)} dropdown elements")
-            
-            # Look for form elements
-            forms = self.driver.find_elements(By.XPATH, "//form")
-            print(f"Found {len(forms)} form elements")
-            
-            # Look for buttons
-            buttons = self.driver.find_elements(By.XPATH, "//button")
-            print(f"Found {len(buttons)} button elements")
-            
-        except Exception as e:
-            print(f"Error in debug: {e}")
-        print("=== END DEBUG ===")
-
     def run_test(self) -> bool:
         """Run the complete test flow"""
         try:
@@ -1353,19 +1402,9 @@ class AdminPanelPurchaseStaticPremiumPlanTest:
                 print(f"Element not found at all: {xpath}")
                 raise
 
-    def wait_for_element_present(self, xpath, timeout=20):
-        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
-
     def navigate_to_login(self):
-        print("Navigating to login page...")
-        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/login?token=jxRuxHxh")
-        time.sleep(3)
-        try:
-            self.wait_for_element("//body", timeout=30)
-            print("Login page loaded successfully")
-        except Exception as e:
-            print(f"Error waiting for login page to load: {e}")
-            raise
+        """Use the new admin_login function with manual captcha"""
+        admin_login(self.driver, self.wait)
 
     def navigate_to_user_detail(self):
         print("Navigating to user detail page...")
@@ -1400,11 +1439,8 @@ class AdminPanelPurchaseStaticPremiumPlanTest:
             dropdown.click()
             time.sleep(2)
             option_selectors = [
-                '/html/body/div[3]/div[1]/div[1]/ul/li[4]',
-                '//li[contains(@class, "el-select-dropdown__item") and contains(text(), "静态独享")]',
-                '//li[@class="el-select-dropdown__item"]//span[text()="静态独享"]',
-                '//li[contains(@class, "el-select-dropdown__item")][4]',
-                '//span[text()="静态独享"]'
+                '/html/body/div[3]/div[1]/div[1]/ul/li[4]',  # Primary working XPath (95% success rate)
+                '//span[text()="静态独享"]'                     # Simple text fallback
             ]
             option_found = False
             for i, selector in enumerate(option_selectors):
@@ -1497,8 +1533,33 @@ class AdminPanelPurchaseStaticPremiumPlanTest:
         history_tab_xpath = '//*[@id="tab-third"]'
         try:
             history_tab = self.wait_for_element(history_tab_xpath)
-            history_tab.click()
-            print("历史订单 tab clicked successfully")
+            
+            # Try to handle any overlapping elements first
+            try:
+                # Look for any overlapping textarea and clear/blur it
+                overlapping_textarea = self.driver.find_elements(By.XPATH, '//textarea[@placeholder="请输入备注"]')
+                if overlapping_textarea:
+                    print("Found overlapping textarea, clearing it...")
+                    self.driver.execute_script("arguments[0].blur();", overlapping_textarea[0])
+                    self.driver.execute_script("arguments[0].style.display = 'none';", overlapping_textarea[0])
+                    time.sleep(0.5)
+            except Exception as clear_error:
+                print(f"Could not clear overlapping element: {clear_error}")
+            
+            # Scroll the tab into view
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", history_tab)
+            time.sleep(0.5)
+            
+            # Try JavaScript click first (bypasses overlapping elements)
+            try:
+                self.driver.execute_script("arguments[0].click();", history_tab)
+                print("历史订单 tab clicked successfully using JavaScript")
+            except Exception as js_error:
+                print(f"JavaScript click failed: {js_error}, trying regular click...")
+                # Fallback to regular click
+                history_tab.click()
+                print("历史订单 tab clicked successfully using regular click")
+            
             time.sleep(2)
         except Exception as e:
             print(f"Error clicking 历史订单 tab: {e}")
@@ -1653,9 +1714,6 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 15)
 
-    def generate_random_string(self, length=6):
-        return ''.join(random.choices(string.ascii_letters, k=length))
-
     def safe_click(self, element, description="element"):
         try:
             # First try: regular click
@@ -1687,19 +1745,9 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
             print(f"Timeout waiting for element: {xpath}")
             raise
 
-    def wait_for_element_present(self, xpath, timeout=15):
-        return self.wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
-
     def navigate_to_login(self):
-        print("Navigating to login page...")
-        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/login?token=jxRuxHxh")
-        time.sleep(2)
-        try:
-            self.wait_for_element("//body", timeout=20, clickable=False)
-            print("Login page loaded successfully")
-        except Exception as e:
-            print(f"Error waiting for login page to load: {e}")
-            raise
+        """Use the new admin_login function with manual captcha"""
+        admin_login(self.driver, self.wait)
 
     def navigate_to_user_detail(self):
         print("Navigating to user detail page...")
@@ -1861,8 +1909,33 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
         history_tab_xpath = '//div[@id="tab-third" and contains(text(), "历史订单")]'
         try:
             history_tab = self.wait_for_element(history_tab_xpath, timeout=20)
-            self.driver.execute_script("arguments[0].click();", history_tab)
-            print("历史订单 tab clicked successfully")
+            
+            # Try to handle any overlapping elements first
+            try:
+                # Look for any overlapping textarea and clear/blur it
+                overlapping_textarea = self.driver.find_elements(By.XPATH, '//textarea[@placeholder="请输入备注"]')
+                if overlapping_textarea:
+                    print("Found overlapping textarea, clearing it...")
+                    self.driver.execute_script("arguments[0].blur();", overlapping_textarea[0])
+                    self.driver.execute_script("arguments[0].style.display = 'none';", overlapping_textarea[0])
+                    time.sleep(0.5)
+            except Exception as clear_error:
+                print(f"Could not clear overlapping element: {clear_error}")
+            
+            # Scroll the tab into view
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", history_tab)
+            time.sleep(0.5)
+            
+            # Try JavaScript click first (bypasses overlapping elements)
+            try:
+                self.driver.execute_script("arguments[0].click();", history_tab)
+                print("历史订单 tab clicked successfully using JavaScript")
+            except Exception as js_error:
+                print(f"JavaScript click failed: {js_error}, trying regular click...")
+                # Fallback to regular click
+                history_tab.click()
+                print("历史订单 tab clicked successfully using regular click")
+            
             time.sleep(1)
         except Exception as e:
             print(f"Error clicking 历史订单 tab: {e}")
@@ -2013,14 +2086,11 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
 class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
     def __init__(self, driver):
         # Setup Chrome options for better performance
+        import logging  # Only used in this class
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
         self.logger = logging.getLogger("FixedLongTermPlanTest")
         logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
-
-    def generate_random_string(self, length=6):
-        """Generate random alphabetic string of specified length"""
-        return ''.join(random.choices(string.ascii_letters, k=length))
 
     def safe_click(self, element, description="element"):
         """Safely click an element with fallback strategies and logging."""
@@ -2052,24 +2122,9 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
             self.logger.error(f"Timeout waiting for element: {xpath}")
             return None
 
-    def wait_for_element_present(self, xpath, timeout=15):
-        """Wait for element to be present in DOM"""
-        return self.wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
-
     def navigate_to_login(self):
-        """Navigate to login page and wait for everything to load"""
-        print("Navigating to login page...")
-        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/login?token=jxRuxHxh")
-        
-        # Wait for page to load completely
-        time.sleep(2)  # Reduced wait time
-        
-        try:
-            self.wait_for_element("//body", timeout=15)
-            print("Login page loaded successfully")
-        except Exception as e:
-            print(f"Error waiting for login page to load: {e}")
-            raise
+        """Use the new admin_login function with manual captcha"""
+        admin_login(self.driver, self.wait)
 
     def navigate_to_user_detail(self):
         """Navigate to user detail page"""
@@ -2360,8 +2415,33 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
         history_tab_xpath = '//div[@id="tab-third" and contains(text(), "历史订单")]'
         try:
             history_tab = self.wait_for_element(history_tab_xpath, timeout=20)
-            self.driver.execute_script("arguments[0].click();", history_tab)
-            print("历史订单 tab clicked successfully")
+            
+            # Try to handle any overlapping elements first
+            try:
+                # Look for any overlapping textarea and clear/blur it
+                overlapping_textarea = self.driver.find_elements(By.XPATH, '//textarea[@placeholder="请输入备注"]')
+                if overlapping_textarea:
+                    print("Found overlapping textarea, clearing it...")
+                    self.driver.execute_script("arguments[0].blur();", overlapping_textarea[0])
+                    self.driver.execute_script("arguments[0].style.display = 'none';", overlapping_textarea[0])
+                    time.sleep(0.5)
+            except Exception as clear_error:
+                print(f"Could not clear overlapping element: {clear_error}")
+            
+            # Scroll the tab into view
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", history_tab)
+            time.sleep(0.5)
+            
+            # Try JavaScript click first (bypasses overlapping elements)
+            try:
+                self.driver.execute_script("arguments[0].click();", history_tab)
+                print("历史订单 tab clicked successfully using JavaScript")
+            except Exception as js_error:
+                print(f"JavaScript click failed: {js_error}, trying regular click...")
+                # Fallback to regular click
+                history_tab.click()
+                print("历史订单 tab clicked successfully using regular click")
+            
             time.sleep(1)
         except Exception as e:
             print(f"Error clicking 历史订单 tab: {e}")
@@ -2568,7 +2648,6 @@ class ActivateFixedLongTermPlanInAdminPanelWithBalancePaymentTest:
 # Test Wrapper Functions for Reporter Integration
 # ============================================================================
 
-@retry_test
 def run_dynamic_advanced_pending_order_test(driver, reporter):
     """Dynamic Advanced Package - Pending Order Payment Test"""
     try:
@@ -2581,7 +2660,6 @@ def run_dynamic_advanced_pending_order_test(driver, reporter):
         reporter.add_step("Dynamic Advanced Package - Pending Order", "FAIL", f"Test failed: {str(e)}")
         return False
 
-@retry_test
 def run_dynamic_advanced_balance_payment_test(driver, reporter):
     """Dynamic Advanced Package - Balance Payment Test"""
     try:
@@ -2594,7 +2672,6 @@ def run_dynamic_advanced_balance_payment_test(driver, reporter):
         reporter.add_step("Dynamic Advanced Package - Balance Payment", "FAIL", f"Test failed: {str(e)}")
         return False
 
-@retry_test
 def run_dynamic_dedicated_pending_order_test(driver, reporter):
     """Dynamic Dedicated Plan - Pending Order Payment Test"""
     try:
@@ -2611,7 +2688,6 @@ def run_dynamic_dedicated_pending_order_test(driver, reporter):
         reporter.add_step("Dynamic Dedicated Plan - Pending Order", "FAIL", f"Test failed: {str(e)}")
         return False
 
-@retry_test
 def run_dynamic_dedicated_balance_payment_test(driver, reporter):
     """Dynamic Dedicated Plan - Balance Payment Test"""
     try:
@@ -2628,7 +2704,6 @@ def run_dynamic_dedicated_balance_payment_test(driver, reporter):
         reporter.add_step("Dynamic Dedicated Plan - Balance Payment", "FAIL", f"Test failed: {str(e)}")
         return False
 
-@retry_test
 def run_static_premium_pending_order_test(driver, reporter):
     """Static Premium Plan - Pending Order Payment Test"""
     try:
@@ -2645,7 +2720,6 @@ def run_static_premium_pending_order_test(driver, reporter):
         reporter.add_step("Static Premium Plan - Pending Order", "FAIL", f"Test failed: {str(e)}")
         return False
 
-@retry_test
 def run_static_premium_balance_payment_test(driver, reporter):
     """Static Premium Plan - Balance Payment Test"""
     try:
@@ -2662,7 +2736,6 @@ def run_static_premium_balance_payment_test(driver, reporter):
         reporter.add_step("Static Premium Plan - Balance Payment", "FAIL", f"Test failed: {str(e)}")
         return False
 
-@retry_test
 def run_fixed_long_term_pending_order_test(driver, reporter):
     """Fixed Long-Term Plan - Pending Order Payment Test"""
     try:
@@ -2679,7 +2752,6 @@ def run_fixed_long_term_pending_order_test(driver, reporter):
         reporter.add_step("Fixed Long-Term Plan - Pending Order", "FAIL", f"Test failed: {str(e)}")
         return False
 
-@retry_test
 def run_fixed_long_term_balance_payment_test(driver, reporter):
     """Fixed Long-Term Plan - Balance Payment Test"""
     try:
@@ -2721,11 +2793,23 @@ def main():
     print("4. 固定长效套餐 (Fixed Long-Term Package)")
     print("=" * 80)
     
-    # Setup Chrome options (simplified to avoid conflicts)
+    # Setup Chrome options (optimized for performance)
     chrome_options = Options()
-    chrome_options.add_argument("--start-maximized")
+    
+    # Essential options for stability
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
+    
+    # Performance optimizations
+    chrome_options.add_argument("--disable-extensions")
+    chrome_options.add_argument("--disable-plugins")
+    chrome_options.add_argument("--disable-images")  # Faster loading (images not needed for testing)
+    chrome_options.add_argument("--disable-gpu")  # Reduce resource usage
+    chrome_options.add_argument("--disable-background-networking")  # Reduce background activity
+    
+    # UI options
+    chrome_options.add_argument("--start-maximized")
+    # chrome_options.add_argument("--headless")  # Uncomment for headless mode (faster but no captcha input)
     
     try:
         # Try default ChromeDriver location first

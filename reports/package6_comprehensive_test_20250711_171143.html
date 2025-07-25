@@ -1,0 +1,1323 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ShenLong Package6 Comprehensive Test Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .header { background-color: #2c3e50; color: white; padding: 20px; border-radius: 5px; }
+        .summary { background-color: white; padding: 20px; margin: 20px 0; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-step { background-color: white; margin: 10px 0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .pass { border-left: 5px solid #27ae60; }
+        .fail { border-left: 5px solid #e74c3c; }
+        .info { border-left: 5px solid #3498db; }
+        .stats { display: flex; justify-content: space-around; }
+        .stat-box { text-align: center; padding: 15px; }
+        .stat-number { font-size: 2em; font-weight: bold; }
+        .pass-color { color: #27ae60; }
+        .fail-color { color: #e74c3c; }
+        .info-color { color: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ShenLong Package6 Comprehensive Test Report</h1>
+        <p>Generated on: 2025-07-11 17:27:53</p>
+        <p>Test Duration: 0:16:09</p>
+    </div>
+    
+    <div class="summary">
+        <h2>Test Summary</h2>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number pass-color">170</div>
+                <div>Passed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number fail-color">2</div>
+                <div>Failed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">172</div>
+                <div>Total Tests</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="summary">
+        <h2>Test Steps</h2>
+
+        <div class="test-step info">
+            <h3>[INFO] Cookie Login Process</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:11:47</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Starting ShenLong cookie login process for phone A</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Main Domain</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:12:12</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to main domain</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add Cookies</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:12:12</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully added 18/18 cookies</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Cookie Login Success</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:12:26</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully authenticated with cookies</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Advanced - No Balance</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:12:51</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic advanced package page</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] No Balance Test Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:13:33</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6df8a6f75+76917]
+	GetHandleVerifier [0x0x7ff6df8a6fd0+77008]
+	(No symbol) [0x0x7ff6df659dea]
+	(No symbol) [0x0x7ff6df6b0256]
+	(No symbol) [0x0x7ff6df6b050c]
+	(No symbol) [0x0x7ff6df703887]
+	(No symbol) [0x0x7ff6df6d84af]
+	(No symbol) [0x0x7ff6df70065c]
+	(No symbol) [0x0x7ff6df6d8243]
+	(No symbol) [0x0x7ff6df6a1431]
+	(No symbol) [0x0x7ff6df6a21c3]
+	GetHandleVerifier [0x0x7ff6dfb7d2ad+3051437]
+	GetHandleVerifier [0x0x7ff6dfb77903+3028483]
+	GetHandleVerifier [0x0x7ff6dfb9589d+3151261]
+	GetHandleVerifier [0x0x7ff6df8c183e+185662]
+	GetHandleVerifier [0x0x7ff6df8c96ff+218111]
+	GetHandleVerifier [0x0x7ff6df8afaf4+112628]
+	GetHandleVerifier [0x0x7ff6df8afca9+113065]
+	GetHandleVerifier [0x0x7ff6df896c78+10616]
+	BaseThreadInitThunk [0x0x7ff87214e8d7+23]
+	RtlUserThreadStart [0x0x7ff87415c34c+44]
+</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Cookie Login Process - Phone B</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:13:35</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Starting ShenLong cookie login process for phone B</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Main Domain</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:13:52</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to main domain</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Clear Cookies</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:13:52</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Cleared all existing cookies</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Add Cookies</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:13:52</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully added 18/18 cookies</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Cookie Login Success - Phone B</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:06</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully authenticated with cookies for phone B</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Advanced</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:10</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic advanced package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:13</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:13</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Dynamic Advanced Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:23</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected to countManage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Advanced</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:27</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic advanced package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:29</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:32</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected Alipay payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:37</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Alipay Page Opened</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:39</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected to Alipay sandbox page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Email</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:40</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered email: lgipqm7573@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Alipay Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:40</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered password: 111111</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Next Step</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:48</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 下一步</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Verify Recipient</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:48</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully verified recipient: shmgbf5888@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Payment Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:54</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered payment password</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:14:57</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Payment Success Verification</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:15:00</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Found payment success message: 您已成功付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Alipay Payment Success</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:15:35</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected back to main site</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Advanced</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:15:42</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic advanced package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:15:44</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select WeChat</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:15:47</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected WeChat payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:15:57</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat QR Found</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:15:57</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully found '微信扫码付款' - WeChat payment successful</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat Payment Complete</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:16:07</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> WeChat payment process completed</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Dedicated</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:16:14</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic dedicated package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:16:16</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:16:16</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Dynamic Dedicated Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:16:26</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected to countManage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Dedicated</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:16:34</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic dedicated package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:16:36</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:16:38</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected Alipay payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:16:43</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step fail">
+            <h3>[FAIL] Dynamic Dedicated Alipay Error</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:03</p>
+            <p><strong>Status:</strong> FAIL</p>
+            <p><strong>Message:</strong> Error: Message: 
+</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Test Dynamic Dedicated Alipay Payment - Failed</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:03</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Failed on attempt 1, will retry</p>
+        </div>
+
+        <div class="test-step retry">
+            <h3>[INFO] Retrying Test Dynamic Dedicated Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:03</p>
+            <p><strong>Status:</strong> RETRY</p>
+            <p><strong>Message:</strong> Attempt 2/3</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Dedicated</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:14</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic dedicated package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:16</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:18</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected Alipay payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:23</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Alipay Page Opened</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:24</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected to Alipay sandbox page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Email</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:24</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered email: lgipqm7573@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Alipay Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:24</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered password: 111111</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Next Step</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:32</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 下一步</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Verify Recipient</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:32</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully verified recipient: shmgbf5888@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Payment Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:37</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered payment password</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:40</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Payment Success Verification</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:17:43</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Found payment success message: 您已成功付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Alipay Payment Success</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:18</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected back to main site</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Test Dynamic Dedicated Alipay Payment - Retry Success</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:18</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Succeeded on retry attempt 2</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Dynamic Dedicated</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:25</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to dynamic dedicated package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:27</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select WeChat</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:29</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected WeChat payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:34</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat QR Found</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:34</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully found '微信扫码付款' - WeChat payment successful</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat Payment Complete</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:44</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> WeChat payment process completed</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Static Premium</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:49</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to static premium package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:51</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:18:52</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Static Premium Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:02</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected to countManage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Static Premium</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:09</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to static premium package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:11</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:13</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected Alipay payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:18</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Alipay Page Opened</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:21</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected to Alipay sandbox page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Email</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:21</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered email: lgipqm7573@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Alipay Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:21</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered password: 111111</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Next Step</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:29</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 下一步</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Verify Recipient</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:29</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully verified recipient: shmgbf5888@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Payment Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:34</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered payment password</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:37</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Payment Success Verification</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:19:39</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Found payment success message: 您已成功付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Alipay Payment Success</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:14</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected back to main site</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Static Premium</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:19</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to static premium package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Buy Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:22</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即购买</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select WeChat</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:24</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected WeChat payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:29</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat QR Found</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:29</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully found '微信扫码付款' - WeChat payment successful</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat Payment Complete</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:39</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> WeChat payment process completed</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Long-Term Package</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:44</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to long-term package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Beijing</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:46</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 北京</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:46</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 立即支付 button</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Fixed Long-Term Wallet Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:20:56</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Current URL: https://test-ip-shenlong.cd.xiaoxigroup.net/personalCenter/packageManager</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Fixed Long-Term</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:21:02</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to fixed long-term package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Beijing Location</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:21:04</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected Beijing location</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:21:06</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected Alipay payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:21:11</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked payment button</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Alipay Payment Process</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:21:32</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Alipay flow not available or different: Message: 
+</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Fixed Long-Term</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:07</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to fixed long-term package page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Beijing Location</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:09</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected Beijing location</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select WeChat</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:11</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected WeChat payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Pay Button</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:16</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked payment button</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat QR Found</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:16</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully found '微信扫码付款' - WeChat payment successful</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat Payment Complete</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:26</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> WeChat payment process completed</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Count Manage</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:30</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to count manage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Add Account</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:33</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 添加付费账户</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Package</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:35</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 动态高级套餐</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:38</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Personal Center Dynamic Advanced Wallet</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:38</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Found '添加成功!' popup - Dynamic Advanced Package added successfully</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Count Manage</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:42</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to count manage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Add Account</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:44</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 添加付费账户</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Package</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:46</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 动态高级套餐</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:49</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 支付宝 payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:54</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Alipay Page Opened</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:55</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected to Alipay sandbox page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Email</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:55</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered email: lgipqm7573@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Alipay Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:22:55</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered password: 111111</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Next Step</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:23:03</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 下一步</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Verify Recipient</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:23:03</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> 收款方 verified: shmgbf5888@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Payment Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:23:09</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered payment password: 111111</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:23:09</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Payment Success Verification</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:23:20</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Found payment success message: 您已成功付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Personal Center Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:23:55</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected back to main site</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Count Manage</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:23:59</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to count manage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Add Account</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:01</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 添加付费账户</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Package</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:03</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 动态高级套餐</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select WeChat</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:05</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 微信 payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:11</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat QR Found</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:11</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully found '微信扫码付款' - WeChat payment successful</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat Payment Complete</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:21</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> WeChat payment process completed</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Count Manage</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:25</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to count manage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Add Account</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:27</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 添加付费账户</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:30</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认 (default Dynamic Dedicated)</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Personal Center Dynamic Dedicated Wallet</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:30</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Found '添加成功!' popup - Dynamic Dedicated Package added successfully</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Count Manage</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:34</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to count manage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Add Account</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:37</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 添加付费账户</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:39</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 支付宝 payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:44</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Alipay Page Opened</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:45</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected to Alipay sandbox page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Email</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:45</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered email: lgipqm7573@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Alipay Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:45</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered password: 111111</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Next Step</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:54</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 下一步</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Verify Recipient</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:24:54</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> 收款方 verified: shmgbf5888@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Payment Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:25:00</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered payment password: 111111</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:25:00</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Payment Success Verification</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:25:06</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Found payment success message: 您已成功付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Personal Center Dedicated Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:25:41</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected back to main site</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Count Manage</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:25:46</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to count manage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Add Account</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:25:48</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 添加付费账户</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select WeChat</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:25:50</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 微信 payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:25:55</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat QR Found</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:25:55</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully found '微信扫码付款' - WeChat payment successful</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat Payment Complete</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:05</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> WeChat payment process completed</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Count Manage</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:09</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to count manage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Add Account</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:11</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 添加付费账户</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Package</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:14</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 静态高级套餐</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:17</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Personal Center Static Advanced Wallet</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:17</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Found '添加成功!' popup - Static Advanced Package added successfully</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Count Manage</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:21</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to count manage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Add Account</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:23</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 添加付费账户</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Package</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:25</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 静态高级套餐</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Alipay</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:27</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 支付宝 payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:32</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Alipay Page Opened</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:33</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected to Alipay sandbox page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Email</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:33</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered email: lgipqm7573@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Alipay Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:33</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered password: 111111</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Next Step</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:42</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 下一步</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Verify Recipient</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:42</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> 收款方 verified: shmgbf5888@sandbox.com</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Enter Payment Password</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:47</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully entered payment password: 111111</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Confirm Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:47</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Payment Success Verification</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:26:52</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Found payment success message: 您已成功付款</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Personal Center Static Alipay Payment</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:27:27</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully redirected back to main site</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Navigate to Count Manage</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:27:31</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully navigated to count manage page</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Add Account</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:27:33</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 添加付费账户</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select Package</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:27:36</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 静态高级套餐</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Select WeChat</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:27:38</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully selected 微信 payment method</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Click Confirm</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:27:43</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully clicked 确认</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat QR Found</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:27:43</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully found '微信扫码付款' - WeChat payment successful</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] WeChat Payment Complete</h3>
+            <p><strong>Time:</strong> 2025-07-11 17:27:53</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> WeChat payment process completed</p>
+        </div>
+
+    </div>
+</body>
+</html>

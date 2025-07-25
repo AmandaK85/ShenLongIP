@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ShenLong Admin Panel Test Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .header { background-color: #2c3e50; color: white; padding: 20px; border-radius: 5px; }
+        .summary { background-color: white; padding: 20px; margin: 20px 0; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-step { background-color: white; margin: 10px 0; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .pass { border-left: 5px solid #27ae60; }
+        .fail { border-left: 5px solid #e74c3c; }
+        .info { border-left: 5px solid #3498db; }
+        .retry { border-left: 5px solid #f39c12; }
+        .stats { display: flex; justify-content: space-around; }
+        .stat-box { text-align: center; padding: 15px; }
+        .stat-number { font-size: 2em; font-weight: bold; }
+        .pass-color { color: #27ae60; }
+        .fail-color { color: #e74c3c; }
+        .info-color { color: #3498db; }
+        .retry-color { color: #f39c12; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ShenLong Admin Panel Test Report (With Auto-Retry)</h1>
+        <p>Generated on: 2025-07-10 09:55:09</p>
+        <p>Test Duration: 0:04:18</p>
+    </div>
+    
+    <div class="summary">
+        <h2>Test Summary</h2>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number pass-color">8</div>
+                <div>Passed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number fail-color">0</div>
+                <div>Failed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number retry-color">0</div>
+                <div>Retried</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">8</div>
+                <div>Total Tests</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="summary">
+        <h2>Test Steps</h2>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Advanced Package Test</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:50:50</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Dynamic Advanced Package - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:51:46</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully completed pending order payment test</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Advanced Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:51:46</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Dynamic Advanced Package - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:52:09</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully completed balance payment test</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Dedicated Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:52:09</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Dynamic Dedicated Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:52:41</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully completed pending order payment test</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Dynamic Dedicated Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:52:41</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Dynamic Dedicated Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:52:58</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully completed balance payment test</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Static Premium Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:52:58</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Static Premium Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:53:28</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully completed pending order payment test</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Static Premium Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:53:28</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Static Premium Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:53:51</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully completed balance payment test</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Fixed Long-Term Plan Test</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:53:51</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Pending Order Payment Test</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Fixed Long-Term Plan - Pending Order</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:54:21</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully completed pending order payment test</p>
+        </div>
+
+        <div class="test-step info">
+            <h3>[INFO] Starting Fixed Long-Term Balance Payment Test</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:54:21</p>
+            <p><strong>Status:</strong> INFO</p>
+            <p><strong>Message:</strong> Initializing Balance Payment Test</p>
+        </div>
+
+        <div class="test-step pass">
+            <h3>[PASS] Fixed Long-Term Plan - Balance Payment</h3>
+            <p><strong>Time:</strong> 2025-07-10 09:55:09</p>
+            <p><strong>Status:</strong> PASS</p>
+            <p><strong>Message:</strong> Successfully completed balance payment test</p>
+        </div>
+
+    </div>
+</body>
+</html>

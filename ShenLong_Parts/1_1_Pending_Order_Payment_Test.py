@@ -49,7 +49,7 @@ class AdminPanelActivateDynamicPremiumPlanTest:
     def navigate_to_login(self):
         """Navigate to login page and wait for everything to load"""
         print("Navigating to login page...")
-        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/login?token=jxRuxHxh")
+        self.driver.get("https://test-admin-shenlong.cd.xiaoxigroup.net/login?token=9zDoACVc6HBorDmJZMXJ5UOMayAS86UH61p/niOotTRhNdaFQ1LGkVcf9M2R/P0d8RTp9Qdy2kpUo65zfHkGZw==")
         
         # Wait for page to load completely
         time.sleep(3)
