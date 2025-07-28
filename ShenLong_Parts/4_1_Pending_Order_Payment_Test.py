@@ -18,7 +18,7 @@ class AdminPanelPurchaseFixedLongTermPlanActivateFixedLongTermPlanInAdminPanelWi
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
         chrome_options.add_argument("--disable-extensions")
         chrome_options.add_argument("--disable-plugins")
-        chrome_options.add_argument("--disable-images")  # Faster loading
+        # chrome_options.add_argument("--disable-images")  # Commented out to allow images
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option('useAutomationExtension', False)
         

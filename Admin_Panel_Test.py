@@ -2803,7 +2803,7 @@ def main():
     # Performance optimizations
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-plugins")
-    chrome_options.add_argument("--disable-images")  # Faster loading (images not needed for testing)
+    # chrome_options.add_argument("--disable-images")  # Commented out to allow images
     chrome_options.add_argument("--disable-gpu")  # Reduce resource usage
     chrome_options.add_argument("--disable-background-networking")  # Reduce background activity
     

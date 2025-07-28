@@ -36,6 +36,42 @@ from driver_utils import setup_chrome_driver
 from selenium.common.exceptions import *
 
 # ============================================================================
+# RETRY DECORATOR FOR TEST FUNCTIONS
+# ============================================================================
+
+def retry_test(func=None, max_attempts=3, delay=2):
+    """
+    Decorator to retry test functions on failure
+    
+    Args:
+        func: The function to decorate (when used without parentheses)
+        max_attempts: Maximum number of retry attempts (default: 3)
+        delay: Delay between retries in seconds (default: 2)
+    """
+    def decorator(f):
+        def wrapper(*args, **kwargs):
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    return f(*args, **kwargs)
+                except Exception as e:
+                    if attempt == max_attempts:
+                        # Last attempt failed, re-raise the exception
+                        raise e
+                    else:
+                        print(f"Attempt {attempt} failed: {str(e)}")
+                        print(f"Retrying in {delay} seconds... (Attempt {attempt + 1}/{max_attempts})")
+                        time.sleep(delay)
+            return None
+        return wrapper
+    
+    if func is None:
+        # Called with arguments: @retry_test(max_attempts=5)
+        return decorator
+    else:
+        # Called without arguments: @retry_test
+        return decorator(func)
+
+# ============================================================================
 # COMMON XPATH SELECTORS - Centralized for maintainability
 # ============================================================================
 
@@ -280,7 +316,7 @@ def process_alipay_payment(driver, reporter):
         else:
             reporter.add_step("Alipay Payment Check", "INFO", f"Current URL: {driver.current_url}")
             return True
-                
+            
     except Exception as e:
         reporter.add_step("Alipay Payment Process", "FAIL", f"Error: {str(e)}")
         return False
@@ -1018,6 +1054,7 @@ def test_dynamic_advanced_wallet_payment(driver, reporter):
         reporter.add_step("Dynamic Advanced Wallet Error", "FAIL", f"Error: {str(e)}")
         return False
 
+@retry_test
 def test_dynamic_advanced_alipay_payment(driver, reporter):
     """Test Dynamic Advanced Package with Alipay payment"""
     print("\n" + "=" * 60)
@@ -2056,22 +2093,21 @@ def test_personal_center_dynamic_advanced_alipay(driver, reporter):
             )
             reporter.add_step("Verify Recipient", "PASS", "Successfully verified recipient: shmgbf5888@sandbox.com")
         except Exception as e:
-            reporter.add_step("Verify Recipient", "INFO", f"Could not verify recipient: {str(e)}")
+            reporter.add_step("Verify Recipient", "INFO", f"Failed to verify 收款方: {str(e)}")
         
         # Enter payment password
-        payment_password = WebDriverWait(driver, 15).until(
+        payment_password = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div[2]/form/div[2]/div[2]/div/div/span[2]/input"))
         )
         payment_password.clear()
         payment_password.send_keys("111111")
-        reporter.add_step("Enter Payment Password", "PASS", "Successfully entered payment password")
+        reporter.add_step("Enter Payment Password", "PASS", "Successfully entered payment password: 111111")
         
         # Click confirm payment
-        confirm_payment_button = WebDriverWait(driver, 15).until(
+        confirm_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/form/div[3]/div/input"))
         )
-        confirm_payment_button.click()
-        time.sleep(3)
+        confirm_button.click()
         reporter.add_step("Confirm Payment", "PASS", "Successfully clicked 确认付款")
         
         # Check for payment success message
@@ -2090,10 +2126,10 @@ def test_personal_center_dynamic_advanced_alipay(driver, reporter):
         
         # Check if redirected back
         if "test-ip-shenlong.cd.xiaoxigroup.net" in driver.current_url:
-            reporter.add_step("Alipay Payment Success", "PASS", "Successfully redirected back to main site")
+            reporter.add_step("Personal Center Alipay Payment", "PASS", "Successfully redirected back to main site")
             return True
         else:
-            reporter.add_step("Alipay Payment Check", "INFO", f"Current URL: {driver.current_url}")
+            reporter.add_step("Personal Center Alipay Payment", "INFO", f"Current URL: {driver.current_url}")
             return True
             
     except Exception as e:
@@ -2303,24 +2339,23 @@ def test_personal_center_dynamic_dedicated_alipay(driver, reporter):
             recipient_element = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'shmgbf5888@sandbox.com')]"))
             )
-            reporter.add_step("Verify Recipient", "PASS", "Successfully verified recipient: shmgbf5888@sandbox.com")
+            reporter.add_step("Verify Recipient", "PASS", "收款方 verified: shmgbf5888@sandbox.com")
         except Exception as e:
-            reporter.add_step("Verify Recipient", "INFO", f"Could not verify recipient: {str(e)}")
+            reporter.add_step("Verify Recipient", "INFO", f"Failed to verify 收款方: {str(e)}")
         
         # Enter payment password
-        payment_password = WebDriverWait(driver, 15).until(
+        payment_password = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div[2]/form/div[2]/div[2]/div/div/span[2]/input"))
         )
         payment_password.clear()
         payment_password.send_keys("111111")
-        reporter.add_step("Enter Payment Password", "PASS", "Successfully entered payment password")
+        reporter.add_step("Enter Payment Password", "PASS", "Successfully entered payment password: 111111")
         
         # Click confirm payment
-        confirm_payment_button = WebDriverWait(driver, 15).until(
+        confirm_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/form/div[3]/div/input"))
         )
-        confirm_payment_button.click()
-        time.sleep(3)
+        confirm_button.click()
         reporter.add_step("Confirm Payment", "PASS", "Successfully clicked 确认付款")
         
         # Check for payment success message
@@ -2339,10 +2374,10 @@ def test_personal_center_dynamic_dedicated_alipay(driver, reporter):
         
         # Check if redirected back
         if "test-ip-shenlong.cd.xiaoxigroup.net" in driver.current_url:
-            reporter.add_step("Alipay Payment Success", "PASS", "Successfully redirected back to main site")
+            reporter.add_step("Personal Center Dedicated Alipay Payment", "PASS", "Successfully redirected back to main site")
             return True
         else:
-            reporter.add_step("Alipay Payment Check", "INFO", f"Current URL: {driver.current_url}")
+            reporter.add_step("Personal Center Dedicated Alipay Payment", "INFO", f"Current URL: {driver.current_url}")
             return True
             
     except Exception as e:

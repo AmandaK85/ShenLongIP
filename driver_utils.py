@@ -29,7 +29,12 @@ def setup_chrome_driver():
         chrome_options.add_argument('--disable-web-security')
         chrome_options.add_argument('--disable-extensions')
         chrome_options.add_argument('--disable-plugins')
-        chrome_options.add_argument('--disable-images')
+        # Remove or comment out the line that disables images
+        # chrome_options.add_argument('--disable-images')
+        
+        # Enable images and media
+        chrome_options.add_argument('--enable-images')
+        chrome_options.add_argument('--enable-media-stream')
         chrome_options.add_argument('--disable-logging')
         chrome_options.add_argument('--disable-default-apps')
         chrome_options.add_argument('--disable-sync')
@@ -41,17 +46,15 @@ def setup_chrome_driver():
         chrome_options.add_argument('--disable-features=TranslateUI')
         chrome_options.add_argument('--disable-ipc-flooding-protection')
         
-        # ============================================================================
-        # GPU & HARDWARE ACCELERATION FIXES
-        # ============================================================================
-        chrome_options.add_argument('--disable-gpu')
-        chrome_options.add_argument('--disable-gpu-sandbox')
-        chrome_options.add_argument('--disable-software-rasterizer')
-        chrome_options.add_argument('--disable-accelerated-2d-canvas')
-        chrome_options.add_argument('--disable-accelerated-jpeg-decoding')
-        chrome_options.add_argument('--disable-accelerated-mjpeg-decode')
-        chrome_options.add_argument('--disable-accelerated-video-decode')
-        chrome_options.add_argument('--disable-accelerated-video-encode')
+        # Remove or comment out all GPU/hardware acceleration disabling options
+        # chrome_options.add_argument('--disable-gpu')
+        # chrome_options.add_argument('--disable-gpu-sandbox')
+        # chrome_options.add_argument('--disable-software-rasterizer')
+        # chrome_options.add_argument('--disable-accelerated-2d-canvas')
+        # chrome_options.add_argument('--disable-accelerated-jpeg-decoding')
+        # chrome_options.add_argument('--disable-accelerated-mjpeg-decode')
+        # chrome_options.add_argument('--disable-accelerated-video-decode')
+        # chrome_options.add_argument('--disable-accelerated-video-encode')
         
         # ============================================================================
         # NETWORK & SSL FIXES
@@ -79,11 +82,15 @@ def setup_chrome_driver():
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation", "enable-logging"])
         chrome_options.add_experimental_option('useAutomationExtension', False)
+        # In the experimental options, set images to 1 (allow)
         chrome_options.add_experimental_option("prefs", {
             "profile.default_content_setting_values.notifications": 2,
             "profile.default_content_settings.popups": 0,
-            "profile.managed_default_content_settings.images": 2,
+            "profile.managed_default_content_settings.images": 1,  # 1=allow images
+            "profile.default_content_setting_values.images": 1,  # 1=allow images
             "profile.default_content_setting_values.media_stream": 2,
+            "profile.managed_default_content_settings.javascript": 1,  # 1=allow javascript
+            "profile.default_content_setting_values.javascript": 1,  # 1=allow javascript
         })
         
         # ============================================================================
@@ -155,6 +162,28 @@ def setup_chrome_driver():
             driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
             driver.execute_script("Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3, 4, 5]})")
             driver.execute_script("Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']})")
+            
+            # Ensure images are enabled
+            driver.execute_script("""
+                // Enable images if they were disabled
+                if (typeof chrome !== 'undefined' && chrome.contentSettings) {
+                    chrome.contentSettings.images.set({
+                        'pattern': '<all_urls>',
+                        'setting': 'allow'
+                    });
+                }
+                
+                // Force image loading
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    if (img.style.display === 'none') {
+                        img.style.display = 'block';
+                    }
+                    if (img.style.visibility === 'hidden') {
+                        img.style.visibility = 'visible';
+                    }
+                });
+            """)
             
             # Suppress console errors and warnings
             driver.execute_script("""

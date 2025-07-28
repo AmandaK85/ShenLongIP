@@ -41,7 +41,7 @@ class DynamicAdvancedPackageTest:
         self.chrome_options.add_argument('--disable-gpu')
         self.chrome_options.add_argument('--disable-web-security')
         self.chrome_options.add_argument('--disable-extensions')
-        self.chrome_options.add_argument('--disable-images')
+        # self.chrome_options.add_argument('--disable-images')  # Commented out to allow images
         self.chrome_options.add_argument('--disable-background-timer-throttling')
         self.chrome_options.add_argument('--disable-backgrounding-occluded-windows')
         self.chrome_options.add_argument('--disable-renderer-backgrounding')
